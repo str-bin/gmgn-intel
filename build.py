@@ -623,33 +623,179 @@ def build_timeline() -> tuple[list[dict], str]:
     return items, generated_at
 
 
-def render_html(items: list[dict], generated_at: str) -> str:
-    counts = {"功能": 0, "招聘": 0, "教程": 0}
-    for it in items:
-        c = it.get("category")
-        if c in counts:
-            counts[c] += 1
+def build_watch_sources(features: dict) -> dict:
+    """Build left-panel watch list from features baseline official_channels / watch_x_accounts."""
+    ch = features.get("official_channels") or {}
+    watch = features.get("watch_x_accounts") or ["@gmgnai", "@gmgnapp001", "@haze0x"]
 
-    # Format display time Asia/Shanghai
-    try:
-        dt = datetime.fromisoformat(generated_at)
-        last_updated_label = dt.strftime("%Y-%m-%d %H:%M") + "（上海时间）"
-    except Exception:
-        last_updated_label = generated_at
+    x_meta = {
+        "@gmgnai": {
+            "title": "@gmgnai",
+            "url": (ch.get("x_primary") or {}).get("url") or "https://x.com/gmgnai",
+            "intro": "官方主账号。产品新功能、链上能力与活动公告的主发布渠道；文档亦指向其 Highlights。",
+            "extra": (ch.get("x_primary") or {}).get("highlights"),
+            "extra_label": "Highlights",
+        },
+        "@gmgnapp001": {
+            "title": "@gmgnapp001",
+            "url": (ch.get("x_app") or {}).get("url") or "https://x.com/gmgnapp001",
+            "intro": "App / 产品演示账号。常发功能视频与 GO/移动端演示，常被 @gmgnai 引用。",
+            "extra": None,
+            "extra_label": None,
+        },
+        "@haze0x": {
+            "title": "@haze0x",
+            "url": (ch.get("x_haze") or {}).get("url") or "https://x.com/haze0x",
+            "intro": "Haze（Cooking gmgn.ai）。招聘置顶与产品路线/风向；与招聘页互补，偶有未上 Hub 的岗位。",
+            "extra": None,
+            "extra_label": None,
+        },
+    }
 
-    payload = json.dumps(items, ensure_ascii=False)
-    # Escape for script tag safety
-    payload = payload.replace("<", "\\u003c").replace(">", "\\u003e").replace("</", "<\\/")
+    x_accounts = []
+    for handle in watch:
+        meta = x_meta.get(handle) or {
+            "title": handle,
+            "url": f"https://x.com/{handle.lstrip('@')}",
+            "intro": "日常监控中的 X 账号。",
+            "extra": None,
+            "extra_label": None,
+        }
+        x_accounts.append(meta)
 
-    return f"""<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GMGN 情报站</title>
-<meta name="description" content="GMGN 新功能、招聘与教程自动收集时间线" />
-<style>
-  :root {{
+    websites = [
+        {
+            "title": "GMGN 官网",
+            "url": ch.get("website") or "https://gmgn.ai",
+            "intro": "产品站。站内 Feature Updates 弹窗是官方更新源之一（无独立公开 URL，需站内打开）。",
+        },
+        {
+            "title": "Blog（教程/指南）",
+            "url": ch.get("blog") or "https://gmgn.ai/blog/",
+            "intro": "英文 Blog：交易教程与产品用法；中文见 blog/zh-cn。",
+        },
+        {
+            "title": "中文 Blog",
+            "url": ch.get("blog_zh") or "https://gmgn.ai/blog/zh-cn/",
+            "intro": "中文博客与部分本地化教程入口。",
+        },
+        {
+            "title": "招聘页（中文）",
+            "url": ch.get("careers_hub_zh") or "https://gmgn.ai/blog/zh-cn/careers/",
+            "intro": "在招岗位 Hub（投递 hr@gmgn.ai）。可从 JD 推断产品在加码的能力方向。",
+        },
+        {
+            "title": "招聘页（英文）",
+            "url": ch.get("careers_hub_en") or "https://gmgn.ai/blog/careers/",
+            "intro": "英文招聘 Hub，与中文页及 @haze0x 置顶互补。",
+        },
+        {
+            "title": "文档更新说明",
+            "url": ch.get("docs_update_page") or "https://docs.gmgn.ai/index/gmgn-update-announcement",
+            "intro": "Docs 上的更新公告页；官方说明与 X Highlights 并列的更新渠道。",
+        },
+        {
+            "title": "Docs 首页",
+            "url": ch.get("docs_home") or "https://docs.gmgn.ai",
+            "intro": "产品文档总入口，含 API / Skills / 功能说明。",
+        },
+        {
+            "title": "Memecoin 教程站",
+            "url": ch.get("memecoin_tutorials") or "https://memecoin.gmgn.ai/",
+            "intro": "面向 meme 交易的专题教程站，补 Blog 之外的用法说明。",
+        },
+        {
+            "title": "AI Hub / Skills",
+            "url": ch.get("ai_hub") or "https://gmgn.ai/ai",
+            "intro": "Giga AI 与 Skills Market；新 Skill 上线常在此可见。",
+        },
+        {
+            "title": "GitHub Discussions",
+            "url": ch.get("github_discussions") or "https://github.com/GMGNAI/gmgn-skills/discussions",
+            "intro": "gmgn-skills 讨论区，偶有能力与接入相关更新。",
+        },
+    ]
+
+    return {
+        "x_accounts": x_accounts,
+        "websites": websites,
+        "last_checked": features.get("last_checked") or "",
+        "last_checked_label": features.get("last_checked_label") or "",
+    }
+
+
+def _esc_html(s: str) -> str:
+    return (
+        str(s or "")
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
+def render_sources_panel(sources: dict) -> str:
+    x_blocks = []
+    for acc in sources.get("x_accounts") or []:
+        extra = ""
+        if acc.get("extra"):
+            label = _esc_html(acc.get("extra_label") or "相关")
+            extra = (
+                f'<div class="src-extra"><a href="{_esc_html(acc["extra"])}" target="_blank" '
+                f'rel="noopener noreferrer">{label}</a></div>'
+            )
+        url = _esc_html(acc.get("url", "#"))
+        title = _esc_html(acc.get("title", ""))
+        intro = _esc_html(acc.get("intro", ""))
+        x_blocks.append(
+            f'<a class="src-card" href="{url}" target="_blank" rel="noopener noreferrer">'
+            f'<div class="src-kind x">X</div>'
+            f'<div class="src-body">'
+            f'<div class="src-title">{title}</div>'
+            f'<div class="src-intro">{intro}</div>'
+            f"{extra}"
+            f"</div></a>"
+        )
+
+    web_blocks = []
+    for site in sources.get("websites") or []:
+        url = _esc_html(site.get("url", "#"))
+        title = _esc_html(site.get("title", ""))
+        intro = _esc_html(site.get("intro", ""))
+        web_blocks.append(
+            f'<a class="src-card" href="{url}" target="_blank" rel="noopener noreferrer">'
+            f'<div class="src-kind web">站</div>'
+            f'<div class="src-body">'
+            f'<div class="src-title">{title}</div>'
+            f'<div class="src-intro">{intro}</div>'
+            f"</div></a>"
+        )
+
+    scan_hint = ""
+    if sources.get("last_checked_label") or sources.get("last_checked"):
+        label = sources.get("last_checked_label") or sources.get("last_checked")
+        scan_hint = f'<div class="panel-hint">基线最近核对：{_esc_html(label)}</div>'
+
+    return (
+        '<aside class="panel-left" aria-label="正在盯着的来源">'
+        '<div class="panel-head">'
+        "<h2>正在盯着</h2>"
+        "<p>日常扫描的 X 账号与网站；有变化写入右侧时间线。</p>"
+        f"{scan_hint}"
+        "</div>"
+        '<section class="src-section">'
+        "<h3>X 账号</h3>"
+        f'<div class="src-list">{"".join(x_blocks)}</div>'
+        "</section>"
+        '<section class="src-section">'
+        "<h3>网站 / 文档</h3>"
+        f'<div class="src-list">{"".join(web_blocks)}</div>'
+        "</section>"
+        "</aside>"
+    )
+
+CSS_TEMPLATE = '''
+  :root {
     --bg: #0b0f14;
     --bg2: #121821;
     --card: #161d28;
@@ -667,187 +813,253 @@ def render_html(items: list[dict], generated_at: str) -> str:
     --line: #2a3548;
     --shadow: 0 8px 28px rgba(0,0,0,.35);
     --radius: 14px;
+    --left-w: 320px;
     --font: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
             "Noto Sans SC", system-ui, sans-serif;
-  }}
-  * {{ box-sizing: border-box; }}
-  html, body {{ margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); }}
-  body {{
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+  body {
     min-height: 100vh;
     background:
       radial-gradient(1200px 600px at 10% -10%, rgba(52,211,153,.12), transparent 50%),
       radial-gradient(900px 500px at 90% 0%, rgba(96,165,250,.10), transparent 45%),
       var(--bg);
-  }}
-  a {{ color: var(--accent2); text-decoration: none; }}
-  a:hover {{ text-decoration: underline; }}
-  .wrap {{ max-width: 820px; margin: 0 auto; padding: 28px 18px 64px; }}
-  header.hero {{
+  }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell {
+    max-width: 1280px; margin: 0 auto; padding: 22px 18px 48px;
+  }
+  header.hero {
     background: linear-gradient(145deg, rgba(22,29,40,.95), rgba(18,24,33,.9));
     border: 1px solid var(--border);
     border-radius: calc(var(--radius) + 4px);
-    padding: 28px 24px 22px;
+    padding: 22px 22px 18px;
     box-shadow: var(--shadow);
-    margin-bottom: 22px;
-  }}
-  .brand {{
-    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
-  }}
-  .logo {{
+    margin-bottom: 18px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 6px;
+  }
+  .logo {
     width: 40px; height: 40px; border-radius: 12px;
     background: linear-gradient(135deg, #34d399, #60a5fa);
     display: grid; place-items: center; font-weight: 800; color: #062016; font-size: 14px;
-  }}
-  h1 {{ margin: 0; font-size: 1.65rem; letter-spacing: .02em; }}
-  .subtitle {{ margin: 8px 0 0; color: var(--muted); line-height: 1.55; font-size: .95rem; }}
-  .meta {{
-    margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 14px;
-    color: var(--muted); font-size: .85rem;
-  }}
-  .pill {{
+  }
+  h1 { margin: 0; font-size: 1.55rem; letter-spacing: .02em; }
+  .subtitle { margin: 8px 0 0; color: var(--muted); line-height: 1.55; font-size: .92rem; }
+  .meta {
+    margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 12px;
+    color: var(--muted); font-size: .82rem;
+  }
+  .pill {
     display: inline-flex; align-items: center; gap: 6px;
     background: var(--bg2); border: 1px solid var(--border);
     border-radius: 999px; padding: 4px 10px;
-  }}
-  .dot {{ width: 8px; height: 8px; border-radius: 50%; }}
-  .dot.func {{ background: var(--func); }}
-  .dot.hire {{ background: var(--hire); }}
-  .dot.tut {{ background: var(--tut); }}
-  .filters {{
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.func { background: var(--func); }
+  .dot.hire { background: var(--hire); }
+  .dot.tut { background: var(--tut); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: var(--left-w) minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .panel-left {
+    position: sticky; top: 12px;
+    max-height: calc(100vh - 24px);
+    overflow: auto;
+    background: rgba(18,24,33,.82);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 2px);
+    padding: 14px 12px 16px;
+    box-shadow: var(--shadow);
+  }
+  .panel-left::-webkit-scrollbar { width: 6px; }
+  .panel-left::-webkit-scrollbar-thumb { background: #2a3548; border-radius: 999px; }
+  .panel-head h2 {
+    margin: 0 0 4px; font-size: 1.05rem;
+  }
+  .panel-head p {
+    margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.45;
+  }
+  .panel-hint {
+    margin-top: 8px; font-size: .72rem; color: var(--muted);
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 8px;
+  }
+  .src-section { margin-top: 14px; }
+  .src-section h3 {
+    margin: 0 0 8px; font-size: .78rem; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--muted); font-weight: 700;
+  }
+  .src-list { display: flex; flex-direction: column; gap: 8px; }
+  a.src-card {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 10px;
+    color: inherit; text-decoration: none;
+    transition: .15s ease;
+  }
+  a.src-card:hover {
+    background: var(--card-hover); border-color: #314159;
+    text-decoration: none;
+  }
+  .src-kind {
+    flex: 0 0 auto; width: 28px; height: 28px; border-radius: 8px;
+    display: grid; place-items: center;
+    font-size: .7rem; font-weight: 800;
+  }
+  .src-kind.x {
+    background: rgba(96,165,250,.18); color: #93c5fd;
+  }
+  .src-kind.web {
+    background: rgba(52,211,153,.16); color: #6ee7b7;
+  }
+  .src-body { min-width: 0; }
+  .src-title {
+    font-size: .88rem; font-weight: 700; line-height: 1.3; margin-bottom: 3px;
+  }
+  .src-intro {
+    font-size: .75rem; color: var(--muted); line-height: 1.45;
+  }
+  .src-extra {
+    margin-top: 4px; font-size: .72rem;
+  }
+
+  .panel-right {
+    min-width: 0;
+  }
+  .panel-right-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 8px; margin-bottom: 6px;
+  }
+  .panel-right-head h2 {
+    margin: 0; font-size: 1.05rem;
+  }
+  .panel-right-head .hint {
+    color: var(--muted); font-size: .78rem;
+  }
+
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
     position: sticky; top: 0; z-index: 20;
     padding: 10px 0; background: linear-gradient(180deg, rgba(11,15,20,.96), rgba(11,15,20,.88));
     backdrop-filter: blur(8px);
-  }}
-  .filters button {{
+  }
+  .filters button {
     border: 1px solid var(--border); background: var(--card); color: var(--text);
     border-radius: 999px; padding: 8px 14px; cursor: pointer; font-size: .9rem;
     transition: .15s ease;
-  }}
-  .filters button:hover {{ background: var(--card-hover); }}
-  .filters button.active {{
+  }
+  .filters button:hover { background: var(--card-hover); }
+  .filters button.active {
     border-color: transparent;
     background: linear-gradient(135deg, rgba(52,211,153,.25), rgba(96,165,250,.25));
     box-shadow: inset 0 0 0 1px rgba(110,231,183,.35);
-  }}
-  .timeline {{ position: relative; padding-left: 22px; }}
-  .timeline::before {{
+  }
+  .timeline { position: relative; padding-left: 22px; }
+  .timeline::before {
     content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
     width: 2px; background: var(--line);
-  }}
-  .item {{
+  }
+  .item {
     position: relative; margin-bottom: 14px;
-  }}
-  .item::before {{
+  }
+  .item::before {
     content: ""; position: absolute; left: -19px; top: 18px;
     width: 12px; height: 12px; border-radius: 50%;
     background: var(--accent); box-shadow: 0 0 0 3px rgba(52,211,153,.18);
-  }}
-  .item[data-cat="招聘"]::before {{ background: var(--hire); box-shadow: 0 0 0 3px rgba(251,191,36,.18); }}
-  .item[data-cat="教程"]::before {{ background: var(--tut); box-shadow: 0 0 0 3px rgba(96,165,250,.18); }}
-  .card {{
+  }
+  .item[data-cat="招聘"]::before { background: var(--hire); box-shadow: 0 0 0 3px rgba(251,191,36,.18); }
+  .item[data-cat="教程"]::before { background: var(--tut); box-shadow: 0 0 0 3px rgba(96,165,250,.18); }
+  .card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 14px 16px 14px;
     transition: .15s ease;
-  }}
-  .card:hover {{ background: var(--card-hover); border-color: #314159; }}
-  .row {{ display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }}
-  .badge {{
+  }
+  .card:hover { background: var(--card-hover); border-color: #314159; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .badge {
     font-size: .75rem; font-weight: 700; letter-spacing: .04em;
     border-radius: 6px; padding: 3px 8px;
-  }}
-  .badge.功能 {{ background: rgba(52,211,153,.15); color: var(--func); }}
-  .badge.招聘 {{ background: rgba(251,191,36,.15); color: var(--hire); }}
-  .badge.教程 {{ background: rgba(96,165,250,.15); color: var(--tut); }}
-  .date {{ color: var(--muted); font-size: .85rem; }}
-  .src {{
+  }
+  .badge.功能 { background: rgba(52,211,153,.15); color: var(--func); }
+  .badge.招聘 { background: rgba(251,191,36,.15); color: var(--hire); }
+  .badge.教程 { background: rgba(96,165,250,.15); color: var(--tut); }
+  .date { color: var(--muted); font-size: .85rem; }
+  .src {
     margin-left: auto; font-size: .8rem; color: var(--muted);
     background: var(--bg2); border: 1px solid var(--border);
     border-radius: 6px; padding: 2px 8px;
-  }}
-  .title {{ margin: 0 0 6px; font-size: 1.05rem; line-height: 1.4; }}
-  .summary {{ margin: 0; color: #c5d0e0; font-size: .92rem; line-height: 1.6;  white-space: pre-wrap; }}
-  .link {{ display: inline-block; margin-top: 10px; font-size: .88rem; }}
-  .empty {{
+  }
+  .title { margin: 0 0 6px; font-size: 1.05rem; line-height: 1.4; }
+  .summary { margin: 0; color: #c5d0e0; font-size: .92rem; line-height: 1.6;  white-space: pre-wrap; }
+  .link { display: inline-block; margin-top: 10px; font-size: .88rem; }
+  .empty {
     text-align: center; padding: 48px 16px; color: var(--muted);
     border: 1px dashed var(--border); border-radius: var(--radius);
     background: rgba(22,29,40,.5);
-  }}
-  footer {{
-    margin-top: 28px; color: var(--muted); font-size: .8rem; text-align: center;
-  }}
-  .hidden {{ display: none !important; }}
-</style>
-</head>
-<body>
-  <div class="wrap">
-    <header class="hero">
-      <div class="brand">
-        <div class="logo">G</div>
-        <h1>GMGN 情报站</h1>
-      </div>
-      <p class="subtitle">自动收集的 GMGN 新功能、招聘与教程更新，按时间线展示，最新在最上。数据来自官方 X、Blog、招聘页与文档基线。</p>
-      <div class="meta">
-        <span class="pill">最近生成：{last_updated_label}</span>
-        <span class="pill"><span class="dot func"></span>功能 {counts["功能"]}</span>
-        <span class="pill"><span class="dot hire"></span>招聘 {counts["招聘"]}</span>
-        <span class="pill"><span class="dot tut"></span>教程 {counts["教程"]}</span>
-        <span class="pill">合计 {len(items)}</span>
-      </div>
-    </header>
+  }
+  footer {
+    margin-top: 22px; color: var(--muted); font-size: .8rem; text-align: center;
+  }
+  .hidden { display: none !important; }
 
-    <nav class="filters" id="filters" aria-label="分类筛选">
-      <button type="button" data-filter="全部" class="active">全部</button>
-      <button type="button" data-filter="功能">功能</button>
-      <button type="button" data-filter="招聘">招聘</button>
-      <button type="button" data-filter="教程">教程</button>
-    </nav>
+  @media (max-width: 960px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .panel-left {
+      position: static; max-height: none; overflow: visible;
+    }
+  }
+  @media (max-width: 560px) {
+    .shell { padding: 14px 12px 40px; }
+    h1 { font-size: 1.3rem; }
+  }
+'''
 
-    <div class="timeline" id="timeline"></div>
-    <div class="empty hidden" id="empty">当前分类暂无条目。换个筛选，或等下次例行扫描写入新情报。</div>
-
-    <footer>
-      由 GMGN 情报 bot 维护 · 运行 <code>build.py</code> 从基线与 <code>updates/</code> 重新生成 ·
-      也可加载同目录 <code>timeline.json</code>
-    </footer>
-  </div>
-
-  <script id="timeline-data" type="application/json">{payload}</script>
-  <script>
+JS_TEMPLATE = '''
     const embedded = JSON.parse(document.getElementById('timeline-data').textContent);
     let items = embedded;
 
-    async function maybeRefresh() {{
-      try {{
-        const res = await fetch('./timeline.json', {{ cache: 'no-store' }});
-        if (res.ok) {{
+    async function maybeRefresh() {
+      try {
+        const res = await fetch('./timeline.json', { cache: 'no-store' });
+        if (res.ok) {
           const remote = await res.json();
           if (Array.isArray(remote) && remote.length) items = remote;
-        }}
-      }} catch (_) {{ /* offline / file:// — use embedded */ }}
+        }
+      } catch (_) { /* offline / file:// — use embedded */ }
       render(currentFilter);
-    }}
+    }
 
     let currentFilter = '全部';
     const timelineEl = document.getElementById('timeline');
     const emptyEl = document.getElementById('empty');
 
-    function escapeHtml(s) {{
-      return String(s ?? '').replace(/[&<>"']/g, c => ({{
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, c => ({
         '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-      }})[c]);
-    }}
+      })[c]);
+    }
 
-    function render(filter) {{
+    function render(filter) {
       currentFilter = filter;
       const list = filter === '全部' ? items : items.filter(i => i.category === filter);
       timelineEl.innerHTML = '';
-      if (!list.length) {{
+      if (!list.length) {
         emptyEl.classList.remove('hidden');
         return;
-      }}
+      }
       emptyEl.classList.add('hidden');
-      for (const it of list) {{
+      for (const it of list) {
         const div = document.createElement('article');
         div.className = 'item';
         div.dataset.cat = it.category || '';
@@ -856,35 +1068,114 @@ def render_html(items: list[dict], generated_at: str) -> str:
         div.innerHTML = `
           <div class="card">
             <div class="row">
-              <span class="badge ${{escapeHtml(it.category)}}">${{escapeHtml(it.category)}}</span>
-              <span class="date">${{escapeHtml(it.date)}}</span>
-              <span class="src">${{escapeHtml(it.source_label || '')}}</span>
+              <span class="badge ${escapeHtml(it.category)}">${escapeHtml(it.category)}</span>
+              <span class="date">${escapeHtml(it.date)}</span>
+              <span class="src">${escapeHtml(it.source_label || '')}</span>
             </div>
-            <h2 class="title">${{escapeHtml(it.title)}}</h2>
-            <p class="summary">${{escapeHtml(it.summary)}}</p>
-            ${{hasLink ? `<a class="link" href="${{escapeHtml(url)}}" target="_blank" rel="noopener noreferrer">查看来源 →</a>` : ''}}
+            <h2 class="title">${escapeHtml(it.title)}</h2>
+            <p class="summary">${escapeHtml(it.summary)}</p>
+            ${hasLink ? `<a class="link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">查看来源 →</a>` : ''}
           </div>`;
         timelineEl.appendChild(div);
-      }}
-    }}
+      }
+    }
 
-    document.getElementById('filters').addEventListener('click', (e) => {{
+    document.getElementById('filters').addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-filter]');
       if (!btn) return;
       document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       render(btn.dataset.filter);
-    }});
+    });
 
     render('全部');
     maybeRefresh();
-  </script>
-</body>
-</html>
-"""
+'''
 
 
-def write_outputs(items: list[dict], generated_at: str) -> None:
+def render_html(items: list[dict], generated_at: str, sources: dict | None = None) -> str:
+    counts = {"功能": 0, "招聘": 0, "教程": 0}
+    for it in items:
+        c = it.get("category")
+        if c in counts:
+            counts[c] += 1
+
+    try:
+        dt = datetime.fromisoformat(generated_at)
+        last_updated_label = dt.strftime("%Y-%m-%d %H:%M") + "（上海时间）"
+    except Exception:
+        last_updated_label = generated_at
+
+    if sources is None:
+        sources = build_watch_sources(load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {})
+
+    sources_html = render_sources_panel(sources)
+
+    payload = json.dumps(items, ensure_ascii=False)
+    payload = payload.replace("<", "\\u003c").replace(">", "\\u003e").replace("</", "<\\/")
+
+    css = CSS_TEMPLATE
+    js = JS_TEMPLATE
+
+    return (
+        "<!DOCTYPE html>\n"
+        '<html lang="zh-CN">\n'
+        "<head>\n"
+        '<meta charset="utf-8" />\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
+        "<title>GMGN 情报站</title>\n"
+        '<meta name="description" content="GMGN 新功能、招聘与教程自动收集时间线" />\n'
+        "<style>\n"
+        f"{css}\n"
+        "</style>\n"
+        "</head>\n"
+        "<body>\n"
+        '  <div class="shell">\n'
+        '    <header class="hero">\n'
+        '      <div class="brand">\n'
+        '        <div class="logo">G</div>\n'
+        "        <h1>GMGN 情报站</h1>\n"
+        "      </div>\n"
+        '      <p class="subtitle">自动收集的 GMGN 新功能、招聘与教程更新。左侧是正在盯着的账号与网站；右侧是时间线（最新在上）。摘要中的【已有】/【在推】/【要做】标出可推断的功能点。</p>\n'
+        '      <div class="meta">\n'
+        f'        <span class="pill">最近生成：{last_updated_label}</span>\n'
+        f'        <span class="pill"><span class="dot func"></span>功能 {counts["功能"]}</span>\n'
+        f'        <span class="pill"><span class="dot hire"></span>招聘 {counts["招聘"]}</span>\n'
+        f'        <span class="pill"><span class="dot tut"></span>教程 {counts["教程"]}</span>\n'
+        f'        <span class="pill">合计 {len(items)}</span>\n'
+        "      </div>\n"
+        "    </header>\n"
+        '    <div class="layout">\n'
+        f"      {sources_html}\n"
+        '      <main class="panel-right" aria-label="情报时间线">\n'
+        '        <div class="panel-right-head">\n'
+        "          <h2>情报时间线</h2>\n"
+        '          <span class="hint">最新在上 · 可按类别筛选</span>\n'
+        "        </div>\n"
+        '        <nav class="filters" id="filters" aria-label="分类筛选">\n'
+        '          <button type="button" data-filter="全部" class="active">全部</button>\n'
+        '          <button type="button" data-filter="功能">功能</button>\n'
+        '          <button type="button" data-filter="招聘">招聘</button>\n'
+        '          <button type="button" data-filter="教程">教程</button>\n'
+        "        </nav>\n"
+        '        <div class="timeline" id="timeline"></div>\n'
+        '        <div class="empty hidden" id="empty">当前分类暂无条目。换个筛选，或等下次例行扫描写入新情报。</div>\n'
+        "      </main>\n"
+        "    </div>\n"
+        "    <footer>\n"
+        "      由 GMGN 情报 bot 维护 · 运行 <code>build.py</code> 从基线与 <code>updates/</code> 重新生成 ·\n"
+        "      也可加载同目录 <code>timeline.json</code>\n"
+        "    </footer>\n"
+        "  </div>\n"
+        f'  <script id="timeline-data" type="application/json">{payload}</script>\n'
+        "<script>\n"
+        f"{js}\n"
+        "</script>\n"
+        "</body>\n"
+        "</html>\n"
+    )
+
+def write_outputs(items: list[dict], generated_at: str, sources: dict | None = None) -> None:
     meta = {
         "generated_at": generated_at,
         "generated_at_label": "Asia/Shanghai",
@@ -897,7 +1188,9 @@ def write_outputs(items: list[dict], generated_at: str) -> None:
     }
     timeline_doc = items  # canonical is a plain array as specified
 
-    html = render_html(items, generated_at)
+    if sources is None:
+        sources = build_watch_sources(load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {})
+    html = render_html(items, generated_at, sources)
     timeline_text = json.dumps(timeline_doc, ensure_ascii=False, indent=2) + "\n"
     meta_text = json.dumps(meta, ensure_ascii=False, indent=2) + "\n"
 
@@ -925,7 +1218,9 @@ def write_outputs(items: list[dict], generated_at: str) -> None:
 
 def main() -> None:
     items, generated_at = build_timeline()
-    write_outputs(items, generated_at)
+    features = load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {}
+    sources = build_watch_sources(features)
+    write_outputs(items, generated_at, sources)
 
 
 if __name__ == "__main__":
