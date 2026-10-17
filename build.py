@@ -367,54 +367,112 @@ def from_features(data: dict, collected: str) -> list[dict]:
     return items
 
 
+def _feature_bullets(pf: dict | None) -> str:
+    """Format product_features dict into 【已有】/【在推】/【要做】 bullets."""
+    if not pf:
+        return ""
+    parts: list[str] = []
+    mapping = [
+        ("already", "【已有】"),
+        ("pushing", "【在推】"),
+        ("building", "【要做/从招聘推断】"),
+    ]
+    for key, label in mapping:
+        bullets = pf.get(key) or []
+        if not bullets:
+            continue
+        parts.append(label)
+        for b in bullets:
+            parts.append(f"• {b}")
+    plus = pf.get("plus_signals") or []
+    if plus:
+        parts.append("【加分信号/相邻能力】")
+        for b in plus:
+            parts.append(f"• {b}")
+    return ("\n" + "\n".join(parts)) if parts else ""
+
+
 def from_careers(data: dict, collected: str) -> list[dict]:
+    """Careers → timeline: lead with PRODUCT DIRECTION, not job titles."""
     items = []
     for r in data.get("open_roles") or []:
         date = r.get("posted") or ""
-        title = r.get("title_zh") or r.get("title_en") or "招聘岗位"
+        role = r.get("title_zh") or r.get("title_en") or ""
         url = r.get("url_zh") or r.get("url_en") or ""
-        loc = r.get("location") or ""
-        summ_en = r.get("summary") or ""
-        summary = (
-            f"在招：{title}。地点/形式：{loc}。投递 hr@gmgn.ai。"
+        pf = r.get("product_features") or {}
+        title = r.get("timeline_title") or (
+            f"产品方向信号（招聘）：{role}" if role else "产品方向信号（招聘）"
         )
-        if summ_en:
-            # Map role blurbs into 功能点 bullets (concrete capabilities)
-            summary += (
-                f"\n【要做/从招聘推断】\n• {summ_en}"
-                "\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）"
-            )
+        # Lead with capability; mention JD only as evidence footnote
+        head = "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。"
+        if role:
+            head += f" 证据岗：{role}。"
+        head += " 投递 hr@gmgn.ai。"
+        summary = head + _feature_bullets(pf)
+        if not pf and r.get("summary"):
+            summary += f"\n【要做/从招聘推断】\n• {r['summary']}"
         items.append(
             make_item(
                 date=date,
                 category="招聘",
-                title=f"招聘：{title}",
+                title=title,
                 summary=summary,
                 source_url=url,
-                source_label="Careers",
+                source_label="Careers JD",
                 collected_at=collected,
             )
         )
     for r in data.get("x_only_or_unlisted") or []:
         date = r.get("posted") or ""
-        title = r.get("title") or "招聘岗位"
+        role = r.get("title") or ""
         url = r.get("source") or ""
-        loc = r.get("location") or ""
-        hint = r.get("apply_hint") or ""
-        status = r.get("status") or ""
-        summary = f"X 公布岗位（招聘站暂未收录）：{title}。{loc}。"
-        if hint:
-            summary += f" {hint}"
-        if status:
-            summary += f"（状态：{status}）"
+        pf = r.get("product_features") or {}
+        title = r.get("timeline_title") or (
+            f"产品方向信号（X 招聘）：{role}" if role else "产品方向信号（X 招聘）"
+        )
+        head = "从 X 招聘帖推断的产品能力方向（岗位名不重要）。"
+        if role:
+            head += f" 证据：{role}。"
+        if r.get("apply_hint"):
+            head += f" {r['apply_hint']}。"
+        if r.get("status"):
+            head += f"（{r['status']}）"
+        summary = head + _feature_bullets(pf)
         items.append(
             make_item(
                 date=date,
                 category="招聘",
-                title=f"招聘：{title}",
+                title=title,
                 summary=summary,
                 source_url=url,
                 source_label="X",
+                collected_at=collected,
+            )
+        )
+    # Optional roadmap rollup entry (newest product-direction summary)
+    roadmap = data.get("product_roadmap_from_hiring") or {}
+    themes = roadmap.get("themes") or []
+    if themes and roadmap.get("summary_zh"):
+        # One rollup card dated to last_checked day so it sits near top when refreshed
+        lc = (data.get("last_checked") or collected)[:10]
+        bullets = ["【要做/从招聘推断｜总览】"]
+        for t in themes:
+            if (t.get("signal_strength") or "") in ("strong", "medium"):
+                building = t.get("building") or []
+                tip = building[0] if building else ""
+                line = f"• {t.get('title_zh')}"
+                if tip:
+                    line += f" — 例：{tip}"
+                bullets.append(line)
+        items.append(
+            make_item(
+                date=lc,
+                category="招聘",
+                title="招聘信号汇总：GMGN 正在加码的产品能力",
+                summary=(roadmap.get("summary_zh") or "") + "\n" + "\n".join(bullets),
+                source_url=(data.get("channels") or {}).get("careers_hub_zh")
+                or "https://gmgn.ai/blog/zh-cn/careers/",
+                source_label="Careers 汇总",
                 collected_at=collected,
             )
         )

@@ -1,5 +1,16 @@
 [
   {
+    "id": "8c1b8fabcac23dd5",
+    "date": "2026-10-17",
+    "datetime": "2026-10-17T12:00:00+08:00",
+    "category": "招聘",
+    "title": "招聘信号汇总：GMGN 正在加码的产品能力",
+    "summary": "从全量 JD 抽出的产品方向（不以岗位名为中心）：跨链资产兑换 + Gas 代付；自建 Launchpad；EVM 聚合路由扩 DEX/发射台；多链数据采集；交易后端低延迟高并发；App 社交社区（喊单/关注/Feed/信誉）；下载→首单转化漏斗；买卖/跟单/限价/K 线迭代；热门榜人工 curation；战壕出币再压延迟。\n【要做/从招聘推断｜总览】\n• 跨链资产兑换 + 高并发 Gas 代付 — 例：跨链请求处理：源链入金识别 → 目标链执行 → 结算状态跟踪\n• 自建 Launchpad（Bonding Curve 发射台） — 例：Bonding Curve 定价合约\n• EVM 聚合路由扩容（新 DEX / 新发射台） — 例：流动性池发现 + 交易构建\n• 多链数据采集与协议解析 — 例：新增 EVM 链与 Solana 生态采集（节点、区块、日志、下游链路）\n• 链上交易后端：更低延迟、更高并发、更稳故障恢复 — 例：慢查询/锁竞争/内存优化，降高峰延迟\n• 工具 → 社交交易社区（喊单/关注/Feed/信誉） — 例：喊单、关注与追踪、信息流、个人主页、榜单迭代\n• App 下载→注册→入金→首单转化与召回 — 例：下载→注册→入金→首笔交易全漏斗\n• App 交易体验：买卖 / 跟单 / K 线 / 限价单 — 例：买卖、跟单、行情 K 线、限价单需求与体验升级\n• 跨链热门 MEME 榜人工 curation — 例：全链热门 MEME 第一时间发现与榜单 curation\n• 战壕出币再压延迟 + 百倍流量基建 — 例：可扛百倍流量的交易/行情基础设施",
+    "source_url": "https://gmgn.ai/blog/zh-cn/careers/",
+    "source_label": "Careers 汇总",
+    "collected_at": "2026-10-17T10:43:00+08:00"
+  },
+  {
     "id": "feat-2026-10-17-skills-caller-dump-score",
     "date": "2026-10-17",
     "datetime": "2026-10-17T10:22:00+08:00",
@@ -55,15 +66,15 @@
     "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
-    "id": "haze-2026-10-02-hotlist-ops",
+    "id": "154d58b4e1735265",
     "date": "2026-10-02",
-    "datetime": "2026-10-02T10:28:25+08:00",
+    "datetime": "2026-10-02T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：热门榜单运营专员（2名·可远程）· @haze0x",
-    "summary": "Haze 亲自招 2 名热门榜单运营；远程、学历不限；投递 haze@gmgn.ai。\n【已有】\n• 跨链热门 MEME / 热门榜单能力（运营需全链盯盘）\n• PVP / PVE 玩法区分已是产品与社区共识\n【在推】\n• 人工运营加持的热门榜曝光与口碑\n【要做/从招聘推断】\n• 热门榜 curation 与全链 MEME 第一时间发现\n• 把运营内容做成可被更多人看到的正口碑分发",
+    "title": "产品方向：跨链热门 MEME 榜人工 curation",
+    "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：热门榜单运营专员×2。 haze@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 跨链热门榜 / 热门 MEME 能力已有\n【在推】\n• 人工运营加持的热门榜曝光与正口碑\n【要做/从招聘推断】\n• 全链热门第一时间发现与榜单 curation",
     "source_url": "https://x.com/haze0x/status/2105847342427676989",
-    "source_label": "X @haze0x",
-    "collected_at": "2026-10-17T10:54:00+08:00"
+    "source_label": "X",
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "haze-2026-09-30-callout-35-partners",
@@ -88,26 +99,26 @@
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
-    "id": "haze-2026-09-24-cs-ops",
+    "id": "d56b74eca0dc2804",
     "date": "2026-09-24",
-    "datetime": "2026-09-24T12:22:12+08:00",
+    "datetime": "2026-09-24T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：中英文客户运营（3名·可远程）· @haze0x",
-    "summary": "Haze 招 3 名中英文客户运营；可远程、高于同行薪酬；投递 haze@gmgn.ai。要求熟练使用 GMGN、在线时间长。\n【已有】\n• 1V1 客服 / 投诉处理通道\n• 群聊社区运营场景\n• 远程连线定位交易/性能问题（可协调研发产品）\n• 中英文用户覆盖（非仅华语）\n【在推】\n• 拉长在线时长与服务口碑\n【要做/从招聘推断】\n• 强化高频用户交易/性能问题的一线响应\n• 全球化客服（中英双语）",
+    "title": "产品方向：中英双语一线客服与交易问题响应",
+    "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：中英文客户运营×3。 haze@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 1V1 客服 / 投诉处理通道\n【在推】\n• 更长在线、更高服务口碑、中英全球化\n【要做/从招聘推断】\n• 高频交易/性能问题一线响应",
     "source_url": "https://x.com/haze0x/status/2102976871571009965",
-    "source_label": "X @haze0x",
-    "collected_at": "2026-10-17T10:54:00+08:00"
+    "source_label": "X",
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "haze-2026-09-23-pinned-hiring",
     "date": "2026-09-23",
     "datetime": "2026-09-23T21:29:19+08:00",
     "category": "招聘",
-    "title": "置顶招聘：产品+研发攻坚（社交/转化/Launchpad/数据/路由/跨链/服务端）",
-    "summary": "Haze 置顶招聘帖（仍置顶）：攻克链上最前沿产品与工程问题。岗位与招聘站一致，另可对照 Blog 长文。\n【已有】\n• 社交社区（Callout/关注/Feed/排行榜）产品线\n• App 用户转化漏斗（下载→注册→入金→首单）\n• Launchpad 智能合约方向\n• 链上数据 ingest / 解析\n• EVM 交易路由\n• 跨链区块链能力\n• 高并发交易服务端\n【要做/从招聘推断】\n• 社交冷启动与声誉体系\n• App 增长/转化与推送召回\n• 更强 Launchpad 合约集成\n• 新链/新 DEX 数据接入与路由质量\n• 跨链与后端延迟/稳定性攻坚",
+    "title": "产品方向总览（Haze 置顶招聘）：社交/转化/Launchpad/路由/跨链代付/数据",
+    "summary": "Haze 置顶招聘仍在：攻克链上最前沿产品与工程问题。以下按「要建什么能力」读，不按岗位名。\n【已有】\n• 社交交易（Callout/关注/Feed/排行榜）\n• App 转化漏斗骨架（下载→注册→入金→首单）\n• EVM 交易路由、链上数据管道、高并发交易服务端\n• 多链交易终端\n【在推】\n• 工具 → 交易社区；App 增长与召回\n【要做/从招聘推断】\n• 自建 Launchpad（Bonding Curve / LP 迁移 / 分润）\n• 跨链资产兑换执行流\n• 高并发 Gas 代付（Gas Sponsor：额度/预算/防滥用）← 见跨链岗 JD\n• 新链/新 DEX/新发射台数据接入与路由质量\n• 社交冷启动、信誉与反女巫\n证据：https://gmgn.ai/blog/zh-cn/careers/ 与跨链岗 https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/",
     "source_url": "https://x.com/haze0x/status/2102752169867018341",
     "source_label": "X @haze0x 置顶",
-    "collected_at": "2026-10-17T10:54:00+08:00"
+    "collected_at": "2026-10-17T11:12:00+08:00"
   },
   {
     "id": "overlay-2026-09-23-callout-pnl",
@@ -125,10 +136,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：产品经理（社交社区方向）· GMGN App",
-    "summary": "在招：产品经理（社交社区方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Callouts, follow/track, feed, leaderboards; relationship cold-start & reputation. 2+ yrs social/trading-community product.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：工具→社交交易社区（喊单/关注/Feed/信誉）",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（社交社区方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• 交易、行情、跟单已跑通\n• 喊单 / 关注追踪 / 信息流 / 个人主页 / 榜单模块已在迭代\n【在推】\n• 从单人盯盘工具转向互相影响、互相跟随的交易社区\n【要做/从招聘推断】\n• 关系链冷启动（打开即有可看可关注）\n• 信息流排序与创作者激励\n• 信誉体系 + 反刷量 / 反女巫\n• 社区指标闭环：关注渗透、跟单转化、创作者留存",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-social-community/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -136,10 +147,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：产品经理（用户转化方向）· GMGN App",
-    "summary": "在招：产品经理（用户转化方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Download→register→deposit→first trade funnel; onboarding, push/email, growth/referral. 2+ yrs growth/conversion.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：App 下载→入金→首单转化漏斗与召回",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（用户转化方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• Web + App 双端产品能力已跑通\n【在推】\n• 把每个新用户送到第一笔交易，再留下、再带人\n【要做/从招聘推断】\n• 下载→注册→入金→首笔交易全漏斗\n• Onboarding / 空状态 / 首单路径\n• Push / 邮件 / 站内消息生命周期触达\n• 邀请裂变、返佣激励（含防刷与 ROI）\n• A/B 实验与转化归因",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-user-conversion/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -147,10 +158,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：EVM 交易路由工程师（EVM Routing Engineer）· GMGN",
-    "summary": "在招：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Routing core: pool discovery, tx build, path quality/latency; DEX/Launchpad contract+service integration. 2+ yrs Go.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：EVM 聚合路由扩 DEX/发射台 + 降延迟",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• EVM 路由核心链路已在生产\n【在推】\n• 路径质量与端到端延迟持续优化\n• 路由质量验证与线上归因\n【要做/从招聘推断】\n• 流动性池发现、交易构建、多跳/拆单\n• 新增 DEX / Launchpad：合约侧报价执行 + 服务端池模型适配\n• Uniswap V2/V3/V4 与 bonding curve 发射台深度支持\n• MEV/抢跑/夹子防护相关执行优化",
     "source_url": "https://gmgn.ai/blog/zh-cn/evm-routing-engineer/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -158,10 +169,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：链上数据开发工程师（Onchain Data Engineer）· GMGN",
-    "summary": "在招：链上数据开发工程师（Onchain Data Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• New EVM/Solana ingest; DEX/Launchpad parsing; data quality. 2+ yrs Go; Uniswap V2/V3/V4 + bonding curve.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：新链/新 DEX/新发射台数据接入与解析",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：链上数据开发工程师（Onchain Data Engineer）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 多链采集与业务数据集已在服务产品\n【在推】\n• 更快纳入新链、新协议形态\n【要做/从招聘推断】\n• 新增 EVM 链与 Solana 生态采集全链路\n• DEX / Launchpad 协议解析（AMM V2/V3/V4 hook、bonding curve）\n• 池发现、费率、发行阶段、成交归属准确建模\n• 数据质量、重组与节点异常治理",
     "source_url": "https://gmgn.ai/blog/zh-cn/onchain-data-engineer/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -169,10 +180,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：高级服务端开发工程师 · GMGN",
-    "summary": "在招：高级服务端开发工程师 · GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• On-chain trading backend perf/stability: latency, concurrency, failover. 3+ yrs server-side.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：交易后端低延迟高并发与故障恢复",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：高级服务端开发工程师 · GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 链上交易服务端已上线有真实用户\n【在推】\n• 高峰吞吐、降延迟、局部故障隔离\n【要做/从招聘推断】\n• 核心服务性能优化（慢查询/锁/内存）\n• 并发控制与流量保护\n• 幂等/重试/状态恢复（防重复下单）\n• RPC 与第三方故障切换、监控压测灰度",
     "source_url": "https://gmgn.ai/blog/zh-cn/senior-backend-engineer/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -180,10 +191,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：高级区块链开发工程师（跨链方向）· GMGN",
-    "summary": "在招：高级区块链开发工程师（跨链方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Cross-chain execution, protocol/fees, Gas sponsor, settlement/security. 3+ yrs; cross-chain or Gas Sponsor prod exp.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：跨链资产兑换 + 高并发 Gas 代付",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：高级区块链开发工程师（跨链方向）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 面向多链生态的资产跨链兑换产品已在建设/有真实用户（JD 表述）\n• 跨链或 Gas Sponsor 生产经验被列为硬性考察方向之一\n【在推】\n• 更低成本、更少操作完成跨链交易\n• 复杂链上交互收成简单可靠体验\n【要做/从招聘推断】\n• 跨链执行流：源链入金识别 → 目标链交易执行 → 结算状态跟踪\n• 多阶段状态同步、失败重试、异常恢复\n• 协议接入与费用：模拟、滑点、Gas 估算、动态费用\n• 高并发 Gas 代付（Gas Sponsor）：调度、代付额度、预算控制、费用核算、防滥用\n• 结算对账、退款/补偿、防重复执行与重复支付\n• 可观测性与生产故障处理（兑换失败、流动性不足、Gas 波动、RPC 异常）\n【加分信号/相邻能力】\n• Intent / Solver\n• 账户抽象 / Paymaster\n• 交易中继\n• 多链流动性管理",
     "source_url": "https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -191,10 +202,10 @@
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：智能合约工程师（Launchpad 方向）· GMGN",
-    "summary": "在招：智能合约工程师（Launchpad 方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Launchpad contracts: bonding curve, virtual/real LP, issuance/revenue share, LP migration. Mainnet + fund-safety exp.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：自建 Launchpad（Bonding Curve/LP 迁移/分润）",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：智能合约工程师（Launchpad 方向）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 站内已支持第三方发射台/新盘发现与交易\n【在推】\n• 端到端自有 Launchpad 协议（对标 Pump.fun 类机制）\n【要做/从招聘推断】\n• Bonding Curve 定价\n• 虚拟流动性池 ↔ 真实流动性池切换\n• 代币发行、手续费与分润\n• 流动性自动迁移\n• 合约与 Go 后端数据流对接\n• 资金流安全与对抗 MEV/夹子设计",
     "source_url": "https://gmgn.ai/blog/zh-cn/smart-contract-engineer-launchpad/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
@@ -209,15 +220,15 @@
     "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
-    "id": "haze-2026-09-21-golang-infra",
+    "id": "008a8b13b2016ed7",
     "date": "2026-09-21",
-    "datetime": "2026-09-21T14:19:34+08:00",
+    "datetime": "2026-09-21T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：Golang 基础设施/后端工程师（战壕延迟与百倍流量）· @haze0x",
-    "summary": "Haze 招 Golang 基础设施/后端：目标战壕出币再快 1ms/1μs、行情爆炸仍稳、扛住百倍流量；投递 hr@gmgn.ai。\n【已有】\n• 战壕（Trenches）出币/新盘信息流\n• 高并发交易后端（在运行但要继续压延迟）\n【要做/从招聘推断】\n• 战壕出币延迟继续压到毫秒/微秒级\n• 行情高峰稳定性与容灾\n• 可承载百倍流量的基础设施",
+    "title": "产品方向：战壕出币再压延迟 + 百倍流量基建",
+    "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：Golang 基础设施/后端工程师。 hr@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 战壕多链新盘信息流已上线\n【在推】\n• 出币再快 1ms/1μs；行情爆炸仍稳\n【要做/从招聘推断】\n• 可承载百倍流量的交易/行情基础设施",
     "source_url": "https://x.com/haze0x/status/2101919245756223672",
-    "source_label": "X @haze0x",
-    "collected_at": "2026-10-17T10:54:00+08:00"
+    "source_label": "X",
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "b1f640e2c542b232",
@@ -334,8 +345,8 @@
     "date": "2026-09-15",
     "datetime": "2026-09-15T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：Brand & Events Marketing Manager",
-    "summary": "X 公布岗位（招聘站暂未收录）：Brand & Events Marketing Manager。Remote, global; 3+ yrs crypto brand/events; English fluent, Mandarin a plus。 X post says Apply (image CTA); not on careers hubs at 2026-10-16 check（状态：announced_on_x_not_on_careers_hub）",
+    "title": "产品方向：全球线下 Brand & Events 触达",
+    "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：Brand & Events Marketing Manager。 X post Apply CTA; not on careers hubs。（announced_on_x_not_on_careers_hub）\n【在推】\n• 全球 in-person events / activations（联合创始人直管）\n【要做/从招聘推断】\n• 线下品牌与活动端到端",
     "source_url": "https://x.com/gmgnai/status/2099719321677410494",
     "source_label": "X",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -378,10 +389,10 @@
     "date": "2026-09-10",
     "datetime": "2026-09-10T12:00:00+08:00",
     "category": "招聘",
-    "title": "招聘：产品经理（链上交易方向）· GMGN App",
-    "summary": "在招：产品经理（链上交易方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time · 3+ years。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• App buy/sell, copy trade, charts, limit orders; competitor intel; SQL/BI.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
+    "title": "产品方向：App 买卖/跟单/K线/限价单体验升级",
+    "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（链上交易方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• App 买卖、跟单、行情 K 线、限价单已存在\n【在推】\n• 对标 pump.fun / fomo / Axiom，按机制层拆竞品后迭代\n【要做/从招聘推断】\n• 交易模块体验加深（买卖/跟单/图表/限价）\n• 路由成交质量作为核心监控指标\n• 用户问题可上链定位路由/计价/索引并反哺产品",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-onchain-trading/",
-    "source_label": "Careers",
+    "source_label": "Careers JD",
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
