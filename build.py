@@ -375,9 +375,15 @@ def from_careers(data: dict, collected: str) -> list[dict]:
         url = r.get("url_zh") or r.get("url_en") or ""
         loc = r.get("location") or ""
         summ_en = r.get("summary") or ""
-        summary = f"在招：{title}。地点/形式：{loc}。投递 hr@gmgn.ai。"
+        summary = (
+            f"在招：{title}。地点/形式：{loc}。投递 hr@gmgn.ai。"
+        )
         if summ_en:
-            summary += f" 要点：{summ_en}"
+            # Map role blurbs into 功能点 bullets (concrete capabilities)
+            summary += (
+                f"\n【要做/从招聘推断】\n• {summ_en}"
+                "\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）"
+            )
         items.append(
             make_item(
                 date=date,
@@ -527,11 +533,16 @@ def dedupe(items: list[dict]) -> list[dict]:
 
     def score(it: dict) -> int:
         url = it.get("source_url") or ""
+        summary = it.get("summary") or ""
         s = 0
         if url and url.rstrip("/") != "https://gmgn.ai/blog":
             s += 2
-        if it.get("summary"):
+        if summary:
             s += 1
+        # Prefer entries that spell out 功能点 / longer analysis
+        if "【已有】" in summary or "【要做" in summary or "【在推】" in summary:
+            s += 5
+        s += min(len(summary) // 80, 5)
         return s
 
     for it in items:
@@ -755,7 +766,7 @@ def render_html(items: list[dict], generated_at: str) -> str:
     border-radius: 6px; padding: 2px 8px;
   }}
   .title {{ margin: 0 0 6px; font-size: 1.05rem; line-height: 1.4; }}
-  .summary {{ margin: 0; color: #c5d0e0; font-size: .92rem; line-height: 1.6; }}
+  .summary {{ margin: 0; color: #c5d0e0; font-size: .92rem; line-height: 1.6;  white-space: pre-wrap; }}
   .link {{ display: inline-block; margin-top: 10px; font-size: .88rem; }}
   .empty {{
     text-align: center; padding: 48px 16px; color: var(--muted);

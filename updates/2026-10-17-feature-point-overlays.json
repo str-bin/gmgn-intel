@@ -1,0 +1,57 @@
+[
+  {
+    "id": "overlay-2026-10-15-skills-profit-source",
+    "date": "2026-10-15",
+    "datetime": "2026-10-15T12:00:00+08:00",
+    "category": "功能",
+    "title": "Skills 钱包分析可追溯利润来源",
+    "summary": "GMGN Skills 钱包分析升级：可追溯利润来源；并提示自发射代币中超过 50% 会失败。\n【已有】\n• Skills 钱包分析\n• 利润来源追溯\n• 自发射代币失败率提示（>50% 失败）\n【在推】\n• 用收益质量（非只看总利润）判断聪明钱",
+    "source_url": "https://x.com/gmgnai/status/2110695428085960771",
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "overlay-2026-10-10-narrative",
+    "date": "2026-10-10",
+    "datetime": "2026-10-10T12:00:00+08:00",
+    "category": "功能",
+    "title": "上线 gmgn-narrative Skill",
+    "summary": "新增 gmgn-narrative：对照链上数据核验叙事说法是否站得住。\n【已有】\n• gmgn-narrative Skill\n• 叙事声称 ↔ 链上数据核验\n【在推】\n• 减少纯故事带节奏的跟风",
+    "source_url": "https://x.com/gmgnai/status/2108761437174976891",
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "overlay-2026-10-08-giga",
+    "date": "2026-10-08",
+    "datetime": "2026-10-08T12:00:00+08:00",
+    "category": "功能",
+    "title": "Giga AI 升级（Haze：点币/点人直接出结论）",
+    "summary": "官方 Giga AI 升级；Haze 同日补充：点一个币/一个人，GIGA 直接回答该不该跟买卖、谁在砸、dev 底子，基于海量链上数据。\n【已有】\n• 站内 Giga AI 助手\n• 代币 / 钱包 / Dev 战绩问答\n• 跟买跟卖、砸盘方、Dev 底子类结论输出\n【在推】\n• 更快、更高质量的 AI 解读替代手工扒链",
+    "source_url": "https://x.com/gmgnai/status/2108131696701059138",
+    "source_label": "X @gmgnai / @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "overlay-2026-09-23-callout-pnl",
+    "date": "2026-09-23",
+    "datetime": "2026-09-23T12:00:00+08:00",
+    "category": "功能",
+    "title": "Callout 同时显示喊单与持仓/实时 PnL",
+    "summary": "Callout 更新：同时展示喊单人、持仓方、实时盈亏与历史喊单。\n【已有】\n• Callout 喊单流\n• 喊单人与持仓方同屏\n• 实时 PnL\n• 历史喊单记录\n【在推】\n• 跟单前对照「喊了是否还拿着、盈亏如何」",
+    "source_url": "https://x.com/gmgnai/status/2102734098473316533",
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "overlay-2026-09-17-gmgn-go",
+    "date": "2026-09-17",
+    "datetime": "2026-09-17T12:00:00+08:00",
+    "category": "功能",
+    "title": "GMGN GO 移动社交交易上线",
+    "summary": "GMGN GO 上线：移动端关注交易者、看 Callout 与排行榜。\n【已有】\n• GMGN GO / App 社交交易版\n• 关注交易者\n• 移动端 Callout\n• 交易员/排行榜\n【在推】\n• 移动社交交易成为主战场之一\n【要做/从招聘推断】\n• （见 Haze 30 天三阶段）页面→对齐市场→领先市场的交易体验",
+    "source_url": "https://x.com/gmgnapp001/status/2100563862613537097",
+    "source_label": "X @gmgnapp001",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  }
+]

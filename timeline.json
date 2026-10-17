@@ -1,36 +1,36 @@
 [
   {
-    "id": "8c2e88e347a1d9b0",
+    "id": "feat-2026-10-17-skills-caller-dump-score",
     "date": "2026-10-17",
-    "datetime": "2026-10-17T12:00:00+08:00",
+    "datetime": "2026-10-17T10:22:00+08:00",
     "category": "功能",
     "title": "Skills 喊单评分：币是否真跑 + 自喊后砸盘惩罚",
-    "summary": "GMGN Skills 用喊单人真实成交账本打双维分：喊的币是否真涨，以及是否在自己喊单后 15 分钟内卖出砸盘（砸盘则分数暴跌）。【功能推断】已打通喊单记录↔成交账本；产品在做 Callout/跟单风控与反割韭菜评分，超越单纯命中率。",
+    "summary": "GMGN Skills 用喊单人真实成交账本打双维分；自喊后约 15 分钟内砸盘则分数暴跌。来源 @gmgnai。\n【已有】\n• Skills 喊单/Callout 评分\n• 喊单记录 ↔ 真实成交账本打通\n• 「币是否真涨」维度\n• 「自喊后短时砸盘」惩罚维度（约 15 分钟）\n【在推】\n• 跟单前用质量分过滤喊单人\n• 反割/反自卖风控",
     "source_url": "https://x.com/gmgnai/status/2111281543029178881",
-    "source_label": "X",
-    "collected_at": "2026-10-17T10:43:00+08:00"
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
-    "id": "6cb57037c07849e4",
+    "id": "overlay-2026-10-15-skills-profit-source",
     "date": "2026-10-15",
     "datetime": "2026-10-15T12:00:00+08:00",
     "category": "功能",
     "title": "Skills 钱包分析可追溯利润来源",
-    "summary": "GMGN Skills 钱包分析升级：可追溯利润来源，并提示自发射代币中超过 50% 会失败。帮助判断聪明钱收益质量。",
+    "summary": "GMGN Skills 钱包分析升级：可追溯利润来源；并提示自发射代币中超过 50% 会失败。\n【已有】\n• Skills 钱包分析\n• 利润来源追溯\n• 自发射代币失败率提示（>50% 失败）\n【在推】\n• 用收益质量（非只看总利润）判断聪明钱",
     "source_url": "https://x.com/gmgnai/status/2110695428085960771",
-    "source_label": "X",
-    "collected_at": "2026-10-17T10:43:00+08:00"
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
-    "id": "2d3a2363995bd9cd",
+    "id": "overlay-2026-10-10-narrative",
     "date": "2026-10-10",
     "datetime": "2026-10-10T12:00:00+08:00",
     "category": "功能",
     "title": "上线 gmgn-narrative Skill",
-    "summary": "新增 gmgn-narrative：对照链上数据核验叙事说法是否站得住，减少被故事带节奏。",
+    "summary": "新增 gmgn-narrative：对照链上数据核验叙事说法是否站得住。\n【已有】\n• gmgn-narrative Skill\n• 叙事声称 ↔ 链上数据核验\n【在推】\n• 减少纯故事带节奏的跟风",
     "source_url": "https://x.com/gmgnai/status/2108761437174976891",
-    "source_label": "X",
-    "collected_at": "2026-10-17T10:43:00+08:00"
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "086d0d5ba4641cda",
@@ -44,15 +44,37 @@
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
-    "id": "b3cb7e6e538acbf3",
+    "id": "overlay-2026-10-08-giga",
     "date": "2026-10-08",
     "datetime": "2026-10-08T12:00:00+08:00",
     "category": "功能",
-    "title": "Giga AI 升级",
-    "summary": "站内 Giga AI 助手升级：更快回答代币、钱包与开发者战绩相关问题。",
+    "title": "Giga AI 升级（Haze：点币/点人直接出结论）",
+    "summary": "官方 Giga AI 升级；Haze 同日补充：点一个币/一个人，GIGA 直接回答该不该跟买卖、谁在砸、dev 底子，基于海量链上数据。\n【已有】\n• 站内 Giga AI 助手\n• 代币 / 钱包 / Dev 战绩问答\n• 跟买跟卖、砸盘方、Dev 底子类结论输出\n【在推】\n• 更快、更高质量的 AI 解读替代手工扒链",
     "source_url": "https://x.com/gmgnai/status/2108131696701059138",
-    "source_label": "X",
-    "collected_at": "2026-10-17T10:43:00+08:00"
+    "source_label": "X @gmgnai / @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "haze-2026-10-02-hotlist-ops",
+    "date": "2026-10-02",
+    "datetime": "2026-10-02T10:28:25+08:00",
+    "category": "招聘",
+    "title": "招聘：热门榜单运营专员（2名·可远程）· @haze0x",
+    "summary": "Haze 亲自招 2 名热门榜单运营；远程、学历不限；投递 haze@gmgn.ai。\n【已有】\n• 跨链热门 MEME / 热门榜单能力（运营需全链盯盘）\n• PVP / PVE 玩法区分已是产品与社区共识\n【在推】\n• 人工运营加持的热门榜曝光与口碑\n【要做/从招聘推断】\n• 热门榜 curation 与全链 MEME 第一时间发现\n• 把运营内容做成可被更多人看到的正口碑分发",
+    "source_url": "https://x.com/haze0x/status/2105847342427676989",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-30-callout-35-partners",
+    "date": "2026-09-30",
+    "datetime": "2026-09-30T16:30:13+08:00",
+    "category": "功能",
+    "title": "Callout 已覆盖 35 家合作伙伴 + Open API 开放接入",
+    "summary": "Haze：GMGN Callout 已覆盖 35 家合作伙伴；开放 API 供生态项目接入，喊单一次多端可见。\n【已有】\n• Callout 喊单发布\n• 向 35+ 合作平台分发喊单\n• Callout Open API（生态可接入）\n【在推】\n• 「Post once. Seen everywhere」跨平台分发网络\n【要做/从招聘推断】\n• 更多合作方/生态通过 API 接入扩大触达",
+    "source_url": "https://x.com/haze0x/status/2105213613460099092",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "3c3c5ecc8b72cd21",
@@ -66,15 +88,37 @@
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
-    "id": "e48be107dd04ad31",
+    "id": "haze-2026-09-24-cs-ops",
+    "date": "2026-09-24",
+    "datetime": "2026-09-24T12:22:12+08:00",
+    "category": "招聘",
+    "title": "招聘：中英文客户运营（3名·可远程）· @haze0x",
+    "summary": "Haze 招 3 名中英文客户运营；可远程、高于同行薪酬；投递 haze@gmgn.ai。要求熟练使用 GMGN、在线时间长。\n【已有】\n• 1V1 客服 / 投诉处理通道\n• 群聊社区运营场景\n• 远程连线定位交易/性能问题（可协调研发产品）\n• 中英文用户覆盖（非仅华语）\n【在推】\n• 拉长在线时长与服务口碑\n【要做/从招聘推断】\n• 强化高频用户交易/性能问题的一线响应\n• 全球化客服（中英双语）",
+    "source_url": "https://x.com/haze0x/status/2102976871571009965",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-23-pinned-hiring",
+    "date": "2026-09-23",
+    "datetime": "2026-09-23T21:29:19+08:00",
+    "category": "招聘",
+    "title": "置顶招聘：产品+研发攻坚（社交/转化/Launchpad/数据/路由/跨链/服务端）",
+    "summary": "Haze 置顶招聘帖（仍置顶）：攻克链上最前沿产品与工程问题。岗位与招聘站一致，另可对照 Blog 长文。\n【已有】\n• 社交社区（Callout/关注/Feed/排行榜）产品线\n• App 用户转化漏斗（下载→注册→入金→首单）\n• Launchpad 智能合约方向\n• 链上数据 ingest / 解析\n• EVM 交易路由\n• 跨链区块链能力\n• 高并发交易服务端\n【要做/从招聘推断】\n• 社交冷启动与声誉体系\n• App 增长/转化与推送召回\n• 更强 Launchpad 合约集成\n• 新链/新 DEX 数据接入与路由质量\n• 跨链与后端延迟/稳定性攻坚",
+    "source_url": "https://x.com/haze0x/status/2102752169867018341",
+    "source_label": "X @haze0x 置顶",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "overlay-2026-09-23-callout-pnl",
     "date": "2026-09-23",
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "功能",
     "title": "Callout 同时显示喊单与持仓/实时 PnL",
-    "summary": "Callout 更新：同时展示喊单人、持仓方、实时盈亏与历史喊单，方便对照跟单风险。",
+    "summary": "Callout 更新：同时展示喊单人、持仓方、实时盈亏与历史喊单。\n【已有】\n• Callout 喊单流\n• 喊单人与持仓方同屏\n• 实时 PnL\n• 历史喊单记录\n【在推】\n• 跟单前对照「喊了是否还拿着、盈亏如何」",
     "source_url": "https://x.com/gmgnai/status/2102734098473316533",
-    "source_label": "X",
-    "collected_at": "2026-10-17T10:43:00+08:00"
+    "source_label": "X @gmgnai",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "506f2844c0cfe750",
@@ -82,7 +126,7 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：产品经理（社交社区方向）· GMGN App",
-    "summary": "在招：产品经理（社交社区方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。 要点：Callouts, follow/track, feed, leaderboards; relationship cold-start & reputation. 2+ yrs social/trading-community product.",
+    "summary": "在招：产品经理（社交社区方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Callouts, follow/track, feed, leaderboards; relationship cold-start & reputation. 2+ yrs social/trading-community product.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-social-community/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -93,7 +137,7 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：产品经理（用户转化方向）· GMGN App",
-    "summary": "在招：产品经理（用户转化方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。 要点：Download→register→deposit→first trade funnel; onboarding, push/email, growth/referral. 2+ yrs growth/conversion.",
+    "summary": "在招：产品经理（用户转化方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Download→register→deposit→first trade funnel; onboarding, push/email, growth/referral. 2+ yrs growth/conversion.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-user-conversion/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -104,7 +148,7 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：EVM 交易路由工程师（EVM Routing Engineer）· GMGN",
-    "summary": "在招：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：Routing core: pool discovery, tx build, path quality/latency; DEX/Launchpad contract+service integration. 2+ yrs Go.",
+    "summary": "在招：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Routing core: pool discovery, tx build, path quality/latency; DEX/Launchpad contract+service integration. 2+ yrs Go.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/evm-routing-engineer/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -115,7 +159,7 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：链上数据开发工程师（Onchain Data Engineer）· GMGN",
-    "summary": "在招：链上数据开发工程师（Onchain Data Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：New EVM/Solana ingest; DEX/Launchpad parsing; data quality. 2+ yrs Go; Uniswap V2/V3/V4 + bonding curve.",
+    "summary": "在招：链上数据开发工程师（Onchain Data Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• New EVM/Solana ingest; DEX/Launchpad parsing; data quality. 2+ yrs Go; Uniswap V2/V3/V4 + bonding curve.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/onchain-data-engineer/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -126,7 +170,7 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：高级服务端开发工程师 · GMGN",
-    "summary": "在招：高级服务端开发工程师 · GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：On-chain trading backend perf/stability: latency, concurrency, failover. 3+ yrs server-side.",
+    "summary": "在招：高级服务端开发工程师 · GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• On-chain trading backend perf/stability: latency, concurrency, failover. 3+ yrs server-side.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/senior-backend-engineer/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -137,7 +181,7 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：高级区块链开发工程师（跨链方向）· GMGN",
-    "summary": "在招：高级区块链开发工程师（跨链方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：Cross-chain execution, protocol/fees, Gas sponsor, settlement/security. 3+ yrs; cross-chain or Gas Sponsor prod exp.",
+    "summary": "在招：高级区块链开发工程师（跨链方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Cross-chain execution, protocol/fees, Gas sponsor, settlement/security. 3+ yrs; cross-chain or Gas Sponsor prod exp.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
@@ -148,10 +192,32 @@
     "datetime": "2026-09-23T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：智能合约工程师（Launchpad 方向）· GMGN",
-    "summary": "在招：智能合约工程师（Launchpad 方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：Launchpad contracts: bonding curve, virtual/real LP, issuance/revenue share, LP migration. Mainnet + fund-safety exp.",
+    "summary": "在招：智能合约工程师（Launchpad 方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• Launchpad contracts: bonding curve, virtual/real LP, issuance/revenue share, LP migration. Mainnet + fund-safety exp.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/smart-contract-engineer-launchpad/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-22-crosschain-share-portfolio",
+    "date": "2026-09-22",
+    "datetime": "2026-09-22T17:54:15+08:00",
+    "category": "功能",
+    "title": "全链分享图 + 全链资产管理上线",
+    "summary": "Haze 宣布：全链分享图已上线；全链资产管理已上线。\n【已有】\n• 全链资产一览/资产管理\n• 全链分享图（可对外分享的跨链仓位/战绩图）\n【在推】\n• 多链统一资产视图与社交分享传播\n【要做/从招聘推断】\n• （结合跨链/数据岗）继续扩链与资产聚合精度",
+    "source_url": "https://x.com/haze0x/status/2102335661701533978",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-21-golang-infra",
+    "date": "2026-09-21",
+    "datetime": "2026-09-21T14:19:34+08:00",
+    "category": "招聘",
+    "title": "招聘：Golang 基础设施/后端工程师（战壕延迟与百倍流量）· @haze0x",
+    "summary": "Haze 招 Golang 基础设施/后端：目标战壕出币再快 1ms/1μs、行情爆炸仍稳、扛住百倍流量；投递 hr@gmgn.ai。\n【已有】\n• 战壕（Trenches）出币/新盘信息流\n• 高并发交易后端（在运行但要继续压延迟）\n【要做/从招聘推断】\n• 战壕出币延迟继续压到毫秒/微秒级\n• 行情高峰稳定性与容灾\n• 可承载百倍流量的基础设施",
+    "source_url": "https://x.com/haze0x/status/2101919245756223672",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "b1f640e2c542b232",
@@ -209,6 +275,17 @@
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
+    "id": "haze-2026-09-18-go-roadmap-30d",
+    "date": "2026-09-18",
+    "datetime": "2026-09-18T13:17:27+08:00",
+    "category": "功能",
+    "title": "App / GMGN GO 三阶段路线图（约 30 天）",
+    "summary": "Haze 长文：网页端持续修；App 将分三版推进，称「一切将在未来 30 天内发生」。\n【已有】\n• 网页端多链交易（仍有小毛病要修）\n• App 旧版 + 社交交易方向（GMGN GO）\n• PVP 战壕体验（相对早期 PVE 数据分析版已转型）\n【在推】\n• 第1版：页面改进\n• 第2版：对齐当前市场水平的交易体验\n• 第3版：领先市场水平的交易体验\n【要做/从招聘推断】\n• （结合 App PM 岗）买卖/跟单/图表/限价单体验升级\n• 社交社区与转化漏斗配合 App 改版",
+    "source_url": "https://x.com/haze0x/status/2100816449069846942",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
     "id": "a9a66c79234fcd9d",
     "date": "2026-09-18",
     "datetime": "2026-09-18T12:00:00+08:00",
@@ -220,15 +297,15 @@
     "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
-    "id": "94ac1c7d765236f2",
+    "id": "overlay-2026-09-17-gmgn-go",
     "date": "2026-09-17",
     "datetime": "2026-09-17T12:00:00+08:00",
     "category": "功能",
     "title": "GMGN GO 移动社交交易上线",
-    "summary": "GMGN GO 上线：移动端可关注交易者、看 Callout 与排行榜，强化社交交易体验。",
+    "summary": "GMGN GO 上线：移动端关注交易者、看 Callout 与排行榜。\n【已有】\n• GMGN GO / App 社交交易版\n• 关注交易者\n• 移动端 Callout\n• 交易员/排行榜\n【在推】\n• 移动社交交易成为主战场之一\n【要做/从招聘推断】\n• （见 Haze 30 天三阶段）页面→对齐市场→领先市场的交易体验",
     "source_url": "https://x.com/gmgnapp001/status/2100563862613537097",
-    "source_label": "X",
-    "collected_at": "2026-10-17T10:43:00+08:00"
+    "source_label": "X @gmgnapp001",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "3d2ed46b18e61f8c",
@@ -302,10 +379,32 @@
     "datetime": "2026-09-10T12:00:00+08:00",
     "category": "招聘",
     "title": "招聘：产品经理（链上交易方向）· GMGN App",
-    "summary": "在招：产品经理（链上交易方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time · 3+ years。投递 hr@gmgn.ai。 要点：App buy/sell, copy trade, charts, limit orders; competitor intel; SQL/BI.",
+    "summary": "在招：产品经理（链上交易方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time · 3+ years。投递 hr@gmgn.ai。\n【要做/从招聘推断】\n• App buy/sell, copy trade, charts, limit orders; competitor intel; SQL/BI.\n【已有】\n• 对应产品线已在跑，岗位用于扩面/加深（见职责关键词）",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-onchain-trading/",
     "source_label": "Careers",
     "collected_at": "2026-10-17T10:43:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-09-foldable",
+    "date": "2026-09-09",
+    "datetime": "2026-09-09T22:16:39+08:00",
+    "category": "功能",
+    "title": "App 已支持折叠屏（与 iPad 分屏战壕）",
+    "summary": "Haze 转发官方：App 已支持折叠屏。官方说明含 iPad/折叠屏上三路战壕 + 图表分屏。\n【已有】\n• App 折叠屏适配\n• iPad / 大屏：三路 Trenches + Feed/图表分屏\n【在推】\n• 大屏移动端扫盘与交易一体体验",
+    "source_url": "https://x.com/haze0x/status/2097690654533152909",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-08-pool-mutation",
+    "date": "2026-09-08",
+    "datetime": "2026-09-08T11:13:06+08:00",
+    "category": "功能",
+    "title": "更新池子与变异数据：交易对一目了然",
+    "summary": "Haze：更新了池子与变异数据，每个代币的交易对一目了然。\n【已有】\n• 代币多交易对/池子列表\n• 池子变异（mutation）相关数据展示\n【在推】\n• 多报价/多池玩法下的选池可见性（降低小池误买）\n【要做/从招聘推断】\n• （结合路由岗）池发现与路径质量继续加强",
+    "source_url": "https://x.com/haze0x/status/2097161277831532667",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "d879c22be8e97eee",
@@ -372,6 +471,28 @@
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
     "collected_at": "2026-10-17T10:43:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-04-sidebar-plugin",
+    "date": "2026-09-04",
+    "datetime": "2026-09-04T23:20:13+08:00",
+    "category": "功能",
+    "title": "数据站侧边栏交易插件（点币同步下单）",
+    "summary": "Haze：产品经理做了小插件——在看数据的网站开启 GMGN 交易侧边栏，点击代币时侧边栏同步该币，便于快速下单。\n【已有】\n• 第三方数据站嵌入/侧边栏交易插件\n• 点击外部站点代币 → 同步到 GMGN 下单面板\n【在推】\n• 「看数据网站 + 即时交易」工作流，缩短从发现到下单路径",
+    "source_url": "https://x.com/haze0x/status/2095894711903121421",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
+  },
+  {
+    "id": "haze-2026-09-01-fomo-500-top",
+    "date": "2026-09-01",
+    "datetime": "2026-09-01T15:17:42+08:00",
+    "category": "功能",
+    "title": "K 线标注 FOMO 的 500 TOP 交易者",
+    "summary": "Haze：在 K 线上标注了一些 FOMO 的 500 TOP 交易者（早于官方 9/16 FOMO Thesis/Top 标记宣传）。\n【已有】\n• K 线 FOMO 相关标注\n• FOMO 体系下的 Top 交易者标记\n【在推】\n• 图表上直接看到 FOMO 资金/交易者行为",
+    "source_url": "https://x.com/haze0x/status/2094686115752190245",
+    "source_label": "X @haze0x",
+    "collected_at": "2026-10-17T10:54:00+08:00"
   },
   {
     "id": "e82c4e028b9a0243",
