@@ -1,5 +1,16 @@
 [
   {
+    "id": "8c2e88e347a1d9b0",
+    "date": "2026-10-17",
+    "datetime": "2026-10-17T12:00:00+08:00",
+    "category": "功能",
+    "title": "Skills 喊单评分：币是否真跑 + 自喊后砸盘惩罚",
+    "summary": "GMGN Skills 用喊单人真实成交账本打双维分：喊的币是否真涨，以及是否在自己喊单后 15 分钟内卖出砸盘（砸盘则分数暴跌）。【功能推断】已打通喊单记录↔成交账本；产品在做 Callout/跟单风控与反割韭菜评分，超越单纯命中率。",
+    "source_url": "https://x.com/gmgnai/status/2111281543029178881",
+    "source_label": "X",
+    "collected_at": "2026-10-17T10:43:00+08:00"
+  },
+  {
     "id": "6cb57037c07849e4",
     "date": "2026-10-15",
     "datetime": "2026-10-15T12:00:00+08:00",
@@ -8,7 +19,7 @@
     "summary": "GMGN Skills 钱包分析升级：可追溯利润来源，并提示自发射代币中超过 50% 会失败。帮助判断聪明钱收益质量。",
     "source_url": "https://x.com/gmgnai/status/2110695428085960771",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "2d3a2363995bd9cd",
@@ -19,7 +30,7 @@
     "summary": "新增 gmgn-narrative：对照链上数据核验叙事说法是否站得住，减少被故事带节奏。",
     "source_url": "https://x.com/gmgnai/status/2108761437174976891",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "086d0d5ba4641cda",
@@ -30,7 +41,7 @@
     "summary": "GMGN Global Championship（GGC）Season 1 公布，赛期约 10/17–10/27 UTC。属赛事活动，非功能发布。",
     "source_url": "https://x.com/gmgnai/status/2108564198225859055",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "b3cb7e6e538acbf3",
@@ -41,7 +52,7 @@
     "summary": "站内 Giga AI 助手升级：更快回答代币、钱包与开发者战绩相关问题。",
     "source_url": "https://x.com/gmgnai/status/2108131696701059138",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "3c3c5ecc8b72cd21",
@@ -52,7 +63,7 @@
     "summary": "合约尽职调查 Skill：安全扣分过程更透明；未读字段一律不通过，避免漏检。",
     "source_url": "https://x.com/gmgnai/status/2104600455657738648",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "e48be107dd04ad31",
@@ -63,7 +74,7 @@
     "summary": "Callout 更新：同时展示喊单人、持仓方、实时盈亏与历史喊单，方便对照跟单风险。",
     "source_url": "https://x.com/gmgnai/status/2102734098473316533",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "506f2844c0cfe750",
@@ -74,7 +85,7 @@
     "summary": "在招：产品经理（社交社区方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。 要点：Callouts, follow/track, feed, leaderboards; relationship cold-start & reputation. 2+ yrs social/trading-community product.",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-social-community/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "d2ac372eaa0b2a30",
@@ -85,7 +96,7 @@
     "summary": "在招：产品经理（用户转化方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time。投递 hr@gmgn.ai。 要点：Download→register→deposit→first trade funnel; onboarding, push/email, growth/referral. 2+ yrs growth/conversion.",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-user-conversion/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "fb4672cfc266317d",
@@ -96,7 +107,7 @@
     "summary": "在招：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：Routing core: pool discovery, tx build, path quality/latency; DEX/Launchpad contract+service integration. 2+ yrs Go.",
     "source_url": "https://gmgn.ai/blog/zh-cn/evm-routing-engineer/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f9a2b4670fb9a4fd",
@@ -107,7 +118,7 @@
     "summary": "在招：链上数据开发工程师（Onchain Data Engineer）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：New EVM/Solana ingest; DEX/Launchpad parsing; data quality. 2+ yrs Go; Uniswap V2/V3/V4 + bonding curve.",
     "source_url": "https://gmgn.ai/blog/zh-cn/onchain-data-engineer/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "8f0ec66e2b76ea41",
@@ -118,7 +129,7 @@
     "summary": "在招：高级服务端开发工程师 · GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：On-chain trading backend perf/stability: latency, concurrency, failover. 3+ yrs server-side.",
     "source_url": "https://gmgn.ai/blog/zh-cn/senior-backend-engineer/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "93fc2ef82c9cd322",
@@ -129,7 +140,7 @@
     "summary": "在招：高级区块链开发工程师（跨链方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：Cross-chain execution, protocol/fees, Gas sponsor, settlement/security. 3+ yrs; cross-chain or Gas Sponsor prod exp.",
     "source_url": "https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f506bfc459863990",
@@ -140,7 +151,7 @@
     "summary": "在招：智能合约工程师（Launchpad 方向）· GMGN。地点/形式：Full-time (location not on card)。投递 hr@gmgn.ai。 要点：Launchpad contracts: bonding curve, virtual/real LP, issuance/revenue share, LP migration. Mainnet + fund-safety exp.",
     "source_url": "https://gmgn.ai/blog/zh-cn/smart-contract-engineer-launchpad/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "b1f640e2c542b232",
@@ -151,7 +162,7 @@
     "summary": "讲解 GMGN 图表上的 FOMO 喊单标记，以及出现后该检查哪些安全/持仓信号。",
     "source_url": "https://gmgn.ai/blog/how-to-read-fomo-calls-on-gmgn-chart/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "7d4deed82c4b23c6",
@@ -162,7 +173,7 @@
     "summary": "中文教程：怎么在 GMGN K 线上看 Fomo 喊单？。",
     "source_url": "https://gmgn.ai/blog/zh-cn/how-to-read-fomo-calls-on-gmgn-chart/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "e7004bca605e0ba1",
@@ -173,7 +184,7 @@
     "summary": "介绍如何在 Arc 链购买 Memecoin，并对比 Arc 与 Robinhood Chain 的差异。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/how-to-buy-memecoins-on-arc/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "76fc7a24ae13af5e",
@@ -184,7 +195,7 @@
     "summary": "对比 Robinhood、Solana、BSC 上常见 Meme 发射台差异，帮你选入口。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "76fc7a24ae13af5e",
@@ -195,7 +206,7 @@
     "summary": "澄清 $MEME（Meme 币）与 AMC 股票代币是否为同一资产，避免买错。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "a9a66c79234fcd9d",
@@ -206,7 +217,7 @@
     "summary": "token-buy Skill：解析 ticker、做安全检查并给出下单规模建议，需用户确认后执行。",
     "source_url": "https://x.com/gmgnai/status/2100785131254632646",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "94ac1c7d765236f2",
@@ -217,7 +228,7 @@
     "summary": "GMGN GO 上线：移动端可关注交易者、看 Callout 与排行榜，强化社交交易体验。",
     "source_url": "https://x.com/gmgnapp001/status/2100563862613537097",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "3d2ed46b18e61f8c",
@@ -228,7 +239,7 @@
     "summary": "Arc 公链从上线首日即可在 GMGN 交易与发现。",
     "source_url": "https://x.com/gmgnai/status/2100197212399845701",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "34c78a7ca7ebf1dc",
@@ -239,7 +250,7 @@
     "summary": "图表新增 Fomo Thesis / Fomo Top 标记，可直接在 K 线上看到 FOMO 喊单点。",
     "source_url": "https://x.com/gmgnai/status/2100174341401170271",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "2e9ce072bf94c026",
@@ -250,7 +261,7 @@
     "summary": "X 公布岗位（招聘站暂未收录）：Brand & Events Marketing Manager。Remote, global; 3+ yrs crypto brand/events; English fluent, Mandarin a plus。 X post says Apply (image CTA); not on careers hubs at 2026-10-16 check（状态：announced_on_x_not_on_careers_hub）",
     "source_url": "https://x.com/gmgnai/status/2099719321677410494",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "7fa4820d9d8e9571",
@@ -261,7 +272,7 @@
     "summary": "全链支持按 RWA 与 Meme 报价类型过滤，方便筛掉不想要的报价资产。",
     "source_url": "https://x.com/gmgnai/status/2099396799186473200",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "fefd6f6e891e2e8b",
@@ -272,7 +283,7 @@
     "summary": "Heat Rank Skill：跨链精选热门列表，用 Skills 聚合多链热度。",
     "source_url": "https://x.com/gmgnai/status/2098234606306861246",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "d75cc0e9a0c27c8d",
@@ -283,7 +294,7 @@
     "summary": "新增对 Quote 代币的安全与流动性检查，降低配对侧风险。",
     "source_url": "https://x.com/gmgnai/status/2097933008154275844",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "d6202fe9c8e580be",
@@ -294,7 +305,7 @@
     "summary": "在招：产品经理（链上交易方向）· GMGN App。地点/形式：Hong Kong · Onsite · Full-time · 3+ years。投递 hr@gmgn.ai。 要点：App buy/sell, copy trade, charts, limit orders; competitor intel; SQL/BI.",
     "source_url": "https://gmgn.ai/blog/zh-cn/pm-onchain-trading/",
     "source_label": "Careers",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "d879c22be8e97eee",
@@ -305,7 +316,7 @@
     "summary": "Trenches 支持 SOL/BSC/Robinhood/Base/Arc 等多链合并信息流，一屏看新盘。",
     "source_url": "https://x.com/gmgnai/status/2096991802230464860",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "c230424ebaeab389",
@@ -316,7 +327,7 @@
     "summary": "开发者评分拆成钱包声誉与代币实力两维，便于区分人设与项目质量。",
     "source_url": "https://x.com/gmgnai/status/2096986626006389047",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f5a7e02a6c24a212",
@@ -327,7 +338,7 @@
     "summary": "手把手：如何在 GMGN 上发现并买入 Robinhood Chain 新发射代币。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f5a7e02a6c24a212",
@@ -338,7 +349,7 @@
     "summary": "以 Robinhood 上热门同名盘为例，教你核对合约与标识，避免买错。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f5a7e02a6c24a212",
@@ -349,7 +360,7 @@
     "summary": "介绍 Robinhood 上与 NVDA 配对的 Memecoin Artificial Inu（AI）背景与注意点。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f5a7e02a6c24a212",
@@ -360,7 +371,7 @@
     "summary": "热盘出现后，应在 GMGN 上依次检查安全、持仓、聪明钱与流动性等要点。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "e82c4e028b9a0243",
@@ -371,7 +382,7 @@
     "summary": "Skills 市场新增图表形态识别 Skill，可辅助看盘。",
     "source_url": "https://x.com/gmgnai/status/2094799783013863557",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "023683469016e71a",
@@ -382,7 +393,7 @@
     "summary": "OpenAPI 推出 Free / Plus / Pro 限速套餐，方便按用量接入 Agent/数据。",
     "source_url": "https://x.com/gmgnai/status/2093130053328764943",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "24e167816312e3f2",
@@ -393,7 +404,7 @@
     "summary": "GMGN Card 上线：闲置余额可享约 5% APY，并支持 Apple/Google Pay 相关场景。",
     "source_url": "https://x.com/gmgnai/status/2090799546989494481",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "b6ab105cc54150c4",
@@ -404,7 +415,7 @@
     "summary": "Trenches 列表内嵌迷你 K 线，扫盘时可直接看走势。",
     "source_url": "https://x.com/gmgnai/status/2089944717161275506",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f38349aec5b0dbeb",
@@ -415,7 +426,7 @@
     "summary": "Arbitrum 链已可在 GMGN 使用。",
     "source_url": "https://x.com/gmgnai/status/2089769132619391390",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "661f9f3c185c2d1d",
@@ -426,7 +437,7 @@
     "summary": "可关注可信开发者，并在 Trenches 用自定义颜色/名称高亮其新盘。",
     "source_url": "https://x.com/gmgnai/status/2089698059928400118",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "1c6176e9acc0b259",
@@ -437,7 +448,7 @@
     "summary": "组合 Trenches、Callout 与钱包追踪，提高发现早期 Meme 的效率。",
     "source_url": "https://gmgn.ai/blog/how-to-find-meme-coins-earlier/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "bbf5e3771f88c2f1",
@@ -448,7 +459,7 @@
     "summary": "解释 Bundle（捆绑仓）概念，并演示在 GMGN 查看 Bundle % 与关联钱包。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "8bfae313d1076d53",
@@ -459,7 +470,7 @@
     "summary": "教你如何在 GMGN 检查 BSC Meme 的买卖税/税率风险。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "8bfae313d1076d53",
@@ -470,7 +481,7 @@
     "summary": "对比 BSC 与 Solana 在 Meme 交易体验、费用与风险上的差异。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "6b102e348b313f1e",
@@ -481,7 +492,7 @@
     "summary": "Wallet Tracker 支持 FOMO 钱包转入/转出跟踪，便于盯资金动向。",
     "source_url": "https://x.com/gmgnai/status/2085733804489220402",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "267b87c799de4a0e",
@@ -492,7 +503,7 @@
     "summary": "面向新手的安全交易指南：钱包、滑点、蜜罐与仓位管理基础。",
     "source_url": "https://gmgn.ai/blog/how-beginners-trade-meme-coins-safely/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f3538519e7159943",
@@ -503,7 +514,7 @@
     "summary": "Manifesto：付费高信念喊单产品形态上线。",
     "source_url": "https://x.com/gmgnai/status/2085351308715008186",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "84ea32aad6fd497e",
@@ -514,7 +525,7 @@
     "summary": "Trenches 新增 Clean Layout，减少噪音、更易扫盘。",
     "source_url": "https://x.com/gmgnai/status/2085019822023397729",
     "source_label": "X",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "793881de682211a2",
@@ -525,7 +536,7 @@
     "summary": "详解 TP/SL、追踪止盈、追踪止损在 GMGN 上的设置方法。",
     "source_url": "https://gmgn.ai/blog/how-to-set-take-profit-stop-loss-on-gmgn/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "4d52cc1e810260fd",
@@ -536,7 +547,7 @@
     "summary": "从流动性、费用、工具与风险角度，帮你选择适合的 Meme 交易链。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "4d52cc1e810260fd",
@@ -547,7 +558,7 @@
     "summary": "讲解如何在 Robinhood 链上用 GMGN 观察叙事/资金轮动的早期迹象。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "059d7cf2bb9010b8",
@@ -558,7 +569,7 @@
     "summary": "gmgn-cli v1.5.3：Cooking / KOL / Smart Money / Market Signal 等能力覆盖 Robinhood。",
     "source_url": "https://github.com/GMGNAI/gmgn-skills/discussions",
     "source_label": "GitHub",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "e71b30c272d2f639",
@@ -569,7 +580,7 @@
     "summary": "完整指南：通过 GMGN 在 Robinhood Chain 购买 CASHCAT。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "e71b30c272d2f639",
@@ -580,7 +591,7 @@
     "summary": "Skills 教程：把 Claude 等 AI Agent 接到 GMGN，跟踪聪明钱钱包。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "e71b30c272d2f639",
@@ -591,7 +602,7 @@
     "summary": "从发现、分析到交易，系统介绍用 GMGN 玩 Robinhood Chain Meme。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "b4ebd71af8005148",
@@ -602,7 +613,7 @@
     "summary": "解释跨链叙事轮动，并说明如何用 GMGN 跟踪多链信号。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "b4ebd71af8005148",
@@ -613,7 +624,7 @@
     "summary": "Skills 教程：结合 Claude 与 GMGN Skills 做 Solana 代币安全检查。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "372200be123e74e8",
@@ -624,7 +635,7 @@
     "summary": "里程碑：Robinhood Chain 完整集成（发射台、智能买入保护、API）。第三方 wiki，通知时请再核 X/Blog。",
     "source_url": "https://iq.wiki/wiki/gmgn/milestones",
     "source_label": "Wiki",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "cc1406d73faab58f",
@@ -635,7 +646,7 @@
     "summary": "Blog 产品向文章：解释 GMGN Cooking 如何把想法接到代币发射流程。",
     "source_url": "https://gmgn.ai/blog/gmgn-cooking/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "227f75c006f857b5",
@@ -646,7 +657,7 @@
     "summary": "Blog 产品向文章：如何把 Claude 等 AI Agent 接到链上数据、钱包分析与交易。",
     "source_url": "https://gmgn.ai/blog/gmgn-skills-for-ai-agents/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "66235866fcc3c54c",
@@ -657,7 +668,7 @@
     "summary": "蜜罐与 Rug 识别指南，配合 GMGN 安全检查字段一起用。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f7eda03ca59f4e50",
@@ -668,7 +679,7 @@
     "summary": "2026 指南：在 Solana 上跟踪聪明钱钱包并做跟单。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f7eda03ca59f4e50",
@@ -679,7 +690,7 @@
     "summary": "从新手视角对比 GMGN 与 Axiom 的功能与上手难度。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   },
   {
     "id": "f7eda03ca59f4e50",
@@ -690,6 +701,6 @@
     "summary": "横向对比 GMGN、Photon、BonkBot、Axiom、Trojan 等平台。（链接以 Blog 首页为准，具体 slug 可能变动）",
     "source_url": "https://gmgn.ai/blog/",
     "source_label": "Blog",
-    "collected_at": "2026-10-16T11:10:00+08:00"
+    "collected_at": "2026-10-17T10:43:00+08:00"
   }
 ]

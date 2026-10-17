@@ -22,6 +22,11 @@ UPDATES_DIR = SITE_DIR / "updates"
 
 # Manual Chinese titles/summaries for known product updates (keyed by source URL or date+en title)
 FEATURE_ZH = {
+    "https://x.com/gmgnai/status/2111281543029178881": (
+        "Skills 喊单评分：币是否真跑 + 自喊后砸盘惩罚",
+        "GMGN Skills 用喊单人真实成交账本打双维分：喊的币是否真涨，以及是否在自己喊单后 15 分钟内卖出砸盘（砸盘则分数暴跌）。"
+        "【功能推断】已打通喊单记录↔成交账本；产品在做 Callout/跟单风控与反割韭菜评分，超越单纯命中率。",
+    ),
     "https://x.com/gmgnai/status/2110695428085960771": (
         "Skills 钱包分析可追溯利润来源",
         "GMGN Skills 钱包分析升级：可追溯利润来源，并提示自发射代币中超过 50% 会失败。帮助判断聪明钱收益质量。",
