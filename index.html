@@ -5,72 +5,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GMGN 情报站</title>
 <meta name="description" content="GMGN 新功能、招聘与教程自动收集时间线" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 
   :root {
-    --bg: #0b0f14;
-    --bg2: #121821;
-    --card: #161d28;
-    --card-hover: #1c2533;
-    --border: #243044;
-    --text: #e8eef7;
-    --muted: #8b9bb4;
-    --accent: #6ee7b7;
-    --accent2: #60a5fa;
-    --warn: #fbbf24;
-    --pink: #f472b6;
-    --func: #34d399;
-    --hire: #fbbf24;
-    --tut: #60a5fa;
-    --line: #2a3548;
-    --shadow: 0 8px 28px rgba(0,0,0,.35);
-    --radius: 14px;
-    --left-w: 320px;
-    --font: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-            "Noto Sans SC", system-ui, sans-serif;
+    --bg: #000000;
+    --bg-elevated: #0a0a0a;
+    --bg-hover: #111111;
+    --border: #1a1a1a;
+    --border-hover: #333333;
+    --text: #ededed;
+    --text-secondary: #a1a1a1;
+    --text-tertiary: #666666;
+    --accent: #fff;
+    --accent-muted: #888;
+    --func: #50e3c2;
+    --hire: #f5a623;
+    --tut: #0070f3;
+    --line: #222;
+    --radius: 8px;
+    --left-w: 300px;
+    --font: "Inter", "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+            "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+            sans-serif;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
-  body {
-    min-height: 100vh;
-    background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(52,211,153,.12), transparent 50%),
-      radial-gradient(900px 500px at 90% 0%, rgba(96,165,250,.10), transparent 45%),
-      var(--bg);
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  a { color: var(--accent2); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  body { min-height: 100vh; }
+  a { color: var(--text); text-decoration: none; }
+  a:hover { color: #fff; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: .85em; color: var(--text-secondary);
+  }
   .shell {
-    max-width: 1280px; margin: 0 auto; padding: 22px 18px 48px;
+    max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px;
   }
   header.hero {
-    background: linear-gradient(145deg, rgba(22,29,40,.95), rgba(18,24,33,.9));
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 4px);
-    padding: 22px 22px 18px;
-    box-shadow: var(--shadow);
-    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    padding: 0 0 24px;
+    margin-bottom: 24px;
   }
   .brand {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
   }
   .logo {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: linear-gradient(135deg, #34d399, #60a5fa);
-    display: grid; place-items: center; font-weight: 800; color: #062016; font-size: 14px;
+    width: 28px; height: 28px; border-radius: 6px;
+    background: #fff; color: #000;
+    display: grid; place-items: center; font-weight: 700; font-size: 13px;
+    letter-spacing: -0.02em;
   }
-  h1 { margin: 0; font-size: 1.55rem; letter-spacing: .02em; }
-  .subtitle { margin: 8px 0 0; color: var(--muted); line-height: 1.55; font-size: .92rem; }
+  h1 {
+    margin: 0; font-size: 1.25rem; font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.2;
+  }
+  .subtitle {
+    margin: 8px 0 0; color: var(--text-secondary);
+    line-height: 1.55; font-size: .875rem; max-width: 56rem;
+  }
   .meta {
-    margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 12px;
-    color: var(--muted); font-size: .82rem;
+    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;
+    color: var(--text-secondary); font-size: .75rem;
   }
   .pill {
     display: inline-flex; align-items: center; gap: 6px;
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 999px; padding: 4px 10px;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 999px; padding: 4px 10px; color: var(--text-secondary);
   }
-  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .pill.scan-time {
+    border-color: #333; color: var(--text);
+  }
+  .pill.result-new {
+    border-color: rgba(80, 227, 194, 0.45); color: var(--func);
+  }
+  .pill.result-quiet {
+    border-color: var(--border); color: var(--text-secondary);
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
   .dot.func { background: var(--func); }
   .dot.hire { background: var(--hire); }
   .dot.tut { background: var(--tut); }
@@ -78,162 +97,250 @@
   .layout {
     display: grid;
     grid-template-columns: var(--left-w) minmax(0, 1fr);
-    gap: 18px;
+    gap: 32px;
     align-items: start;
   }
 
   .panel-left {
-    position: sticky; top: 12px;
-    max-height: calc(100vh - 24px);
+    position: sticky; top: 16px;
+    max-height: calc(100vh - 32px);
     overflow: auto;
-    background: rgba(18,24,33,.82);
     border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 2px);
-    padding: 14px 12px 16px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+    padding: 0;
   }
-  .panel-left::-webkit-scrollbar { width: 6px; }
-  .panel-left::-webkit-scrollbar-thumb { background: #2a3548; border-radius: 999px; }
-  .panel-head h2 {
-    margin: 0 0 4px; font-size: 1.05rem;
+  .panel-left::-webkit-scrollbar { width: 4px; }
+  .panel-left::-webkit-scrollbar-thumb { background: #333; border-radius: 999px; }
+  .panel-toggle {
+    display: block; width: 100%; text-align: left;
+    background: transparent; border: 0; color: inherit;
+    padding: 16px; cursor: pointer;
+    font: inherit;
   }
-  .panel-head p {
-    margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.45;
+  .panel-toggle:hover { background: var(--bg-hover); }
+  .panel-toggle:focus-visible {
+    outline: 2px solid var(--accent, #0070f3);
+    outline-offset: -2px;
+  }
+  .panel-title-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel-title-row h2 {
+    margin: 0; font-size: .9375rem; font-weight: 600;
+    letter-spacing: -0.01em; flex: 0 1 auto;
+  }
+  .panel-count {
+    font-size: .6875rem; color: var(--text-tertiary);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 1px 7px; line-height: 1.4;
+  }
+  .chevron {
+    margin-left: auto; flex: 0 0 auto;
+    width: 16px; height: 16px; position: relative;
+    transition: transform .18s ease;
+  }
+  .chevron::before {
+    content: ""; position: absolute; inset: 4px;
+    border-right: 1.5px solid var(--text-secondary);
+    border-bottom: 1.5px solid var(--text-secondary);
+    transform: rotate(45deg); /* points down when expanded */
+  }
+  .panel-left.is-collapsed .chevron { transform: rotate(-90deg); } /* points right */
+  .panel-desc {
+    margin: 6px 0 0; color: var(--text-secondary); font-size: .75rem; line-height: 1.5;
   }
   .panel-hint {
-    margin-top: 8px; font-size: .72rem; color: var(--muted);
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 6px 8px;
+    margin-top: 10px; font-size: .6875rem; color: var(--text-tertiary);
+    border-top: 1px solid var(--border); padding-top: 10px;
   }
-  .src-section { margin-top: 14px; }
+  .panel-body { padding: 0 16px 16px; }
+  .panel-left.is-collapsed .panel-desc,
+  .panel-left.is-collapsed .panel-hint,
+  .panel-left.is-collapsed .panel-body { display: none; }
+  .panel-left.is-collapsed {
+    max-height: none; overflow: visible;
+  }
+  .panel-left.is-collapsed .panel-toggle { padding-bottom: 14px; }
+  .src-section { margin-top: 18px; }
   .src-section h3 {
-    margin: 0 0 8px; font-size: .78rem; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--muted); font-weight: 700;
+    margin: 0 0 8px; font-size: .6875rem; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--text-tertiary); font-weight: 500;
   }
-  .src-list { display: flex; flex-direction: column; gap: 8px; }
-  a.src-card {
+  .src-list { display: flex; flex-direction: column; gap: 2px; }
+  .src-card {
     display: flex; gap: 10px; align-items: flex-start;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 10px 10px;
-    color: inherit; text-decoration: none;
-    transition: .15s ease;
+    border-radius: 6px; padding: 8px;
+    transition: background .12s ease;
   }
-  a.src-card:hover {
-    background: var(--card-hover); border-color: #314159;
-    text-decoration: none;
-  }
+  .src-card:hover { background: var(--bg-hover); }
   .src-kind {
-    flex: 0 0 auto; width: 28px; height: 28px; border-radius: 8px;
+    flex: 0 0 auto; width: 22px; height: 22px; border-radius: 4px;
     display: grid; place-items: center;
-    font-size: .7rem; font-weight: 800;
+    font-size: .625rem; font-weight: 600;
+    border: 1px solid var(--border); color: var(--text-secondary);
+    margin-top: 1px;
   }
-  .src-kind.x {
-    background: rgba(96,165,250,.18); color: #93c5fd;
+  .src-kind.x { color: var(--text-secondary); }
+  .src-kind.web { color: var(--text-secondary); }
+  .src-body { min-width: 0; flex: 1; }
+  a.src-title, .src-title {
+    display: block;
+    font-size: .8125rem; font-weight: 500; line-height: 1.35;
+    margin-bottom: 2px; color: var(--text);
+    letter-spacing: -0.01em;
   }
-  .src-kind.web {
-    background: rgba(52,211,153,.16); color: #6ee7b7;
-  }
-  .src-body { min-width: 0; }
-  .src-title {
-    font-size: .88rem; font-weight: 700; line-height: 1.3; margin-bottom: 3px;
-  }
+  a.src-title:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
   .src-intro {
-    font-size: .75rem; color: var(--muted); line-height: 1.45;
+    font-size: .6875rem; color: var(--text-tertiary); line-height: 1.45;
   }
-  .src-extra {
-    margin-top: 4px; font-size: .72rem;
+  a.src-extra {
+    display: inline-block; margin-top: 6px;
+    font-size: .6875rem; color: var(--text-secondary);
+    border: none; padding: 0; background: none;
   }
+  a.src-extra:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
 
-  .panel-right {
-    min-width: 0;
-  }
+  .panel-right { min-width: 0; }
   .panel-right-head {
     display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
-    gap: 8px; margin-bottom: 6px;
+    gap: 8px; margin-bottom: 12px;
   }
   .panel-right-head h2 {
-    margin: 0; font-size: 1.05rem;
+    margin: 0; font-size: .9375rem; font-weight: 600; letter-spacing: -0.01em;
   }
   .panel-right-head .hint {
-    color: var(--muted); font-size: .78rem;
+    color: var(--text-tertiary); font-size: .75rem;
   }
 
   .filters {
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
+    display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px;
     position: sticky; top: 0; z-index: 20;
-    padding: 10px 0; background: linear-gradient(180deg, rgba(11,15,20,.96), rgba(11,15,20,.88));
+    padding: 8px 0;
+    background: rgba(0,0,0,.85);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .filters button {
-    border: 1px solid var(--border); background: var(--card); color: var(--text);
-    border-radius: 999px; padding: 8px 14px; cursor: pointer; font-size: .9rem;
-    transition: .15s ease;
+    border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+    border-radius: 999px; padding: 5px 12px; cursor: pointer; font-size: .8125rem;
+    font-family: inherit; transition: .12s ease;
   }
-  .filters button:hover { background: var(--card-hover); }
+  .filters button:hover { border-color: var(--border-hover); color: var(--text); }
   .filters button.active {
-    border-color: transparent;
-    background: linear-gradient(135deg, rgba(52,211,153,.25), rgba(96,165,250,.25));
-    box-shadow: inset 0 0 0 1px rgba(110,231,183,.35);
+    border-color: #fff; background: #fff; color: #000; font-weight: 500;
   }
-  .timeline { position: relative; padding-left: 22px; }
+  .timeline { position: relative; padding-left: 20px; }
   .timeline::before {
-    content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
-    width: 2px; background: var(--line);
+    content: ""; position: absolute; left: 5px; top: 4px; bottom: 4px;
+    width: 1px; background: var(--line);
   }
-  .item {
-    position: relative; margin-bottom: 14px;
-  }
+  .item { position: relative; margin-bottom: 12px; }
   .item::before {
-    content: ""; position: absolute; left: -19px; top: 18px;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent); box-shadow: 0 0 0 3px rgba(52,211,153,.18);
+    content: ""; position: absolute; left: -17px; top: 16px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--text-tertiary); border: 1px solid var(--bg);
   }
-  .item[data-cat="招聘"]::before { background: var(--hire); box-shadow: 0 0 0 3px rgba(251,191,36,.18); }
-  .item[data-cat="教程"]::before { background: var(--tut); box-shadow: 0 0 0 3px rgba(96,165,250,.18); }
+  .item[data-cat="功能"]::before { background: var(--func); }
+  .item[data-cat="招聘"]::before { background: var(--hire); }
+  .item[data-cat="教程"]::before { background: var(--tut); }
   .card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 16px 14px;
-    transition: .15s ease;
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    background: var(--bg-elevated);
+    transition: border-color .12s ease;
   }
-  .card:hover { background: var(--card-hover); border-color: #314159; }
+  .card:hover { border-color: var(--border-hover); }
   .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
   .badge {
-    font-size: .75rem; font-weight: 700; letter-spacing: .04em;
-    border-radius: 6px; padding: 3px 8px;
+    font-size: .6875rem; font-weight: 500; letter-spacing: .02em;
+    border-radius: 4px; padding: 2px 7px;
+    border: 1px solid var(--border);
   }
-  .badge.功能 { background: rgba(52,211,153,.15); color: var(--func); }
-  .badge.招聘 { background: rgba(251,191,36,.15); color: var(--hire); }
-  .badge.教程 { background: rgba(96,165,250,.15); color: var(--tut); }
-  .date { color: var(--muted); font-size: .85rem; }
+  .badge.功能 { color: var(--func); border-color: rgba(80,227,194,.25); }
+  .badge.招聘 { color: var(--hire); border-color: rgba(245,166,35,.25); }
+  .badge.教程 { color: var(--tut); border-color: rgba(0,112,243,.3); }
+  .date { color: var(--text-tertiary); font-size: .75rem; }
   .src {
-    margin-left: auto; font-size: .8rem; color: var(--muted);
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 6px; padding: 2px 8px;
+    margin-left: auto; font-size: .6875rem; color: var(--text-tertiary);
+    border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px;
   }
-  .title { margin: 0 0 6px; font-size: 1.05rem; line-height: 1.4; }
-  .summary { margin: 0; color: #c5d0e0; font-size: .92rem; line-height: 1.6;  white-space: pre-wrap; }
-  .link { display: inline-block; margin-top: 10px; font-size: .88rem; }
+  .src:empty { display: none; }
+  .title {
+    margin: 0 0 6px; font-size: .9375rem; line-height: 1.4;
+    font-weight: 500; letter-spacing: -0.01em;
+  }
+  .summary {
+    margin: 0; color: var(--text-secondary); font-size: .8125rem;
+    line-height: 1.65; white-space: pre-wrap;
+  }
+  .summary .fp-label {
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: .01em;
+    color: #fff;
+    border-radius: 4px;
+    padding: 1px 7px;
+    margin: 6px 0 2px;
+    line-height: 1.5;
+  }
+  .summary .fp-label.fp-already {
+    background: rgba(80, 227, 194, .18);
+    border: 1px solid rgba(80, 227, 194, .4);
+    color: #7dffd6;
+  }
+  .summary .fp-label.fp-pushing {
+    background: rgba(0, 112, 243, .2);
+    border: 1px solid rgba(0, 112, 243, .45);
+    color: #7eb6ff;
+  }
+  .summary .fp-label.fp-building {
+    background: rgba(245, 166, 35, .2);
+    border: 1px solid rgba(245, 166, 35, .45);
+    color: #ffc86b;
+  }
+  .summary .fp-label.fp-other {
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #fff;
+  }
+  .summary .fp-line {
+    display: block;
+    font-weight: 700;
+    color: #f5f5f5;
+    background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.03) 70%, transparent);
+    border-left: 2px solid rgba(255,255,255,.35);
+    padding: 3px 10px;
+    margin: 3px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .summary .fp-line.fp-already { border-left-color: rgba(80, 227, 194, .7); background: linear-gradient(90deg, rgba(80,227,194,.14), transparent); }
+  .summary .fp-line.fp-pushing { border-left-color: rgba(0, 112, 243, .7); background: linear-gradient(90deg, rgba(0,112,243,.14), transparent); }
+  .summary .fp-line.fp-building { border-left-color: rgba(245, 166, 35, .75); background: linear-gradient(90deg, rgba(245,166,35,.14), transparent); }
+  .summary .fp-line.fp-other { border-left-color: rgba(255,255,255,.4); }
+  .link {
+    display: inline-block; margin-top: 10px; font-size: .8125rem;
+    color: var(--text-secondary);
+  }
+  .link:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
   .empty {
-    text-align: center; padding: 48px 16px; color: var(--muted);
+    text-align: center; padding: 48px 16px; color: var(--text-tertiary);
     border: 1px dashed var(--border); border-radius: var(--radius);
-    background: rgba(22,29,40,.5);
+    font-size: .875rem;
   }
   footer {
-    margin-top: 22px; color: var(--muted); font-size: .8rem; text-align: center;
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
+    color: var(--text-tertiary); font-size: .75rem; text-align: center;
   }
   .hidden { display: none !important; }
 
   @media (max-width: 960px) {
-    .layout {
-      grid-template-columns: 1fr;
-    }
-    .panel-left {
-      position: static; max-height: none; overflow: visible;
-    }
+    .layout { grid-template-columns: 1fr; gap: 24px; }
+    .panel-left { position: static; max-height: none; overflow: visible; }
   }
   @media (max-width: 560px) {
-    .shell { padding: 14px 12px 40px; }
-    h1 { font-size: 1.3rem; }
+    .shell { padding: 20px 16px 48px; }
+    h1 { font-size: 1.125rem; }
   }
 
 </style>
@@ -247,15 +354,16 @@
       </div>
       <p class="subtitle">自动收集的 GMGN 新功能、招聘与教程更新。左侧是正在盯着的账号与网站；右侧是时间线（最新在上）。摘要中的【已有】/【在推】/【要做】标出可推断的功能点。</p>
       <div class="meta">
-        <span class="pill">最近生成：2026-10-17 11:13（上海时间）</span>
-        <span class="pill"><span class="dot func"></span>功能 36</span>
+        <span class="pill scan-time">最近扫描：2026-10-19 15:10:10 Asia/Shanghai (UTC+8)</span>
+        <span class="pill result-quiet">本次：无新增</span>
+        <span class="pill"><span class="dot func"></span>功能 38</span>
         <span class="pill"><span class="dot hire"></span>招聘 14</span>
         <span class="pill"><span class="dot tut"></span>教程 26</span>
-        <span class="pill">合计 76</span>
+        <span class="pill">合计 78</span>
       </div>
     </header>
     <div class="layout">
-      <aside class="panel-left" aria-label="正在盯着的来源"><div class="panel-head"><h2>正在盯着</h2><p>日常扫描的 X 账号与网站；有变化写入右侧时间线。</p><div class="panel-hint">基线最近核对：2026-10-17 10:43 Asia/Shanghai (UTC+8)</div></div><section class="src-section"><h3>X 账号</h3><div class="src-list"><a class="src-card" href="https://x.com/gmgnai" target="_blank" rel="noopener noreferrer"><div class="src-kind x">X</div><div class="src-body"><div class="src-title">@gmgnai</div><div class="src-intro">官方主账号。产品新功能、链上能力与活动公告的主发布渠道；文档亦指向其 Highlights。</div><div class="src-extra"><a href="https://x.com/gmgnai/highlights" target="_blank" rel="noopener noreferrer">Highlights</a></div></div></a><a class="src-card" href="https://x.com/gmgnapp001" target="_blank" rel="noopener noreferrer"><div class="src-kind x">X</div><div class="src-body"><div class="src-title">@gmgnapp001</div><div class="src-intro">App / 产品演示账号。常发功能视频与 GO/移动端演示，常被 @gmgnai 引用。</div></div></a><a class="src-card" href="https://x.com/haze0x" target="_blank" rel="noopener noreferrer"><div class="src-kind x">X</div><div class="src-body"><div class="src-title">@haze0x</div><div class="src-intro">Haze（Cooking gmgn.ai）。招聘置顶与产品路线/风向；与招聘页互补，偶有未上 Hub 的岗位。</div></div></a></div></section><section class="src-section"><h3>网站 / 文档</h3><div class="src-list"><a class="src-card" href="https://gmgn.ai" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">GMGN 官网</div><div class="src-intro">产品站。站内 Feature Updates 弹窗是官方更新源之一（无独立公开 URL，需站内打开）。</div></div></a><a class="src-card" href="https://gmgn.ai/blog/" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">Blog（教程/指南）</div><div class="src-intro">英文 Blog：交易教程与产品用法；中文见 blog/zh-cn。</div></div></a><a class="src-card" href="https://gmgn.ai/blog/zh-cn/" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">中文 Blog</div><div class="src-intro">中文博客与部分本地化教程入口。</div></div></a><a class="src-card" href="https://gmgn.ai/blog/zh-cn/careers/" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">招聘页（中文）</div><div class="src-intro">在招岗位 Hub（投递 hr@gmgn.ai）。可从 JD 推断产品在加码的能力方向。</div></div></a><a class="src-card" href="https://gmgn.ai/blog/careers/" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">招聘页（英文）</div><div class="src-intro">英文招聘 Hub，与中文页及 @haze0x 置顶互补。</div></div></a><a class="src-card" href="https://docs.gmgn.ai/index/gmgn-update-announcement" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">文档更新说明</div><div class="src-intro">Docs 上的更新公告页；官方说明与 X Highlights 并列的更新渠道。</div></div></a><a class="src-card" href="https://docs.gmgn.ai" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">Docs 首页</div><div class="src-intro">产品文档总入口，含 API / Skills / 功能说明。</div></div></a><a class="src-card" href="https://memecoin.gmgn.ai/" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">Memecoin 教程站</div><div class="src-intro">面向 meme 交易的专题教程站，补 Blog 之外的用法说明。</div></div></a><a class="src-card" href="https://gmgn.ai/ai" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">AI Hub / Skills</div><div class="src-intro">Giga AI 与 Skills Market；新 Skill 上线常在此可见。</div></div></a><a class="src-card" href="https://github.com/GMGNAI/gmgn-skills/discussions" target="_blank" rel="noopener noreferrer"><div class="src-kind web">站</div><div class="src-body"><div class="src-title">GitHub Discussions</div><div class="src-intro">gmgn-skills 讨论区，偶有能力与接入相关更新。</div></div></a></div></section></aside>
+      <aside class="panel-left" id="watch-panel" aria-label="正在盯着的来源"><button type="button" class="panel-toggle" id="watch-toggle" aria-expanded="true" aria-controls="watch-body"><div class="panel-head"><div class="panel-title-row"><h2>正在盯着</h2><span class="panel-count">13 个来源</span><span class="chevron" aria-hidden="true"></span></div><p class="panel-desc">日常扫描的 X 账号与网站；有变化写入右侧时间线。</p><div class="panel-hint">最近扫描：2026-10-19 15:10:10 Asia/Shanghai (UTC+8) · 本次：无新增</div></div></button><div class="panel-body" id="watch-body"><section class="src-section"><h3>X 账号</h3><div class="src-list"><article class="src-card"><div class="src-kind x" aria-hidden="true">X</div><div class="src-body"><a class="src-title" href="https://x.com/gmgnai" target="_blank" rel="noopener noreferrer">@gmgnai</a><div class="src-intro">官方主账号。产品新功能、链上能力与活动公告的主发布渠道；文档亦指向其 Highlights。</div><a class="src-extra" href="https://x.com/gmgnai/highlights" target="_blank" rel="noopener noreferrer">Highlights →</a></div></article><article class="src-card"><div class="src-kind x" aria-hidden="true">X</div><div class="src-body"><a class="src-title" href="https://x.com/gmgnapp001" target="_blank" rel="noopener noreferrer">@gmgnapp001</a><div class="src-intro">App / 产品演示账号。常发功能视频与 GO/移动端演示，常被 @gmgnai 引用。</div></div></article><article class="src-card"><div class="src-kind x" aria-hidden="true">X</div><div class="src-body"><a class="src-title" href="https://x.com/haze0x" target="_blank" rel="noopener noreferrer">@haze0x</a><div class="src-intro">Haze（Cooking gmgn.ai）。招聘置顶与产品路线/风向；与招聘页互补，偶有未上 Hub 的岗位。</div></div></article></div></section><section class="src-section"><h3>网站 / 文档</h3><div class="src-list"><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://gmgn.ai" target="_blank" rel="noopener noreferrer">GMGN 官网</a><div class="src-intro">产品站。站内 Feature Updates 弹窗是官方更新源之一（无独立公开 URL，需站内打开）。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://gmgn.ai/blog/" target="_blank" rel="noopener noreferrer">Blog（教程/指南）</a><div class="src-intro">英文 Blog：交易教程与产品用法；中文见 blog/zh-cn。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://gmgn.ai/blog/zh-cn/" target="_blank" rel="noopener noreferrer">中文 Blog</a><div class="src-intro">中文博客与部分本地化教程入口。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://gmgn.ai/blog/zh-cn/careers/" target="_blank" rel="noopener noreferrer">招聘页（中文）</a><div class="src-intro">在招岗位 Hub（投递 hr@gmgn.ai）。可从 JD 推断产品在加码的能力方向。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://gmgn.ai/blog/careers/" target="_blank" rel="noopener noreferrer">招聘页（英文）</a><div class="src-intro">英文招聘 Hub，与中文页及 @haze0x 置顶互补。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://docs.gmgn.ai/index/gmgn-update-announcement" target="_blank" rel="noopener noreferrer">文档更新说明</a><div class="src-intro">Docs 上的更新公告页；官方说明与 X Highlights 并列的更新渠道。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://docs.gmgn.ai" target="_blank" rel="noopener noreferrer">Docs 首页</a><div class="src-intro">产品文档总入口，含 API / Skills / 功能说明。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://memecoin.gmgn.ai/" target="_blank" rel="noopener noreferrer">Memecoin 教程站</a><div class="src-intro">面向 meme 交易的专题教程站，补 Blog 之外的用法说明。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://gmgn.ai/ai" target="_blank" rel="noopener noreferrer">AI Hub / Skills</a><div class="src-intro">Giga AI 与 Skills Market；新 Skill 上线常在此可见。</div></div></article><article class="src-card"><div class="src-kind web" aria-hidden="true">站</div><div class="src-body"><a class="src-title" href="https://github.com/GMGNAI/gmgn-skills/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a><div class="src-intro">gmgn-skills 讨论区，偶有能力与接入相关更新。</div></div></article></div></section></div></aside>
       <main class="panel-right" aria-label="情报时间线">
         <div class="panel-right-head">
           <h2>情报时间线</h2>
@@ -276,7 +384,7 @@
       也可加载同目录 <code>timeline.json</code>
     </footer>
   </div>
-  <script id="timeline-data" type="application/json">[{"id": "8c1b8fabcac23dd5", "date": "2026-10-17", "datetime": "2026-10-17T12:00:00+08:00", "category": "招聘", "title": "招聘信号汇总：GMGN 正在加码的产品能力", "summary": "从全量 JD 抽出的产品方向（不以岗位名为中心）：跨链资产兑换 + Gas 代付；自建 Launchpad；EVM 聚合路由扩 DEX/发射台；多链数据采集；交易后端低延迟高并发；App 社交社区（喊单/关注/Feed/信誉）；下载→首单转化漏斗；买卖/跟单/限价/K 线迭代；热门榜人工 curation；战壕出币再压延迟。\n【要做/从招聘推断｜总览】\n• 跨链资产兑换 + 高并发 Gas 代付 — 例：跨链请求处理：源链入金识别 → 目标链执行 → 结算状态跟踪\n• 自建 Launchpad（Bonding Curve 发射台） — 例：Bonding Curve 定价合约\n• EVM 聚合路由扩容（新 DEX / 新发射台） — 例：流动性池发现 + 交易构建\n• 多链数据采集与协议解析 — 例：新增 EVM 链与 Solana 生态采集（节点、区块、日志、下游链路）\n• 链上交易后端：更低延迟、更高并发、更稳故障恢复 — 例：慢查询/锁竞争/内存优化，降高峰延迟\n• 工具 → 社交交易社区（喊单/关注/Feed/信誉） — 例：喊单、关注与追踪、信息流、个人主页、榜单迭代\n• App 下载→注册→入金→首单转化与召回 — 例：下载→注册→入金→首笔交易全漏斗\n• App 交易体验：买卖 / 跟单 / K 线 / 限价单 — 例：买卖、跟单、行情 K 线、限价单需求与体验升级\n• 跨链热门 MEME 榜人工 curation — 例：全链热门 MEME 第一时间发现与榜单 curation\n• 战壕出币再压延迟 + 百倍流量基建 — 例：可扛百倍流量的交易/行情基础设施", "source_url": "https://gmgn.ai/blog/zh-cn/careers/", "source_label": "Careers 汇总", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "feat-2026-10-17-skills-caller-dump-score", "date": "2026-10-17", "datetime": "2026-10-17T10:22:00+08:00", "category": "功能", "title": "Skills 喊单评分：币是否真跑 + 自喊后砸盘惩罚", "summary": "GMGN Skills 用喊单人真实成交账本打双维分；自喊后约 15 分钟内砸盘则分数暴跌。来源 @gmgnai。\n【已有】\n• Skills 喊单/Callout 评分\n• 喊单记录 ↔ 真实成交账本打通\n• 「币是否真涨」维度\n• 「自喊后短时砸盘」惩罚维度（约 15 分钟）\n【在推】\n• 跟单前用质量分过滤喊单人\n• 反割/反自卖风控", "source_url": "https://x.com/gmgnai/status/2111281543029178881", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "overlay-2026-10-15-skills-profit-source", "date": "2026-10-15", "datetime": "2026-10-15T12:00:00+08:00", "category": "功能", "title": "Skills 钱包分析可追溯利润来源", "summary": "GMGN Skills 钱包分析升级：可追溯利润来源；并提示自发射代币中超过 50% 会失败。\n【已有】\n• Skills 钱包分析\n• 利润来源追溯\n• 自发射代币失败率提示（\u003e50% 失败）\n【在推】\n• 用收益质量（非只看总利润）判断聪明钱", "source_url": "https://x.com/gmgnai/status/2110695428085960771", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "overlay-2026-10-10-narrative", "date": "2026-10-10", "datetime": "2026-10-10T12:00:00+08:00", "category": "功能", "title": "上线 gmgn-narrative Skill", "summary": "新增 gmgn-narrative：对照链上数据核验叙事说法是否站得住。\n【已有】\n• gmgn-narrative Skill\n• 叙事声称 ↔ 链上数据核验\n【在推】\n• 减少纯故事带节奏的跟风", "source_url": "https://x.com/gmgnai/status/2108761437174976891", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "086d0d5ba4641cda", "date": "2026-10-09", "datetime": "2026-10-09T12:00:00+08:00", "category": "功能", "title": "GGC 全球赛季 1 公布", "summary": "GMGN Global Championship（GGC）Season 1 公布，赛期约 10/17–10/27 UTC。属赛事活动，非功能发布。", "source_url": "https://x.com/gmgnai/status/2108564198225859055", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "overlay-2026-10-08-giga", "date": "2026-10-08", "datetime": "2026-10-08T12:00:00+08:00", "category": "功能", "title": "Giga AI 升级（Haze：点币/点人直接出结论）", "summary": "官方 Giga AI 升级；Haze 同日补充：点一个币/一个人，GIGA 直接回答该不该跟买卖、谁在砸、dev 底子，基于海量链上数据。\n【已有】\n• 站内 Giga AI 助手\n• 代币 / 钱包 / Dev 战绩问答\n• 跟买跟卖、砸盘方、Dev 底子类结论输出\n【在推】\n• 更快、更高质量的 AI 解读替代手工扒链", "source_url": "https://x.com/gmgnai/status/2108131696701059138", "source_label": "X @gmgnai / @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "154d58b4e1735265", "date": "2026-10-02", "datetime": "2026-10-02T12:00:00+08:00", "category": "招聘", "title": "产品方向：跨链热门 MEME 榜人工 curation", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：热门榜单运营专员×2。 haze@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 跨链热门榜 / 热门 MEME 能力已有\n【在推】\n• 人工运营加持的热门榜曝光与正口碑\n【要做/从招聘推断】\n• 全链热门第一时间发现与榜单 curation", "source_url": "https://x.com/haze0x/status/2105847342427676989", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "haze-2026-09-30-callout-35-partners", "date": "2026-09-30", "datetime": "2026-09-30T16:30:13+08:00", "category": "功能", "title": "Callout 已覆盖 35 家合作伙伴 + Open API 开放接入", "summary": "Haze：GMGN Callout 已覆盖 35 家合作伙伴；开放 API 供生态项目接入，喊单一次多端可见。\n【已有】\n• Callout 喊单发布\n• 向 35+ 合作平台分发喊单\n• Callout Open API（生态可接入）\n【在推】\n• 「Post once. Seen everywhere」跨平台分发网络\n【要做/从招聘推断】\n• 更多合作方/生态通过 API 接入扩大触达", "source_url": "https://x.com/haze0x/status/2105213613460099092", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "3c3c5ecc8b72cd21", "date": "2026-09-28", "datetime": "2026-09-28T12:00:00+08:00", "category": "功能", "title": "上线 gmgn-contract-dd", "summary": "合约尽职调查 Skill：安全扣分过程更透明；未读字段一律不通过，避免漏检。", "source_url": "https://x.com/gmgnai/status/2104600455657738648", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "d56b74eca0dc2804", "date": "2026-09-24", "datetime": "2026-09-24T12:00:00+08:00", "category": "招聘", "title": "产品方向：中英双语一线客服与交易问题响应", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：中英文客户运营×3。 haze@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 1V1 客服 / 投诉处理通道\n【在推】\n• 更长在线、更高服务口碑、中英全球化\n【要做/从招聘推断】\n• 高频交易/性能问题一线响应", "source_url": "https://x.com/haze0x/status/2102976871571009965", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "haze-2026-09-23-pinned-hiring", "date": "2026-09-23", "datetime": "2026-09-23T21:29:19+08:00", "category": "招聘", "title": "产品方向总览（Haze 置顶招聘）：社交/转化/Launchpad/路由/跨链代付/数据", "summary": "Haze 置顶招聘仍在：攻克链上最前沿产品与工程问题。以下按「要建什么能力」读，不按岗位名。\n【已有】\n• 社交交易（Callout/关注/Feed/排行榜）\n• App 转化漏斗骨架（下载→注册→入金→首单）\n• EVM 交易路由、链上数据管道、高并发交易服务端\n• 多链交易终端\n【在推】\n• 工具 → 交易社区；App 增长与召回\n【要做/从招聘推断】\n• 自建 Launchpad（Bonding Curve / LP 迁移 / 分润）\n• 跨链资产兑换执行流\n• 高并发 Gas 代付（Gas Sponsor：额度/预算/防滥用）← 见跨链岗 JD\n• 新链/新 DEX/新发射台数据接入与路由质量\n• 社交冷启动、信誉与反女巫\n证据：https://gmgn.ai/blog/zh-cn/careers/ 与跨链岗 https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/", "source_url": "https://x.com/haze0x/status/2102752169867018341", "source_label": "X @haze0x 置顶", "collected_at": "2026-10-17T11:12:00+08:00"}, {"id": "overlay-2026-09-23-callout-pnl", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "功能", "title": "Callout 同时显示喊单与持仓/实时 PnL", "summary": "Callout 更新：同时展示喊单人、持仓方、实时盈亏与历史喊单。\n【已有】\n• Callout 喊单流\n• 喊单人与持仓方同屏\n• 实时 PnL\n• 历史喊单记录\n【在推】\n• 跟单前对照「喊了是否还拿着、盈亏如何」", "source_url": "https://x.com/gmgnai/status/2102734098473316533", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "506f2844c0cfe750", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：工具→社交交易社区（喊单/关注/Feed/信誉）", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（社交社区方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• 交易、行情、跟单已跑通\n• 喊单 / 关注追踪 / 信息流 / 个人主页 / 榜单模块已在迭代\n【在推】\n• 从单人盯盘工具转向互相影响、互相跟随的交易社区\n【要做/从招聘推断】\n• 关系链冷启动（打开即有可看可关注）\n• 信息流排序与创作者激励\n• 信誉体系 + 反刷量 / 反女巫\n• 社区指标闭环：关注渗透、跟单转化、创作者留存", "source_url": "https://gmgn.ai/blog/zh-cn/pm-social-community/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "d2ac372eaa0b2a30", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：App 下载→入金→首单转化漏斗与召回", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（用户转化方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• Web + App 双端产品能力已跑通\n【在推】\n• 把每个新用户送到第一笔交易，再留下、再带人\n【要做/从招聘推断】\n• 下载→注册→入金→首笔交易全漏斗\n• Onboarding / 空状态 / 首单路径\n• Push / 邮件 / 站内消息生命周期触达\n• 邀请裂变、返佣激励（含防刷与 ROI）\n• A/B 实验与转化归因", "source_url": "https://gmgn.ai/blog/zh-cn/pm-user-conversion/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "fb4672cfc266317d", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：EVM 聚合路由扩 DEX/发射台 + 降延迟", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• EVM 路由核心链路已在生产\n【在推】\n• 路径质量与端到端延迟持续优化\n• 路由质量验证与线上归因\n【要做/从招聘推断】\n• 流动性池发现、交易构建、多跳/拆单\n• 新增 DEX / Launchpad：合约侧报价执行 + 服务端池模型适配\n• Uniswap V2/V3/V4 与 bonding curve 发射台深度支持\n• MEV/抢跑/夹子防护相关执行优化", "source_url": "https://gmgn.ai/blog/zh-cn/evm-routing-engineer/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f9a2b4670fb9a4fd", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：新链/新 DEX/新发射台数据接入与解析", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：链上数据开发工程师（Onchain Data Engineer）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 多链采集与业务数据集已在服务产品\n【在推】\n• 更快纳入新链、新协议形态\n【要做/从招聘推断】\n• 新增 EVM 链与 Solana 生态采集全链路\n• DEX / Launchpad 协议解析（AMM V2/V3/V4 hook、bonding curve）\n• 池发现、费率、发行阶段、成交归属准确建模\n• 数据质量、重组与节点异常治理", "source_url": "https://gmgn.ai/blog/zh-cn/onchain-data-engineer/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "8f0ec66e2b76ea41", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：交易后端低延迟高并发与故障恢复", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：高级服务端开发工程师 · GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 链上交易服务端已上线有真实用户\n【在推】\n• 高峰吞吐、降延迟、局部故障隔离\n【要做/从招聘推断】\n• 核心服务性能优化（慢查询/锁/内存）\n• 并发控制与流量保护\n• 幂等/重试/状态恢复（防重复下单）\n• RPC 与第三方故障切换、监控压测灰度", "source_url": "https://gmgn.ai/blog/zh-cn/senior-backend-engineer/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "93fc2ef82c9cd322", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：跨链资产兑换 + 高并发 Gas 代付", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：高级区块链开发工程师（跨链方向）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 面向多链生态的资产跨链兑换产品已在建设/有真实用户（JD 表述）\n• 跨链或 Gas Sponsor 生产经验被列为硬性考察方向之一\n【在推】\n• 更低成本、更少操作完成跨链交易\n• 复杂链上交互收成简单可靠体验\n【要做/从招聘推断】\n• 跨链执行流：源链入金识别 → 目标链交易执行 → 结算状态跟踪\n• 多阶段状态同步、失败重试、异常恢复\n• 协议接入与费用：模拟、滑点、Gas 估算、动态费用\n• 高并发 Gas 代付（Gas Sponsor）：调度、代付额度、预算控制、费用核算、防滥用\n• 结算对账、退款/补偿、防重复执行与重复支付\n• 可观测性与生产故障处理（兑换失败、流动性不足、Gas 波动、RPC 异常）\n【加分信号/相邻能力】\n• Intent / Solver\n• 账户抽象 / Paymaster\n• 交易中继\n• 多链流动性管理", "source_url": "https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f506bfc459863990", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：自建 Launchpad（Bonding Curve/LP 迁移/分润）", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：智能合约工程师（Launchpad 方向）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 站内已支持第三方发射台/新盘发现与交易\n【在推】\n• 端到端自有 Launchpad 协议（对标 Pump.fun 类机制）\n【要做/从招聘推断】\n• Bonding Curve 定价\n• 虚拟流动性池 ↔ 真实流动性池切换\n• 代币发行、手续费与分润\n• 流动性自动迁移\n• 合约与 Go 后端数据流对接\n• 资金流安全与对抗 MEV/夹子设计", "source_url": "https://gmgn.ai/blog/zh-cn/smart-contract-engineer-launchpad/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "haze-2026-09-22-crosschain-share-portfolio", "date": "2026-09-22", "datetime": "2026-09-22T17:54:15+08:00", "category": "功能", "title": "全链分享图 + 全链资产管理上线", "summary": "Haze 宣布：全链分享图已上线；全链资产管理已上线。\n【已有】\n• 全链资产一览/资产管理\n• 全链分享图（可对外分享的跨链仓位/战绩图）\n【在推】\n• 多链统一资产视图与社交分享传播\n【要做/从招聘推断】\n• （结合跨链/数据岗）继续扩链与资产聚合精度", "source_url": "https://x.com/haze0x/status/2102335661701533978", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "008a8b13b2016ed7", "date": "2026-09-21", "datetime": "2026-09-21T12:00:00+08:00", "category": "招聘", "title": "产品方向：战壕出币再压延迟 + 百倍流量基建", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：Golang 基础设施/后端工程师。 hr@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 战壕多链新盘信息流已上线\n【在推】\n• 出币再快 1ms/1μs；行情爆炸仍稳\n【要做/从招聘推断】\n• 可承载百倍流量的交易/行情基础设施", "source_url": "https://x.com/haze0x/status/2101919245756223672", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "b1f640e2c542b232", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：怎么在 K 线上看 FOMO 喊单", "summary": "讲解 GMGN 图表上的 FOMO 喊单标记，以及出现后该检查哪些安全/持仓信号。", "source_url": "https://gmgn.ai/blog/how-to-read-fomo-calls-on-gmgn-chart/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "7d4deed82c4b23c6", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：怎么在 GMGN K 线上看 Fomo 喊单？", "summary": "中文教程：怎么在 GMGN K 线上看 Fomo 喊单？。", "source_url": "https://gmgn.ai/blog/zh-cn/how-to-read-fomo-calls-on-gmgn-chart/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "e7004bca605e0ba1", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：如何在 Arc 买 Memecoin（对比 Robinhood）", "summary": "介绍如何在 Arc 链购买 Memecoin，并对比 Arc 与 Robinhood Chain 的差异。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/how-to-buy-memecoins-on-arc/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "76fc7a24ae13af5e", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：Pons / StonkFun / Flap 发射台对比", "summary": "对比 Robinhood、Solana、BSC 上常见 Meme 发射台差异，帮你选入口。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "76fc7a24ae13af5e", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：$MEME 与 AMC 股票代币是否同一资产", "summary": "澄清 $MEME（Meme 币）与 AMC 股票代币是否为同一资产，避免买错。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "haze-2026-09-18-go-roadmap-30d", "date": "2026-09-18", "datetime": "2026-09-18T13:17:27+08:00", "category": "功能", "title": "App / GMGN GO 三阶段路线图（约 30 天）", "summary": "Haze 长文：网页端持续修；App 将分三版推进，称「一切将在未来 30 天内发生」。\n【已有】\n• 网页端多链交易（仍有小毛病要修）\n• App 旧版 + 社交交易方向（GMGN GO）\n• PVP 战壕体验（相对早期 PVE 数据分析版已转型）\n【在推】\n• 第1版：页面改进\n• 第2版：对齐当前市场水平的交易体验\n• 第3版：领先市场水平的交易体验\n【要做/从招聘推断】\n• （结合 App PM 岗）买卖/跟单/图表/限价单体验升级\n• 社交社区与转化漏斗配合 App 改版", "source_url": "https://x.com/haze0x/status/2100816449069846942", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "a9a66c79234fcd9d", "date": "2026-09-18", "datetime": "2026-09-18T12:00:00+08:00", "category": "功能", "title": "上线 token-buy Skill", "summary": "token-buy Skill：解析 ticker、做安全检查并给出下单规模建议，需用户确认后执行。", "source_url": "https://x.com/gmgnai/status/2100785131254632646", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "overlay-2026-09-17-gmgn-go", "date": "2026-09-17", "datetime": "2026-09-17T12:00:00+08:00", "category": "功能", "title": "GMGN GO 移动社交交易上线", "summary": "GMGN GO 上线：移动端关注交易者、看 Callout 与排行榜。\n【已有】\n• GMGN GO / App 社交交易版\n• 关注交易者\n• 移动端 Callout\n• 交易员/排行榜\n【在推】\n• 移动社交交易成为主战场之一\n【要做/从招聘推断】\n• （见 Haze 30 天三阶段）页面→对齐市场→领先市场的交易体验", "source_url": "https://x.com/gmgnapp001/status/2100563862613537097", "source_label": "X @gmgnapp001", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "3d2ed46b18e61f8c", "date": "2026-09-16", "datetime": "2026-09-16T12:00:00+08:00", "category": "功能", "title": "Arc 链首日上线 GMGN", "summary": "Arc 公链从上线首日即可在 GMGN 交易与发现。", "source_url": "https://x.com/gmgnai/status/2100197212399845701", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "34c78a7ca7ebf1dc", "date": "2026-09-16", "datetime": "2026-09-16T12:00:00+08:00", "category": "功能", "title": "K 线 FOMO 喊单标记", "summary": "图表新增 Fomo Thesis / Fomo Top 标记，可直接在 K 线上看到 FOMO 喊单点。", "source_url": "https://x.com/gmgnai/status/2100174341401170271", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "2e9ce072bf94c026", "date": "2026-09-15", "datetime": "2026-09-15T12:00:00+08:00", "category": "招聘", "title": "产品方向：全球线下 Brand & Events 触达", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：Brand & Events Marketing Manager。 X post Apply CTA; not on careers hubs。（announced_on_x_not_on_careers_hub）\n【在推】\n• 全球 in-person events / activations（联合创始人直管）\n【要做/从招聘推断】\n• 线下品牌与活动端到端", "source_url": "https://x.com/gmgnai/status/2099719321677410494", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "7fa4820d9d8e9571", "date": "2026-09-14", "datetime": "2026-09-14T12:00:00+08:00", "category": "功能", "title": "RWA / Meme 报价过滤（全链）", "summary": "全链支持按 RWA 与 Meme 报价类型过滤，方便筛掉不想要的报价资产。", "source_url": "https://x.com/gmgnai/status/2099396799186473200", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "fefd6f6e891e2e8b", "date": "2026-09-11", "datetime": "2026-09-11T12:00:00+08:00", "category": "功能", "title": "Heat Rank 跨链热度榜 Skill", "summary": "Heat Rank Skill：跨链精选热门列表，用 Skills 聚合多链热度。", "source_url": "https://x.com/gmgnai/status/2098234606306861246", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "d75cc0e9a0c27c8d", "date": "2026-09-10", "datetime": "2026-09-10T12:00:00+08:00", "category": "功能", "title": "报价代币安全与流动性检查", "summary": "新增对 Quote 代币的安全与流动性检查，降低配对侧风险。", "source_url": "https://x.com/gmgnai/status/2097933008154275844", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "d6202fe9c8e580be", "date": "2026-09-10", "datetime": "2026-09-10T12:00:00+08:00", "category": "招聘", "title": "产品方向：App 买卖/跟单/K线/限价单体验升级", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（链上交易方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• App 买卖、跟单、行情 K 线、限价单已存在\n【在推】\n• 对标 pump.fun / fomo / Axiom，按机制层拆竞品后迭代\n【要做/从招聘推断】\n• 交易模块体验加深（买卖/跟单/图表/限价）\n• 路由成交质量作为核心监控指标\n• 用户问题可上链定位路由/计价/索引并反哺产品", "source_url": "https://gmgn.ai/blog/zh-cn/pm-onchain-trading/", "source_label": "Careers JD", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "haze-2026-09-09-foldable", "date": "2026-09-09", "datetime": "2026-09-09T22:16:39+08:00", "category": "功能", "title": "App 已支持折叠屏（与 iPad 分屏战壕）", "summary": "Haze 转发官方：App 已支持折叠屏。官方说明含 iPad/折叠屏上三路战壕 + 图表分屏。\n【已有】\n• App 折叠屏适配\n• iPad / 大屏：三路 Trenches + Feed/图表分屏\n【在推】\n• 大屏移动端扫盘与交易一体体验", "source_url": "https://x.com/haze0x/status/2097690654533152909", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "haze-2026-09-08-pool-mutation", "date": "2026-09-08", "datetime": "2026-09-08T11:13:06+08:00", "category": "功能", "title": "更新池子与变异数据：交易对一目了然", "summary": "Haze：更新了池子与变异数据，每个代币的交易对一目了然。\n【已有】\n• 代币多交易对/池子列表\n• 池子变异（mutation）相关数据展示\n【在推】\n• 多报价/多池玩法下的选池可见性（降低小池误买）\n【要做/从招聘推断】\n• （结合路由岗）池发现与路径质量继续加强", "source_url": "https://x.com/haze0x/status/2097161277831532667", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "d879c22be8e97eee", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "功能", "title": "多链 Trenches 合并信息流", "summary": "Trenches 支持 SOL/BSC/Robinhood/Base/Arc 等多链合并信息流，一屏看新盘。", "source_url": "https://x.com/gmgnai/status/2096991802230464860", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "c230424ebaeab389", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "功能", "title": "双 Dev 评分：声誉 + 实力", "summary": "开发者评分拆成钱包声誉与代币实力两维，便于区分人设与项目质量。", "source_url": "https://x.com/gmgnai/status/2096986626006389047", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：在 GMGN 买 Robinhood 新盘", "summary": "手把手：如何在 GMGN 上发现并买入 Robinhood Chain 新发射代币。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：同名热盘怎么辨别买的是哪一个", "summary": "以 Robinhood 上热门同名盘为例，教你核对合约与标识，避免买错。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：什么是 Artificial Inu（AI）", "summary": "介绍 Robinhood 上与 NVDA 配对的 Memecoin Artificial Inu（AI）背景与注意点。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：发现热门 Meme 后在 GMGN 查什么", "summary": "热盘出现后，应在 GMGN 上依次检查安全、持仓、聪明钱与流动性等要点。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "haze-2026-09-04-sidebar-plugin", "date": "2026-09-04", "datetime": "2026-09-04T23:20:13+08:00", "category": "功能", "title": "数据站侧边栏交易插件（点币同步下单）", "summary": "Haze：产品经理做了小插件——在看数据的网站开启 GMGN 交易侧边栏，点击代币时侧边栏同步该币，便于快速下单。\n【已有】\n• 第三方数据站嵌入/侧边栏交易插件\n• 点击外部站点代币 → 同步到 GMGN 下单面板\n【在推】\n• 「看数据网站 + 即时交易」工作流，缩短从发现到下单路径", "source_url": "https://x.com/haze0x/status/2095894711903121421", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "haze-2026-09-01-fomo-500-top", "date": "2026-09-01", "datetime": "2026-09-01T15:17:42+08:00", "category": "功能", "title": "K 线标注 FOMO 的 500 TOP 交易者", "summary": "Haze：在 K 线上标注了一些 FOMO 的 500 TOP 交易者（早于官方 9/16 FOMO Thesis/Top 标记宣传）。\n【已有】\n• K 线 FOMO 相关标注\n• FOMO 体系下的 Top 交易者标记\n【在推】\n• 图表上直接看到 FOMO 资金/交易者行为", "source_url": "https://x.com/haze0x/status/2094686115752190245", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "e82c4e028b9a0243", "date": "2026-09-01", "datetime": "2026-09-01T12:00:00+08:00", "category": "功能", "title": "Skills Market 上线 Chart Pattern", "summary": "Skills 市场新增图表形态识别 Skill，可辅助看盘。", "source_url": "https://x.com/gmgnai/status/2094799783013863557", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "023683469016e71a", "date": "2026-08-28", "datetime": "2026-08-28T12:00:00+08:00", "category": "功能", "title": "OpenAPI Free / Plus / Pro 套餐", "summary": "OpenAPI 推出 Free / Plus / Pro 限速套餐，方便按用量接入 Agent/数据。", "source_url": "https://x.com/gmgnai/status/2093130053328764943", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "24e167816312e3f2", "date": "2026-08-21", "datetime": "2026-08-21T12:00:00+08:00", "category": "功能", "title": "GMGN Card：闲置余额 5% APY", "summary": "GMGN Card 上线：闲置余额可享约 5% APY，并支持 Apple/Google Pay 相关场景。", "source_url": "https://x.com/gmgnai/status/2090799546989494481", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "b6ab105cc54150c4", "date": "2026-08-19", "datetime": "2026-08-19T12:00:00+08:00", "category": "功能", "title": "Trenches 内联迷你图", "summary": "Trenches 列表内嵌迷你 K 线，扫盘时可直接看走势。", "source_url": "https://x.com/gmgnai/status/2089944717161275506", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f38349aec5b0dbeb", "date": "2026-08-18", "datetime": "2026-08-18T12:00:00+08:00", "category": "功能", "title": "Arbitrum 上线 GMGN", "summary": "Arbitrum 链已可在 GMGN 使用。", "source_url": "https://x.com/gmgnai/status/2089769132619391390", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "661f9f3c185c2d1d", "date": "2026-08-18", "datetime": "2026-08-18T12:00:00+08:00", "category": "功能", "title": "关注可信 Dev，Trenches 高亮", "summary": "可关注可信开发者，并在 Trenches 用自定义颜色/名称高亮其新盘。", "source_url": "https://x.com/gmgnai/status/2089698059928400118", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "1c6176e9acc0b259", "date": "2026-08-18", "datetime": "2026-08-18T12:00:00+08:00", "category": "教程", "title": "教程：用 Trenches / Callout / 钱包追踪更早发现 Meme", "summary": "组合 Trenches、Callout 与钱包追踪，提高发现早期 Meme 的效率。", "source_url": "https://gmgn.ai/blog/how-to-find-meme-coins-earlier/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "bbf5e3771f88c2f1", "date": "2026-08-14", "datetime": "2026-08-14T12:00:00+08:00", "category": "教程", "title": "教程：什么是 Bundle，如何查捆绑比例", "summary": "解释 Bundle（捆绑仓）概念，并演示在 GMGN 查看 Bundle % 与关联钱包。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "8bfae313d1076d53", "date": "2026-08-11", "datetime": "2026-08-11T12:00:00+08:00", "category": "教程", "title": "教程：在 GMGN 查 BSC Meme 代币税", "summary": "教你如何在 GMGN 检查 BSC Meme 的买卖税/税率风险。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "8bfae313d1076d53", "date": "2026-08-11", "datetime": "2026-08-11T12:00:00+08:00", "category": "教程", "title": "教程：BSC 与 Solana 玩 Meme 有何不同", "summary": "对比 BSC 与 Solana 在 Meme 交易体验、费用与风险上的差异。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "6b102e348b313f1e", "date": "2026-08-07", "datetime": "2026-08-07T12:00:00+08:00", "category": "功能", "title": "钱包追踪：FOMO 转入转出", "summary": "Wallet Tracker 支持 FOMO 钱包转入/转出跟踪，便于盯资金动向。", "source_url": "https://x.com/gmgnai/status/2085733804489220402", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "267b87c799de4a0e", "date": "2026-08-07", "datetime": "2026-08-07T12:00:00+08:00", "category": "教程", "title": "教程：新手如何更安全地交易 Meme", "summary": "面向新手的安全交易指南：钱包、滑点、蜜罐与仓位管理基础。", "source_url": "https://gmgn.ai/blog/how-beginners-trade-meme-coins-safely/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f3538519e7159943", "date": "2026-08-06", "datetime": "2026-08-06T12:00:00+08:00", "category": "功能", "title": "Manifesto 付费高信念喊单", "summary": "Manifesto：付费高信念喊单产品形态上线。", "source_url": "https://x.com/gmgnai/status/2085351308715008186", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "84ea32aad6fd497e", "date": "2026-08-05", "datetime": "2026-08-05T12:00:00+08:00", "category": "功能", "title": "Trenches 简洁布局模式", "summary": "Trenches 新增 Clean Layout，减少噪音、更易扫盘。", "source_url": "https://x.com/gmgnai/status/2085019822023397729", "source_label": "X", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "793881de682211a2", "date": "2026-08-04", "datetime": "2026-08-04T12:00:00+08:00", "category": "教程", "title": "教程：在 GMGN 设置止盈止损与追踪单", "summary": "详解 TP/SL、追踪止盈、追踪止损在 GMGN 上的设置方法。", "source_url": "https://gmgn.ai/blog/how-to-set-take-profit-stop-loss-on-gmgn/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "4d52cc1e810260fd", "date": "2026-08-04", "datetime": "2026-08-04T12:00:00+08:00", "category": "教程", "title": "教程：怎么选 Meme 交易链", "summary": "从流动性、费用、工具与风险角度，帮你选择适合的 Meme 交易链。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "4d52cc1e810260fd", "date": "2026-08-04", "datetime": "2026-08-04T12:00:00+08:00", "category": "教程", "title": "教程：用 GMGN 发现 Robinhood 轮动早期信号", "summary": "讲解如何在 Robinhood 链上用 GMGN 观察叙事/资金轮动的早期迹象。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "059d7cf2bb9010b8", "date": "2026-07-22", "datetime": "2026-07-22T12:00:00+08:00", "category": "功能", "title": "gmgn-cli v1.5.3 支持 Robinhood", "summary": "gmgn-cli v1.5.3：Cooking / KOL / Smart Money / Market Signal 等能力覆盖 Robinhood。", "source_url": "https://github.com/GMGNAI/gmgn-skills/discussions", "source_label": "GitHub", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "e71b30c272d2f639", "date": "2026-07-14", "datetime": "2026-07-14T12:00:00+08:00", "category": "教程", "title": "教程：在 Robinhood 用 GMGN 买 CASHCAT", "summary": "完整指南：通过 GMGN 在 Robinhood Chain 购买 CASHCAT。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "e71b30c272d2f639", "date": "2026-07-14", "datetime": "2026-07-14T12:00:00+08:00", "category": "教程", "title": "教程：用 Claude + GMGN Skills 跟踪聪明钱", "summary": "Skills 教程：把 Claude 等 AI Agent 接到 GMGN，跟踪聪明钱钱包。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "e71b30c272d2f639", "date": "2026-07-14", "datetime": "2026-07-14T12:00:00+08:00", "category": "教程", "title": "教程：CASHCAT 之后如何用 GMGN 做 Robinhood Meme", "summary": "从发现、分析到交易，系统介绍用 GMGN 玩 Robinhood Chain Meme。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "b4ebd71af8005148", "date": "2026-07-07", "datetime": "2026-07-07T12:00:00+08:00", "category": "教程", "title": "教程：跨链 Meme 叙事轮动怎么跟踪", "summary": "解释跨链叙事轮动，并说明如何用 GMGN 跟踪多链信号。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "b4ebd71af8005148", "date": "2026-07-07", "datetime": "2026-07-07T12:00:00+08:00", "category": "教程", "title": "教程：用 Claude + Skills 检查 Solana 代币安全", "summary": "Skills 教程：结合 Claude 与 GMGN Skills 做 Solana 代币安全检查。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "372200be123e74e8", "date": "2026-07-01", "datetime": "2026-07-01T12:00:00+08:00", "category": "功能", "title": "Robinhood 链完整接入", "summary": "里程碑：Robinhood Chain 完整集成（发射台、智能买入保护、API）。第三方 wiki，通知时请再核 X/Blog。", "source_url": "https://iq.wiki/wiki/gmgn/milestones", "source_label": "Wiki", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "cc1406d73faab58f", "date": "2026-06-29", "datetime": "2026-06-29T12:00:00+08:00", "category": "功能", "title": "产品文：GMGN Cooking 说明", "summary": "Blog 产品向文章：解释 GMGN Cooking 如何把想法接到代币发射流程。", "source_url": "https://gmgn.ai/blog/gmgn-cooking/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "227f75c006f857b5", "date": "2026-06-25", "datetime": "2026-06-25T12:00:00+08:00", "category": "功能", "title": "产品文：GMGN Skills for AI Agents", "summary": "Blog 产品向文章：如何把 Claude 等 AI Agent 接到链上数据、钱包分析与交易。", "source_url": "https://gmgn.ai/blog/gmgn-skills-for-ai-agents/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "66235866fcc3c54c", "date": "2026-06-25", "datetime": "2026-06-25T12:00:00+08:00", "category": "教程", "title": "教程：如何判断 Meme 是否安全（蜜罐/Rug）", "summary": "蜜罐与 Rug 识别指南，配合 GMGN 安全检查字段一起用。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f7eda03ca59f4e50", "date": "2026-06-18", "datetime": "2026-06-18T12:00:00+08:00", "category": "教程", "title": "教程：跟踪并跟单 Solana 聪明钱（2026）", "summary": "2026 指南：在 Solana 上跟踪聪明钱钱包并做跟单。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f7eda03ca59f4e50", "date": "2026-06-18", "datetime": "2026-06-18T12:00:00+08:00", "category": "教程", "title": "教程：GMGN vs Axiom，新手怎么选", "summary": "从新手视角对比 GMGN 与 Axiom 的功能与上手难度。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}, {"id": "f7eda03ca59f4e50", "date": "2026-06-18", "datetime": "2026-06-18T12:00:00+08:00", "category": "教程", "title": "教程：2026 Meme 交易平台对比", "summary": "横向对比 GMGN、Photon、BonkBot、Axiom、Trojan 等平台。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-17T10:43:00+08:00"}]</script>
+  <script id="timeline-data" type="application/json">[{"id": "6d3faf83505f8cda", "date": "2026-10-19", "datetime": "2026-10-19T12:00:00+08:00", "category": "招聘", "title": "招聘信号汇总：GMGN 正在加码的产品能力", "summary": "从全量 JD 抽出的产品方向（不以岗位名为中心）：跨链资产兑换 + Gas 代付；自建 Launchpad；EVM 聚合路由扩 DEX/发射台；多链数据采集；交易后端低延迟高并发；App 社交社区（喊单/关注/Feed/信誉）；下载→首单转化漏斗；买卖/跟单/限价/K 线迭代；热门榜人工 curation；战壕出币再压延迟。\n【要做/从招聘推断｜总览】\n• 跨链资产兑换 + 高并发 Gas 代付 — 例：跨链请求处理：源链入金识别 → 目标链执行 → 结算状态跟踪\n• 自建 Launchpad（Bonding Curve 发射台） — 例：Bonding Curve 定价合约\n• EVM 聚合路由扩容（新 DEX / 新发射台） — 例：流动性池发现 + 交易构建\n• 多链数据采集与协议解析 — 例：新增 EVM 链与 Solana 生态采集（节点、区块、日志、下游链路）\n• 链上交易后端：更低延迟、更高并发、更稳故障恢复 — 例：慢查询/锁竞争/内存优化，降高峰延迟\n• 工具 → 社交交易社区（喊单/关注/Feed/信誉） — 例：喊单、关注与追踪、信息流、个人主页、榜单迭代\n• App 下载→注册→入金→首单转化与召回 — 例：下载→注册→入金→首笔交易全漏斗\n• App 交易体验：买卖 / 跟单 / K 线 / 限价单 — 例：买卖、跟单、行情 K 线、限价单需求与体验升级\n• 跨链热门 MEME 榜人工 curation — 例：全链热门 MEME 第一时间发现与榜单 curation\n• 战壕出币再压延迟 + 百倍流量基建 — 例：可扛百倍流量的交易/行情基础设施", "source_url": "https://gmgn.ai/blog/zh-cn/careers/", "source_label": "Careers 汇总", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "feat-2026-10-18-creator-rewards", "date": "2026-10-18", "datetime": "2026-10-18T13:26:38+08:00", "category": "功能", "title": "创作者奖励（Creator rewards）已在发放", "summary": "@gmgnapp001 回应 Yeon 关于 creator rewards 的提问：确认「Creator rewards are already rolling out」；互动回复参与方向为「发 Callout + 持有建设」。属社交/内容创作者激励，区别于通用交易积分 Rewards 页的笼统描述。\n【已有】\n• 创作者奖励计划已上线并发放中\n• 参与线索：发 Callout + 持有/建设（官方回复）\n【在推】\n• 用创作者激励拉回流与 Callout/社交交易活跃\n• 与竞品创作者激励同场竞争（Yeon 语境）\n【要做】\n• 公开细则（门槛/结算/适用对象）仍不完整——持续盯公告与 App 内说明", "source_url": "https://x.com/gmgnapp001/status/2111690397693149416", "source_label": "X @gmgnapp001", "related_urls": ["https://x.com/gmgnapp001/status/2111688672764686467", "https://x.com/gmgnapp001/status/2111692657873580099", "https://x.com/yeon__/status/2111418082547962186"], "collected_at": "2026-10-18T15:10:32+08:00"}, {"id": "feat-2026-10-17-all-board-leaderboard", "date": "2026-10-17", "datetime": "2026-10-17T19:08:00+08:00", "category": "功能", "title": "排行榜上线 All（全时）榜：全用户 × 全链累计盈亏", "summary": "@gmgnapp001 宣布 All board 上线：不是今日/本周，而是账号在 GMGN 上的历史累计表现；官方回复明确「所有用户（不只 KOL）+ 全链汇总、无需切链」。晨间扫描漏记，本轮补入。\n【已有】\n• Rank / 排行榜\n• All（全时 / all-time）时间维度\n• 全用户（非仅 KOL）上榜\n• 全链汇总盈亏，无需切换链\n【在推】\n• 用全时榜对照日榜/周榜，识别长期稳定盈利地址\n• 社交交易/关注列表与全时榜联动", "source_url": "https://x.com/gmgnapp001/status/2111413916639355361", "source_label": "X @gmgnapp001", "related_urls": ["https://x.com/gmgnapp001/status/2111344547318087781"], "collected_at": "2026-10-18T15:10:32+08:00"}, {"id": "feat-2026-10-17-skills-caller-dump-score", "date": "2026-10-17", "datetime": "2026-10-17T10:22:00+08:00", "category": "功能", "title": "Skills 喊单评分：币是否真跑 + 自喊后砸盘惩罚", "summary": "GMGN Skills 用喊单人真实成交账本打双维分；自喊后约 15 分钟内砸盘则分数暴跌。来源 @gmgnai。\n【已有】\n• Skills 喊单/Callout 评分\n• 喊单记录 ↔ 真实成交账本打通\n• 「币是否真涨」维度\n• 「自喊后短时砸盘」惩罚维度（约 15 分钟）\n【在推】\n• 跟单前用质量分过滤喊单人\n• 反割/反自卖风控", "source_url": "https://x.com/gmgnai/status/2111281543029178881", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "overlay-2026-10-15-skills-profit-source", "date": "2026-10-15", "datetime": "2026-10-15T12:00:00+08:00", "category": "功能", "title": "Skills 钱包分析可追溯利润来源", "summary": "GMGN Skills 钱包分析升级：可追溯利润来源；并提示自发射代币中超过 50% 会失败。\n【已有】\n• Skills 钱包分析\n• 利润来源追溯\n• 自发射代币失败率提示（\u003e50% 失败）\n【在推】\n• 用收益质量（非只看总利润）判断聪明钱", "source_url": "https://x.com/gmgnai/status/2110695428085960771", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "overlay-2026-10-10-narrative", "date": "2026-10-10", "datetime": "2026-10-10T12:00:00+08:00", "category": "功能", "title": "上线 gmgn-narrative Skill", "summary": "新增 gmgn-narrative：对照链上数据核验叙事说法是否站得住。\n【已有】\n• gmgn-narrative Skill\n• 叙事声称 ↔ 链上数据核验\n【在推】\n• 减少纯故事带节奏的跟风", "source_url": "https://x.com/gmgnai/status/2108761437174976891", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "086d0d5ba4641cda", "date": "2026-10-09", "datetime": "2026-10-09T12:00:00+08:00", "category": "功能", "title": "GGC 全球赛季 1 公布", "summary": "GMGN Global Championship（GGC）Season 1 公布，赛期约 10/17–10/27 UTC。属赛事活动，非功能发布。", "source_url": "https://x.com/gmgnai/status/2108564198225859055", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "overlay-2026-10-08-giga", "date": "2026-10-08", "datetime": "2026-10-08T12:00:00+08:00", "category": "功能", "title": "Giga AI 升级（Haze：点币/点人直接出结论）", "summary": "官方 Giga AI 升级；Haze 同日补充：点一个币/一个人，GIGA 直接回答该不该跟买卖、谁在砸、dev 底子，基于海量链上数据。\n【已有】\n• 站内 Giga AI 助手\n• 代币 / 钱包 / Dev 战绩问答\n• 跟买跟卖、砸盘方、Dev 底子类结论输出\n【在推】\n• 更快、更高质量的 AI 解读替代手工扒链", "source_url": "https://x.com/gmgnai/status/2108131696701059138", "source_label": "X @gmgnai / @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "154d58b4e1735265", "date": "2026-10-02", "datetime": "2026-10-02T12:00:00+08:00", "category": "招聘", "title": "产品方向：跨链热门 MEME 榜人工 curation", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：热门榜单运营专员×2。 haze@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 跨链热门榜 / 热门 MEME 能力已有\n【在推】\n• 人工运营加持的热门榜曝光与正口碑\n【要做/从招聘推断】\n• 全链热门第一时间发现与榜单 curation", "source_url": "https://x.com/haze0x/status/2105847342427676989", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "haze-2026-09-30-callout-35-partners", "date": "2026-09-30", "datetime": "2026-09-30T16:30:13+08:00", "category": "功能", "title": "Callout 已覆盖 35 家合作伙伴 + Open API 开放接入", "summary": "Haze：GMGN Callout 已覆盖 35 家合作伙伴；开放 API 供生态项目接入，喊单一次多端可见。\n【已有】\n• Callout 喊单发布\n• 向 35+ 合作平台分发喊单\n• Callout Open API（生态可接入）\n【在推】\n• 「Post once. Seen everywhere」跨平台分发网络\n【要做/从招聘推断】\n• 更多合作方/生态通过 API 接入扩大触达", "source_url": "https://x.com/haze0x/status/2105213613460099092", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "3c3c5ecc8b72cd21", "date": "2026-09-28", "datetime": "2026-09-28T12:00:00+08:00", "category": "功能", "title": "上线 gmgn-contract-dd", "summary": "合约尽职调查 Skill：安全扣分过程更透明；未读字段一律不通过，避免漏检。", "source_url": "https://x.com/gmgnai/status/2104600455657738648", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "d56b74eca0dc2804", "date": "2026-09-24", "datetime": "2026-09-24T12:00:00+08:00", "category": "招聘", "title": "产品方向：中英双语一线客服与交易问题响应", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：中英文客户运营×3。 haze@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 1V1 客服 / 投诉处理通道\n【在推】\n• 更长在线、更高服务口碑、中英全球化\n【要做/从招聘推断】\n• 高频交易/性能问题一线响应", "source_url": "https://x.com/haze0x/status/2102976871571009965", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "haze-2026-09-23-pinned-hiring", "date": "2026-09-23", "datetime": "2026-09-23T21:29:19+08:00", "category": "招聘", "title": "产品方向总览（Haze 置顶招聘）：社交/转化/Launchpad/路由/跨链代付/数据", "summary": "Haze 置顶招聘仍在：攻克链上最前沿产品与工程问题。以下按「要建什么能力」读，不按岗位名。\n【已有】\n• 社交交易（Callout/关注/Feed/排行榜）\n• App 转化漏斗骨架（下载→注册→入金→首单）\n• EVM 交易路由、链上数据管道、高并发交易服务端\n• 多链交易终端\n【在推】\n• 工具 → 交易社区；App 增长与召回\n【要做/从招聘推断】\n• 自建 Launchpad（Bonding Curve / LP 迁移 / 分润）\n• 跨链资产兑换执行流\n• 高并发 Gas 代付（Gas Sponsor：额度/预算/防滥用）← 见跨链岗 JD\n• 新链/新 DEX/新发射台数据接入与路由质量\n• 社交冷启动、信誉与反女巫\n证据：https://gmgn.ai/blog/zh-cn/careers/ 与跨链岗 https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/", "source_url": "https://x.com/haze0x/status/2102752169867018341", "source_label": "X @haze0x 置顶", "collected_at": "2026-10-17T11:12:00+08:00"}, {"id": "overlay-2026-09-23-callout-pnl", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "功能", "title": "Callout 同时显示喊单与持仓/实时 PnL", "summary": "Callout 更新：同时展示喊单人、持仓方、实时盈亏与历史喊单。\n【已有】\n• Callout 喊单流\n• 喊单人与持仓方同屏\n• 实时 PnL\n• 历史喊单记录\n【在推】\n• 跟单前对照「喊了是否还拿着、盈亏如何」", "source_url": "https://x.com/gmgnai/status/2102734098473316533", "source_label": "X @gmgnai", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "506f2844c0cfe750", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：工具→社交交易社区（喊单/关注/Feed/信誉）", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（社交社区方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• 交易、行情、跟单已跑通\n• 喊单 / 关注追踪 / 信息流 / 个人主页 / 榜单模块已在迭代\n【在推】\n• 从单人盯盘工具转向互相影响、互相跟随的交易社区\n【要做/从招聘推断】\n• 关系链冷启动（打开即有可看可关注）\n• 信息流排序与创作者激励\n• 信誉体系 + 反刷量 / 反女巫\n• 社区指标闭环：关注渗透、跟单转化、创作者留存", "source_url": "https://gmgn.ai/blog/zh-cn/pm-social-community/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "d2ac372eaa0b2a30", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：App 下载→入金→首单转化漏斗与召回", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（用户转化方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• Web + App 双端产品能力已跑通\n【在推】\n• 把每个新用户送到第一笔交易，再留下、再带人\n【要做/从招聘推断】\n• 下载→注册→入金→首笔交易全漏斗\n• Onboarding / 空状态 / 首单路径\n• Push / 邮件 / 站内消息生命周期触达\n• 邀请裂变、返佣激励（含防刷与 ROI）\n• A/B 实验与转化归因", "source_url": "https://gmgn.ai/blog/zh-cn/pm-user-conversion/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "fb4672cfc266317d", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：EVM 聚合路由扩 DEX/发射台 + 降延迟", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：EVM 交易路由工程师（EVM Routing Engineer）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• EVM 路由核心链路已在生产\n【在推】\n• 路径质量与端到端延迟持续优化\n• 路由质量验证与线上归因\n【要做/从招聘推断】\n• 流动性池发现、交易构建、多跳/拆单\n• 新增 DEX / Launchpad：合约侧报价执行 + 服务端池模型适配\n• Uniswap V2/V3/V4 与 bonding curve 发射台深度支持\n• MEV/抢跑/夹子防护相关执行优化", "source_url": "https://gmgn.ai/blog/zh-cn/evm-routing-engineer/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f9a2b4670fb9a4fd", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：新链/新 DEX/新发射台数据接入与解析", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：链上数据开发工程师（Onchain Data Engineer）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 多链采集与业务数据集已在服务产品\n【在推】\n• 更快纳入新链、新协议形态\n【要做/从招聘推断】\n• 新增 EVM 链与 Solana 生态采集全链路\n• DEX / Launchpad 协议解析（AMM V2/V3/V4 hook、bonding curve）\n• 池发现、费率、发行阶段、成交归属准确建模\n• 数据质量、重组与节点异常治理", "source_url": "https://gmgn.ai/blog/zh-cn/onchain-data-engineer/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "8f0ec66e2b76ea41", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：交易后端低延迟高并发与故障恢复", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：高级服务端开发工程师 · GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 链上交易服务端已上线有真实用户\n【在推】\n• 高峰吞吐、降延迟、局部故障隔离\n【要做/从招聘推断】\n• 核心服务性能优化（慢查询/锁/内存）\n• 并发控制与流量保护\n• 幂等/重试/状态恢复（防重复下单）\n• RPC 与第三方故障切换、监控压测灰度", "source_url": "https://gmgn.ai/blog/zh-cn/senior-backend-engineer/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "93fc2ef82c9cd322", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：跨链资产兑换 + 高并发 Gas 代付", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：高级区块链开发工程师（跨链方向）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 面向多链生态的资产跨链兑换产品已在建设/有真实用户（JD 表述）\n• 跨链或 Gas Sponsor 生产经验被列为硬性考察方向之一\n【在推】\n• 更低成本、更少操作完成跨链交易\n• 复杂链上交互收成简单可靠体验\n【要做/从招聘推断】\n• 跨链执行流：源链入金识别 → 目标链交易执行 → 结算状态跟踪\n• 多阶段状态同步、失败重试、异常恢复\n• 协议接入与费用：模拟、滑点、Gas 估算、动态费用\n• 高并发 Gas 代付（Gas Sponsor）：调度、代付额度、预算控制、费用核算、防滥用\n• 结算对账、退款/补偿、防重复执行与重复支付\n• 可观测性与生产故障处理（兑换失败、流动性不足、Gas 波动、RPC 异常）\n【加分信号/相邻能力】\n• Intent / Solver\n• 账户抽象 / Paymaster\n• 交易中继\n• 多链流动性管理", "source_url": "https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f506bfc459863990", "date": "2026-09-23", "datetime": "2026-09-23T12:00:00+08:00", "category": "招聘", "title": "产品方向：自建 Launchpad（Bonding Curve/LP 迁移/分润）", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：智能合约工程师（Launchpad 方向）· GMGN。 投递 hr@gmgn.ai。\n【已有】\n• 站内已支持第三方发射台/新盘发现与交易\n【在推】\n• 端到端自有 Launchpad 协议（对标 Pump.fun 类机制）\n【要做/从招聘推断】\n• Bonding Curve 定价\n• 虚拟流动性池 ↔ 真实流动性池切换\n• 代币发行、手续费与分润\n• 流动性自动迁移\n• 合约与 Go 后端数据流对接\n• 资金流安全与对抗 MEV/夹子设计", "source_url": "https://gmgn.ai/blog/zh-cn/smart-contract-engineer-launchpad/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "haze-2026-09-22-crosschain-share-portfolio", "date": "2026-09-22", "datetime": "2026-09-22T17:54:15+08:00", "category": "功能", "title": "全链分享图 + 全链资产管理上线", "summary": "Haze 宣布：全链分享图已上线；全链资产管理已上线。\n【已有】\n• 全链资产一览/资产管理\n• 全链分享图（可对外分享的跨链仓位/战绩图）\n【在推】\n• 多链统一资产视图与社交分享传播\n【要做/从招聘推断】\n• （结合跨链/数据岗）继续扩链与资产聚合精度", "source_url": "https://x.com/haze0x/status/2102335661701533978", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "008a8b13b2016ed7", "date": "2026-09-21", "datetime": "2026-09-21T12:00:00+08:00", "category": "招聘", "title": "产品方向：战壕出币再压延迟 + 百倍流量基建", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：Golang 基础设施/后端工程师。 hr@gmgn.ai。（haze0x_only_not_on_careers_hub）\n【已有】\n• 战壕多链新盘信息流已上线\n【在推】\n• 出币再快 1ms/1μs；行情爆炸仍稳\n【要做/从招聘推断】\n• 可承载百倍流量的交易/行情基础设施", "source_url": "https://x.com/haze0x/status/2101919245756223672", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "b1f640e2c542b232", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：怎么在 K 线上看 FOMO 喊单", "summary": "讲解 GMGN 图表上的 FOMO 喊单标记，以及出现后该检查哪些安全/持仓信号。", "source_url": "https://gmgn.ai/blog/how-to-read-fomo-calls-on-gmgn-chart/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "7d4deed82c4b23c6", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：怎么在 GMGN K 线上看 Fomo 喊单？", "summary": "中文教程：怎么在 GMGN K 线上看 Fomo 喊单？。", "source_url": "https://gmgn.ai/blog/zh-cn/how-to-read-fomo-calls-on-gmgn-chart/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "e7004bca605e0ba1", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：如何在 Arc 买 Memecoin（对比 Robinhood）", "summary": "介绍如何在 Arc 链购买 Memecoin，并对比 Arc 与 Robinhood Chain 的差异。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/how-to-buy-memecoins-on-arc/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "76fc7a24ae13af5e", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：Pons / StonkFun / Flap 发射台对比", "summary": "对比 Robinhood、Solana、BSC 上常见 Meme 发射台差异，帮你选入口。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "76fc7a24ae13af5e", "date": "2026-09-20", "datetime": "2026-09-20T12:00:00+08:00", "category": "教程", "title": "教程：$MEME 与 AMC 股票代币是否同一资产", "summary": "澄清 $MEME（Meme 币）与 AMC 股票代币是否为同一资产，避免买错。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "haze-2026-09-18-go-roadmap-30d", "date": "2026-09-18", "datetime": "2026-09-18T13:17:27+08:00", "category": "功能", "title": "App / GMGN GO 三阶段路线图（约 30 天）", "summary": "Haze 长文：网页端持续修；App 将分三版推进，称「一切将在未来 30 天内发生」。\n【已有】\n• 网页端多链交易（仍有小毛病要修）\n• App 旧版 + 社交交易方向（GMGN GO）\n• PVP 战壕体验（相对早期 PVE 数据分析版已转型）\n【在推】\n• 第1版：页面改进\n• 第2版：对齐当前市场水平的交易体验\n• 第3版：领先市场水平的交易体验\n【要做/从招聘推断】\n• （结合 App PM 岗）买卖/跟单/图表/限价单体验升级\n• 社交社区与转化漏斗配合 App 改版", "source_url": "https://x.com/haze0x/status/2100816449069846942", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "a9a66c79234fcd9d", "date": "2026-09-18", "datetime": "2026-09-18T12:00:00+08:00", "category": "功能", "title": "上线 token-buy Skill", "summary": "token-buy Skill：解析 ticker、做安全检查并给出下单规模建议，需用户确认后执行。", "source_url": "https://x.com/gmgnai/status/2100785131254632646", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "overlay-2026-09-17-gmgn-go", "date": "2026-09-17", "datetime": "2026-09-17T12:00:00+08:00", "category": "功能", "title": "GMGN GO 移动社交交易上线", "summary": "GMGN GO 上线：移动端关注交易者、看 Callout 与排行榜。\n【已有】\n• GMGN GO / App 社交交易版\n• 关注交易者\n• 移动端 Callout\n• 交易员/排行榜\n【在推】\n• 移动社交交易成为主战场之一\n【要做/从招聘推断】\n• （见 Haze 30 天三阶段）页面→对齐市场→领先市场的交易体验", "source_url": "https://x.com/gmgnapp001/status/2100563862613537097", "source_label": "X @gmgnapp001", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "3d2ed46b18e61f8c", "date": "2026-09-16", "datetime": "2026-09-16T12:00:00+08:00", "category": "功能", "title": "Arc 链首日上线 GMGN", "summary": "Arc 公链从上线首日即可在 GMGN 交易与发现。", "source_url": "https://x.com/gmgnai/status/2100197212399845701", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "34c78a7ca7ebf1dc", "date": "2026-09-16", "datetime": "2026-09-16T12:00:00+08:00", "category": "功能", "title": "K 线 FOMO 喊单标记", "summary": "图表新增 Fomo Thesis / Fomo Top 标记，可直接在 K 线上看到 FOMO 喊单点。", "source_url": "https://x.com/gmgnai/status/2100174341401170271", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "2e9ce072bf94c026", "date": "2026-09-15", "datetime": "2026-09-15T12:00:00+08:00", "category": "招聘", "title": "产品方向：全球线下 Brand & Events 触达", "summary": "从 X 招聘帖推断的产品能力方向（岗位名不重要）。 证据：Brand & Events Marketing Manager。 X post Apply CTA; not on careers hubs。（announced_on_x_not_on_careers_hub）\n【在推】\n• 全球 in-person events / activations（联合创始人直管）\n【要做/从招聘推断】\n• 线下品牌与活动端到端", "source_url": "https://x.com/gmgnai/status/2099719321677410494", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "7fa4820d9d8e9571", "date": "2026-09-14", "datetime": "2026-09-14T12:00:00+08:00", "category": "功能", "title": "RWA / Meme 报价过滤（全链）", "summary": "全链支持按 RWA 与 Meme 报价类型过滤，方便筛掉不想要的报价资产。", "source_url": "https://x.com/gmgnai/status/2099396799186473200", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "fefd6f6e891e2e8b", "date": "2026-09-11", "datetime": "2026-09-11T12:00:00+08:00", "category": "功能", "title": "Heat Rank 跨链热度榜 Skill", "summary": "Heat Rank Skill：跨链精选热门列表，用 Skills 聚合多链热度。", "source_url": "https://x.com/gmgnai/status/2098234606306861246", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "d75cc0e9a0c27c8d", "date": "2026-09-10", "datetime": "2026-09-10T12:00:00+08:00", "category": "功能", "title": "报价代币安全与流动性检查", "summary": "新增对 Quote 代币的安全与流动性检查，降低配对侧风险。", "source_url": "https://x.com/gmgnai/status/2097933008154275844", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "d6202fe9c8e580be", "date": "2026-09-10", "datetime": "2026-09-10T12:00:00+08:00", "category": "招聘", "title": "产品方向：App 买卖/跟单/K线/限价单体验升级", "summary": "从招聘 JD 推断的产品能力方向（岗位名不重要，看要建什么）。 证据岗：产品经理（链上交易方向）· GMGN App。 投递 hr@gmgn.ai。\n【已有】\n• App 买卖、跟单、行情 K 线、限价单已存在\n【在推】\n• 对标 pump.fun / fomo / Axiom，按机制层拆竞品后迭代\n【要做/从招聘推断】\n• 交易模块体验加深（买卖/跟单/图表/限价）\n• 路由成交质量作为核心监控指标\n• 用户问题可上链定位路由/计价/索引并反哺产品", "source_url": "https://gmgn.ai/blog/zh-cn/pm-onchain-trading/", "source_label": "Careers JD", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "haze-2026-09-09-foldable", "date": "2026-09-09", "datetime": "2026-09-09T22:16:39+08:00", "category": "功能", "title": "App 已支持折叠屏（与 iPad 分屏战壕）", "summary": "Haze 转发官方：App 已支持折叠屏。官方说明含 iPad/折叠屏上三路战壕 + 图表分屏。\n【已有】\n• App 折叠屏适配\n• iPad / 大屏：三路 Trenches + Feed/图表分屏\n【在推】\n• 大屏移动端扫盘与交易一体体验", "source_url": "https://x.com/haze0x/status/2097690654533152909", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "haze-2026-09-08-pool-mutation", "date": "2026-09-08", "datetime": "2026-09-08T11:13:06+08:00", "category": "功能", "title": "更新池子与变异数据：交易对一目了然", "summary": "Haze：更新了池子与变异数据，每个代币的交易对一目了然。\n【已有】\n• 代币多交易对/池子列表\n• 池子变异（mutation）相关数据展示\n【在推】\n• 多报价/多池玩法下的选池可见性（降低小池误买）\n【要做/从招聘推断】\n• （结合路由岗）池发现与路径质量继续加强", "source_url": "https://x.com/haze0x/status/2097161277831532667", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "d879c22be8e97eee", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "功能", "title": "多链 Trenches 合并信息流", "summary": "Trenches 支持 SOL/BSC/Robinhood/Base/Arc 等多链合并信息流，一屏看新盘。", "source_url": "https://x.com/gmgnai/status/2096991802230464860", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "c230424ebaeab389", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "功能", "title": "双 Dev 评分：声誉 + 实力", "summary": "开发者评分拆成钱包声誉与代币实力两维，便于区分人设与项目质量。", "source_url": "https://x.com/gmgnai/status/2096986626006389047", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：在 GMGN 买 Robinhood 新盘", "summary": "手把手：如何在 GMGN 上发现并买入 Robinhood Chain 新发射代币。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：同名热盘怎么辨别买的是哪一个", "summary": "以 Robinhood 上热门同名盘为例，教你核对合约与标识，避免买错。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：什么是 Artificial Inu（AI）", "summary": "介绍 Robinhood 上与 NVDA 配对的 Memecoin Artificial Inu（AI）背景与注意点。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f5a7e02a6c24a212", "date": "2026-09-07", "datetime": "2026-09-07T12:00:00+08:00", "category": "教程", "title": "教程：发现热门 Meme 后在 GMGN 查什么", "summary": "热盘出现后，应在 GMGN 上依次检查安全、持仓、聪明钱与流动性等要点。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "haze-2026-09-04-sidebar-plugin", "date": "2026-09-04", "datetime": "2026-09-04T23:20:13+08:00", "category": "功能", "title": "数据站侧边栏交易插件（点币同步下单）", "summary": "Haze：产品经理做了小插件——在看数据的网站开启 GMGN 交易侧边栏，点击代币时侧边栏同步该币，便于快速下单。\n【已有】\n• 第三方数据站嵌入/侧边栏交易插件\n• 点击外部站点代币 → 同步到 GMGN 下单面板\n【在推】\n• 「看数据网站 + 即时交易」工作流，缩短从发现到下单路径", "source_url": "https://x.com/haze0x/status/2095894711903121421", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "haze-2026-09-01-fomo-500-top", "date": "2026-09-01", "datetime": "2026-09-01T15:17:42+08:00", "category": "功能", "title": "K 线标注 FOMO 的 500 TOP 交易者", "summary": "Haze：在 K 线上标注了一些 FOMO 的 500 TOP 交易者（早于官方 9/16 FOMO Thesis/Top 标记宣传）。\n【已有】\n• K 线 FOMO 相关标注\n• FOMO 体系下的 Top 交易者标记\n【在推】\n• 图表上直接看到 FOMO 资金/交易者行为", "source_url": "https://x.com/haze0x/status/2094686115752190245", "source_label": "X @haze0x", "collected_at": "2026-10-17T10:54:00+08:00"}, {"id": "e82c4e028b9a0243", "date": "2026-09-01", "datetime": "2026-09-01T12:00:00+08:00", "category": "功能", "title": "Skills Market 上线 Chart Pattern", "summary": "Skills 市场新增图表形态识别 Skill，可辅助看盘。", "source_url": "https://x.com/gmgnai/status/2094799783013863557", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "023683469016e71a", "date": "2026-08-28", "datetime": "2026-08-28T12:00:00+08:00", "category": "功能", "title": "OpenAPI Free / Plus / Pro 套餐", "summary": "OpenAPI 推出 Free / Plus / Pro 限速套餐，方便按用量接入 Agent/数据。", "source_url": "https://x.com/gmgnai/status/2093130053328764943", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "24e167816312e3f2", "date": "2026-08-21", "datetime": "2026-08-21T12:00:00+08:00", "category": "功能", "title": "GMGN Card：闲置余额 5% APY", "summary": "GMGN Card 上线：闲置余额可享约 5% APY，并支持 Apple/Google Pay 相关场景。", "source_url": "https://x.com/gmgnai/status/2090799546989494481", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "b6ab105cc54150c4", "date": "2026-08-19", "datetime": "2026-08-19T12:00:00+08:00", "category": "功能", "title": "Trenches 内联迷你图", "summary": "Trenches 列表内嵌迷你 K 线，扫盘时可直接看走势。", "source_url": "https://x.com/gmgnai/status/2089944717161275506", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f38349aec5b0dbeb", "date": "2026-08-18", "datetime": "2026-08-18T12:00:00+08:00", "category": "功能", "title": "Arbitrum 上线 GMGN", "summary": "Arbitrum 链已可在 GMGN 使用。", "source_url": "https://x.com/gmgnai/status/2089769132619391390", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "661f9f3c185c2d1d", "date": "2026-08-18", "datetime": "2026-08-18T12:00:00+08:00", "category": "功能", "title": "关注可信 Dev，Trenches 高亮", "summary": "可关注可信开发者，并在 Trenches 用自定义颜色/名称高亮其新盘。", "source_url": "https://x.com/gmgnai/status/2089698059928400118", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "1c6176e9acc0b259", "date": "2026-08-18", "datetime": "2026-08-18T12:00:00+08:00", "category": "教程", "title": "教程：用 Trenches / Callout / 钱包追踪更早发现 Meme", "summary": "组合 Trenches、Callout 与钱包追踪，提高发现早期 Meme 的效率。", "source_url": "https://gmgn.ai/blog/how-to-find-meme-coins-earlier/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "bbf5e3771f88c2f1", "date": "2026-08-14", "datetime": "2026-08-14T12:00:00+08:00", "category": "教程", "title": "教程：什么是 Bundle，如何查捆绑比例", "summary": "解释 Bundle（捆绑仓）概念，并演示在 GMGN 查看 Bundle % 与关联钱包。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "8bfae313d1076d53", "date": "2026-08-11", "datetime": "2026-08-11T12:00:00+08:00", "category": "教程", "title": "教程：在 GMGN 查 BSC Meme 代币税", "summary": "教你如何在 GMGN 检查 BSC Meme 的买卖税/税率风险。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "8bfae313d1076d53", "date": "2026-08-11", "datetime": "2026-08-11T12:00:00+08:00", "category": "教程", "title": "教程：BSC 与 Solana 玩 Meme 有何不同", "summary": "对比 BSC 与 Solana 在 Meme 交易体验、费用与风险上的差异。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "6b102e348b313f1e", "date": "2026-08-07", "datetime": "2026-08-07T12:00:00+08:00", "category": "功能", "title": "钱包追踪：FOMO 转入转出", "summary": "Wallet Tracker 支持 FOMO 钱包转入/转出跟踪，便于盯资金动向。", "source_url": "https://x.com/gmgnai/status/2085733804489220402", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "267b87c799de4a0e", "date": "2026-08-07", "datetime": "2026-08-07T12:00:00+08:00", "category": "教程", "title": "教程：新手如何更安全地交易 Meme", "summary": "面向新手的安全交易指南：钱包、滑点、蜜罐与仓位管理基础。", "source_url": "https://gmgn.ai/blog/how-beginners-trade-meme-coins-safely/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f3538519e7159943", "date": "2026-08-06", "datetime": "2026-08-06T12:00:00+08:00", "category": "功能", "title": "Manifesto 付费高信念喊单", "summary": "Manifesto：付费高信念喊单产品形态上线。", "source_url": "https://x.com/gmgnai/status/2085351308715008186", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "84ea32aad6fd497e", "date": "2026-08-05", "datetime": "2026-08-05T12:00:00+08:00", "category": "功能", "title": "Trenches 简洁布局模式", "summary": "Trenches 新增 Clean Layout，减少噪音、更易扫盘。", "source_url": "https://x.com/gmgnai/status/2085019822023397729", "source_label": "X", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "793881de682211a2", "date": "2026-08-04", "datetime": "2026-08-04T12:00:00+08:00", "category": "教程", "title": "教程：在 GMGN 设置止盈止损与追踪单", "summary": "详解 TP/SL、追踪止盈、追踪止损在 GMGN 上的设置方法。", "source_url": "https://gmgn.ai/blog/how-to-set-take-profit-stop-loss-on-gmgn/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "4d52cc1e810260fd", "date": "2026-08-04", "datetime": "2026-08-04T12:00:00+08:00", "category": "教程", "title": "教程：怎么选 Meme 交易链", "summary": "从流动性、费用、工具与风险角度，帮你选择适合的 Meme 交易链。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "4d52cc1e810260fd", "date": "2026-08-04", "datetime": "2026-08-04T12:00:00+08:00", "category": "教程", "title": "教程：用 GMGN 发现 Robinhood 轮动早期信号", "summary": "讲解如何在 Robinhood 链上用 GMGN 观察叙事/资金轮动的早期迹象。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "059d7cf2bb9010b8", "date": "2026-07-22", "datetime": "2026-07-22T12:00:00+08:00", "category": "功能", "title": "gmgn-cli v1.5.3 支持 Robinhood", "summary": "gmgn-cli v1.5.3：Cooking / KOL / Smart Money / Market Signal 等能力覆盖 Robinhood。", "source_url": "https://github.com/GMGNAI/gmgn-skills/discussions", "source_label": "GitHub", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "e71b30c272d2f639", "date": "2026-07-14", "datetime": "2026-07-14T12:00:00+08:00", "category": "教程", "title": "教程：在 Robinhood 用 GMGN 买 CASHCAT", "summary": "完整指南：通过 GMGN 在 Robinhood Chain 购买 CASHCAT。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "e71b30c272d2f639", "date": "2026-07-14", "datetime": "2026-07-14T12:00:00+08:00", "category": "教程", "title": "教程：用 Claude + GMGN Skills 跟踪聪明钱", "summary": "Skills 教程：把 Claude 等 AI Agent 接到 GMGN，跟踪聪明钱钱包。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "e71b30c272d2f639", "date": "2026-07-14", "datetime": "2026-07-14T12:00:00+08:00", "category": "教程", "title": "教程：CASHCAT 之后如何用 GMGN 做 Robinhood Meme", "summary": "从发现、分析到交易，系统介绍用 GMGN 玩 Robinhood Chain Meme。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "b4ebd71af8005148", "date": "2026-07-07", "datetime": "2026-07-07T12:00:00+08:00", "category": "教程", "title": "教程：跨链 Meme 叙事轮动怎么跟踪", "summary": "解释跨链叙事轮动，并说明如何用 GMGN 跟踪多链信号。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "b4ebd71af8005148", "date": "2026-07-07", "datetime": "2026-07-07T12:00:00+08:00", "category": "教程", "title": "教程：用 Claude + Skills 检查 Solana 代币安全", "summary": "Skills 教程：结合 Claude 与 GMGN Skills 做 Solana 代币安全检查。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "372200be123e74e8", "date": "2026-07-01", "datetime": "2026-07-01T12:00:00+08:00", "category": "功能", "title": "Robinhood 链完整接入", "summary": "里程碑：Robinhood Chain 完整集成（发射台、智能买入保护、API）。第三方 wiki，通知时请再核 X/Blog。", "source_url": "https://iq.wiki/wiki/gmgn/milestones", "source_label": "Wiki", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "cc1406d73faab58f", "date": "2026-06-29", "datetime": "2026-06-29T12:00:00+08:00", "category": "功能", "title": "产品文：GMGN Cooking 说明", "summary": "Blog 产品向文章：解释 GMGN Cooking 如何把想法接到代币发射流程。", "source_url": "https://gmgn.ai/blog/gmgn-cooking/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "227f75c006f857b5", "date": "2026-06-25", "datetime": "2026-06-25T12:00:00+08:00", "category": "功能", "title": "产品文：GMGN Skills for AI Agents", "summary": "Blog 产品向文章：如何把 Claude 等 AI Agent 接到链上数据、钱包分析与交易。", "source_url": "https://gmgn.ai/blog/gmgn-skills-for-ai-agents/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "66235866fcc3c54c", "date": "2026-06-25", "datetime": "2026-06-25T12:00:00+08:00", "category": "教程", "title": "教程：如何判断 Meme 是否安全（蜜罐/Rug）", "summary": "蜜罐与 Rug 识别指南，配合 GMGN 安全检查字段一起用。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f7eda03ca59f4e50", "date": "2026-06-18", "datetime": "2026-06-18T12:00:00+08:00", "category": "教程", "title": "教程：跟踪并跟单 Solana 聪明钱（2026）", "summary": "2026 指南：在 Solana 上跟踪聪明钱钱包并做跟单。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f7eda03ca59f4e50", "date": "2026-06-18", "datetime": "2026-06-18T12:00:00+08:00", "category": "教程", "title": "教程：GMGN vs Axiom，新手怎么选", "summary": "从新手视角对比 GMGN 与 Axiom 的功能与上手难度。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}, {"id": "f7eda03ca59f4e50", "date": "2026-06-18", "datetime": "2026-06-18T12:00:00+08:00", "category": "教程", "title": "教程：2026 Meme 交易平台对比", "summary": "横向对比 GMGN、Photon、BonkBot、Axiom、Trojan 等平台。（链接以 Blog 首页为准，具体 slug 可能变动）", "source_url": "https://gmgn.ai/blog/", "source_label": "Blog", "collected_at": "2026-10-19T15:10:10+08:00"}]</script>
 <script>
 
     const embedded = JSON.parse(document.getElementById('timeline-data').textContent);
@@ -303,6 +411,46 @@
       })[c]);
     }
 
+    function fpKind(label) {
+      if (label.includes('已有')) return 'fp-already';
+      if (label.includes('在推')) return 'fp-pushing';
+      if (label.includes('要做') || label.includes('招聘推断') || label.includes('加分')) return 'fp-building';
+      if (label.includes('功能推断') || label.includes('相邻')) return 'fp-other';
+      return 'fp-other';
+    }
+
+    function formatSummary(raw) {
+      const text = String(raw ?? '');
+      if (!text) return '';
+      const lines = text.split('\n');
+      let kind = null;
+      const out = [];
+      for (const line of lines) {
+        const trimmed = line.trim();
+        const labelMatch = trimmed.match(/^(【[^】]+】)[ \t]*(.*)$/);
+        if (labelMatch && /^【/.test(trimmed)) {
+          const lab = labelMatch[1];
+          const rest = (labelMatch[2] || '').trim();
+          kind = fpKind(lab);
+          out.push('<span class="fp-label ' + kind + '">' + escapeHtml(lab) + '</span>');
+          if (rest) {
+            out.push('<span class="fp-line ' + kind + '">' + escapeHtml(rest) + '</span>');
+          }
+          continue;
+        }
+        if (kind && /^[•*-]/.test(trimmed)) {
+          out.push('<span class="fp-line ' + kind + '">' + escapeHtml(trimmed) + '</span>');
+          continue;
+        }
+        if (!trimmed) {
+          out.push('');
+          continue;
+        }
+        out.push(escapeHtml(line));
+      }
+      return out.join('\n');
+    }
+
     function render(filter) {
       currentFilter = filter;
       const list = filter === '全部' ? items : items.filter(i => i.category === filter);
@@ -323,10 +471,10 @@
             <div class="row">
               <span class="badge ${escapeHtml(it.category)}">${escapeHtml(it.category)}</span>
               <span class="date">${escapeHtml(it.date)}</span>
-              <span class="src">${escapeHtml(it.source_label || '')}</span>
+              ${it.source_label ? `<span class="src">${escapeHtml(it.source_label)}</span>` : ''}
             </div>
             <h2 class="title">${escapeHtml(it.title)}</h2>
-            <p class="summary">${escapeHtml(it.summary)}</p>
+            <div class="summary">${formatSummary(it.summary)}</div>
             ${hasLink ? `<a class="link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">查看来源 →</a>` : ''}
           </div>`;
         timelineEl.appendChild(div);
@@ -343,6 +491,27 @@
 
     render('全部');
     maybeRefresh();
+
+    (function initWatchCollapse() {
+      const panel = document.getElementById('watch-panel');
+      const toggle = document.getElementById('watch-toggle');
+      if (!panel || !toggle) return;
+      const KEY = 'gmgn-watch-collapsed';
+      function apply(collapsed) {
+        panel.classList.toggle('is-collapsed', collapsed);
+        toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      }
+      let stored = null;
+      try { stored = localStorage.getItem(KEY); } catch (_) {}
+      if (stored === '1') apply(true);
+      else if (stored === '0') apply(false);
+      else apply(window.matchMedia('(max-width: 960px)').matches);
+      toggle.addEventListener('click', () => {
+        const next = !panel.classList.contains('is-collapsed');
+        apply(next);
+        try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (_) {}
+      });
+    })();
 
 </script>
 </body>

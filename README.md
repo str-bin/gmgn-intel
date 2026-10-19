@@ -1,15 +1,18 @@
 # GMGN 情报站
 
-按时间线展示本 bot 收集到的 GMGN **功能 / 招聘 / 教程** 更新，最新在最上。
+按时间线展示本 bot 收集到的 GMGN **功能 / 招聘 / 教程** 更新，最新在最上。左侧为正在盯着的账号与网站，右侧为时间线。
 
 ## 公网地址
 
 | | |
 |--|--|
-| **GitHub Pages** | https://str-bin.github.io/gmgn-intel/ |
-| **仓库** | https://github.com/str-bin/gmgn-intel |
+| **Cloudflare Pages（主公网）** | https://gmgn-intel.pages.dev/ |
+| GitHub Pages（次要/可选） | https://str-bin.github.io/gmgn-intel/ |
+| 源码仓库（非公网入口） | https://github.com/str-bin/gmgn-intel |
 
-站点为纯静态：`index.html` + `timeline.json`，由 GitHub Pages 从 `main` 分支根目录托管。
+日常请用 **Cloudflare Pages** 链接分享；它不暴露 GitHub 用户名。GitHub Pages 仅作备份/可选同步。
+
+站点为纯静态：`index.html` + `timeline.json`。Cloudflare 项目名：`gmgn-intel`（Direct Upload，无 Git 连接）。
 
 ## 文件
 
@@ -17,9 +20,10 @@
 |------|------|
 | `index.html` | 单页时间线（已内嵌数据，可直接打开；有服务器时会再拉 `timeline.json`） |
 | `timeline.json` | 权威情报数组（newest-first） |
-| `build.py` | 从基线 + `updates/` 重新生成上述文件 |
+| `build.py` | 从基线 + `updates/` 重新生成上述文件；支持 `--no-new` / `--has-new` / `--new-count` 写入扫描结果 |
 | `updates/` | 追加新情报的 JSON（可选） |
-| `build-meta.json` | 最近一次生成统计 |
+| `build-meta.json` | 最近一次生成统计（含 last_checked / scan_result） |
+| `scan-status.json` | 最近一次扫描时间与结果（有新增 / 无新增）；例行扫描即使无新增也要更新并部署 |
 
 基线文件在工作区上一级目录（不进本仓库）：
 
@@ -27,30 +31,28 @@
 - `../gmgn-careers-baseline.json`
 - `../gmgn-tutorials-baseline.json`
 
-## 例行更新流程（本地 → 公网）
+## 例行更新流程（本地 → Cloudflare 公网）
 
-1. 例行扫描发现新内容后：
-   - 更新对应 baseline JSON，**或**
-   - 在 `updates/` 下放一个 JSON 文件（单条对象、数组、或 `{"items":[...]}`），字段与 `timeline.json` 条目一致。
-2. 运行：
-
-```bash
-python3 build.py
-```
-
-3. 脚本会写回工作区站点目录（并镜像到 store `site/`）。
-4. **同步到 GitHub Pages**（在已 clone 本仓库的目录，或从工作区拷贝后）：
+1. 例行扫描结束后（无论有无新增）：更新 baseline 的 `last_checked`；有新内容则写 baseline / `updates/`。
+2. 运行：`python3 build.py --no-new` 或 `python3 build.py --has-new --new-count N`（会写入 `scan-status.json` 并刷新页头「最近扫描 / 本次」）。
+3. **即使无新增也要部署**到 Cloudflare Pages，让公网站点时间及时。
+4. **部署到 Cloudflare Pages**（Direct Upload，推荐）：
 
 ```bash
-# 若工作副本在 /tmp/gmgn-intel-deploy 或任意 clone：
-cp /workspace/gmgn-intel/index.html /workspace/gmgn-intel/timeline.json /workspace/gmgn-intel/build-meta.json .
-# 如有新 updates/*.json 一并拷入 updates/
-git add index.html timeline.json build-meta.json updates/
-git commit -m "Update intel timeline"
-git push origin main
+# 需要 Cloudflare API Token（Pages Edit）或通过已授权的 user-Cloudflare MCP：
+# 1) GET upload-token for project gmgn-intel
+# 2) BLAKE3-hash assets (base64(content)+ext without dot, first 32 hex)
+# 3) POST /pages/assets/check-missing + upload + upsert-hashes (Bearer upload JWT)
+# 4) POST /accounts/{account_id}/pages/projects/gmgn-intel/deployments with multipart manifest
+
+# 或若本机有 CLOUDFLARE_API_TOKEN：
+CLOUDFLARE_ACCOUNT_ID=647f8d4a9431e60660aa60270bf00127 \
+  npx wrangler pages deploy /workspace/gmgn-intel \
+  --project-name=gmgn-intel \
+  --commit-dirty=true
 ```
 
-约 1 分钟后公网页面会刷新。Pages 源：`main` / root。
+可选：继续 `git push` 到 GitHub Pages 作次要镜像（会暴露仓库所有者名，一般不必）。
 
 条目需含：`id`, `date`, `datetime`, `category`（功能|招聘|教程）, `title`, `summary`, `source_url`, `source_label`, `collected_at`。
 

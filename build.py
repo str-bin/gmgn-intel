@@ -10,8 +10,15 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 SITE_DIR = Path(__file__).resolve().parent
-STORE_ROOT = SITE_DIR.parent
+_KNOWN_STORE = Path("/cursor/stores/store-96e8c890-c974-40ba-84ee-930a023c3a7a")
+# Prefer adjacent store root (site/ next to baselines); fall back to known store id.
+STORE_ROOT = SITE_DIR.parent if (SITE_DIR.parent / "gmgn-features-baseline.json").exists() else _KNOWN_STORE
 MIRROR_DIR = Path("/workspace/gmgn-intel")
+# Always keep both site copies in sync when build runs from either location.
+SITE_DESTS = []
+for _d in (SITE_DIR, STORE_ROOT / "site", MIRROR_DIR):
+    if _d not in SITE_DESTS:
+        SITE_DESTS.append(_d)
 
 TZ_SHANGHAI = timezone(timedelta(hours=8))
 
@@ -19,6 +26,7 @@ FEATURES_PATH = STORE_ROOT / "gmgn-features-baseline.json"
 CAREERS_PATH = STORE_ROOT / "gmgn-careers-baseline.json"
 TUTORIALS_PATH = STORE_ROOT / "gmgn-tutorials-baseline.json"
 UPDATES_DIR = SITE_DIR / "updates"
+SCAN_STATUS_NAME = "scan-status.json"
 
 # Manual Chinese titles/summaries for known product updates (keyed by source URL or date+en title)
 FEATURE_ZH = {
@@ -271,6 +279,117 @@ TUTORIAL_ZH = {
         "横向对比 GMGN、Photon、BonkBot、Axiom、Trojan 等平台。",
     ),
 }
+
+
+
+def now_shanghai() -> datetime:
+    return datetime.now(TZ_SHANGHAI)
+
+
+def format_shanghai_label(iso_or_dt) -> str:
+    """Human label in Asia/Shanghai, e.g. 2026-10-18 09:00 Asia/Shanghai."""
+    if isinstance(iso_or_dt, datetime):
+        dt = iso_or_dt
+    else:
+        s = str(iso_or_dt or "").strip()
+        if not s:
+            return ""
+        try:
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+        except Exception:
+            return s
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=TZ_SHANGHAI)
+    local = dt.astimezone(TZ_SHANGHAI)
+    return local.strftime("%Y-%m-%d %H:%M") + " Asia/Shanghai"
+
+
+def load_scan_status() -> dict:
+    """Load scan-status.json from site dirs (newest mtime wins)."""
+    best = None
+    best_mtime = -1.0
+    for dest in SITE_DESTS:
+        p = dest / SCAN_STATUS_NAME
+        if not p.exists():
+            continue
+        try:
+            m = p.stat().st_mtime
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if m >= best_mtime and isinstance(data, dict):
+                best = data
+                best_mtime = m
+        except Exception:
+            continue
+    return best or {}
+
+
+def resolve_scan_status(
+    features: dict | None = None,
+    *,
+    override: dict | None = None,
+) -> dict:
+    """Merge CLI/file override with baselines into a displayable scan status."""
+    features = features or {}
+    file_st = load_scan_status()
+    ov = override or {}
+
+    last_checked = (
+        ov.get("last_checked")
+        or file_st.get("last_checked")
+        or features.get("last_checked")
+        or ""
+    )
+    last_checked_label = (
+        ov.get("last_checked_label")
+        or file_st.get("last_checked_label")
+        or features.get("last_checked_label")
+        or format_shanghai_label(last_checked)
+    )
+
+    if "has_new" in ov:
+        has_new = bool(ov.get("has_new"))
+    elif "has_new" in file_st:
+        has_new = bool(file_st.get("has_new"))
+    else:
+        has_new = False
+
+    if "new_count" in ov:
+        try:
+            new_count = int(ov.get("new_count") or 0)
+        except Exception:
+            new_count = 0
+    elif "new_count" in file_st:
+        try:
+            new_count = int(file_st.get("new_count") or 0)
+        except Exception:
+            new_count = 0
+    else:
+        new_count = 0
+
+    if has_new and new_count <= 0:
+        new_count = max(new_count, 1)
+    if not has_new:
+        new_count = 0
+
+    if has_new:
+        result = f"有新增 · {new_count} 条" if new_count else "有新增"
+        result_short = "有新增"
+    else:
+        result = "无新增"
+        result_short = "无新增"
+
+    if ov.get("result"):
+        result = str(ov["result"])
+        result_short = result
+
+    return {
+        "last_checked": last_checked,
+        "last_checked_label": last_checked_label,
+        "has_new": has_new,
+        "new_count": new_count,
+        "result": result,
+        "result_short": result_short,
+    }
 
 
 def load_json(path: Path) -> dict:
@@ -792,55 +911,101 @@ def _esc_html(s: str) -> str:
     )
 
 
+def _valid_http_url(u: object) -> str:
+    """Return stripped http(s) URL, or empty string if missing/invalid."""
+    if not isinstance(u, str):
+        return ""
+    s = u.strip()
+    if not s:
+        return ""
+    if s.startswith(("http://", "https://")):
+        return s
+    return ""
+
+
 def render_sources_panel(sources: dict) -> str:
+    """Left panel: watched X accounts + websites. Never nest <a>, never empty chips."""
     x_blocks = []
     for acc in sources.get("x_accounts") or []:
-        extra = ""
-        if acc.get("extra"):
-            label = _esc_html(acc.get("extra_label") or "相关")
-            extra = (
-                f'<div class="src-extra"><a href="{_esc_html(acc["extra"])}" target="_blank" '
-                f'rel="noopener noreferrer">{label}</a></div>'
-            )
-        url = _esc_html(acc.get("url", "#"))
+        url = _valid_http_url(acc.get("url")) or "#"
         title = _esc_html(acc.get("title", ""))
         intro = _esc_html(acc.get("intro", ""))
+        extra_url = _valid_http_url(acc.get("extra"))
+        extra_label = (acc.get("extra_label") or "").strip()
+        extra = ""
+        # Only render a secondary link when both URL and label are real (no empty pill).
+        if extra_url and extra_label:
+            extra = (
+                f'<a class="src-extra" href="{_esc_html(extra_url)}" target="_blank" '
+                f'rel="noopener noreferrer">{_esc_html(extra_label)} →</a>'
+            )
+        # Card is NOT an <a> — title + optional extra are separate links (avoids nested <a> empty box).
+        title_html = (
+            f'<a class="src-title" href="{_esc_html(url)}" target="_blank" '
+            f'rel="noopener noreferrer">{title}</a>'
+            if url != "#"
+            else f'<div class="src-title">{title}</div>'
+        )
         x_blocks.append(
-            f'<a class="src-card" href="{url}" target="_blank" rel="noopener noreferrer">'
-            f'<div class="src-kind x">X</div>'
+            f'<article class="src-card">'
+            f'<div class="src-kind x" aria-hidden="true">X</div>'
             f'<div class="src-body">'
-            f'<div class="src-title">{title}</div>'
+            f"{title_html}"
             f'<div class="src-intro">{intro}</div>'
             f"{extra}"
-            f"</div></a>"
+            f"</div></article>"
         )
 
     web_blocks = []
     for site in sources.get("websites") or []:
-        url = _esc_html(site.get("url", "#"))
+        url = _valid_http_url(site.get("url")) or "#"
         title = _esc_html(site.get("title", ""))
         intro = _esc_html(site.get("intro", ""))
+        title_html = (
+            f'<a class="src-title" href="{_esc_html(url)}" target="_blank" '
+            f'rel="noopener noreferrer">{title}</a>'
+            if url != "#"
+            else f'<div class="src-title">{title}</div>'
+        )
         web_blocks.append(
-            f'<a class="src-card" href="{url}" target="_blank" rel="noopener noreferrer">'
-            f'<div class="src-kind web">站</div>'
+            f'<article class="src-card">'
+            f'<div class="src-kind web" aria-hidden="true">站</div>'
             f'<div class="src-body">'
-            f'<div class="src-title">{title}</div>'
+            f"{title_html}"
             f'<div class="src-intro">{intro}</div>'
-            f"</div></a>"
+            f"</div></article>"
         )
 
     scan_hint = ""
-    if sources.get("last_checked_label") or sources.get("last_checked"):
-        label = sources.get("last_checked_label") or sources.get("last_checked")
-        scan_hint = f'<div class="panel-hint">基线最近核对：{_esc_html(label)}</div>'
+    label = (sources.get("last_checked_label") or sources.get("last_checked") or "").strip()
+    result = (sources.get("scan_result") or "").strip()
+    if label or result:
+        parts = []
+        if label:
+            parts.append(f"最近扫描：{_esc_html(label)}")
+        if result:
+            parts.append(f"本次：{_esc_html(result)}")
+        scan_hint = f'<div class="panel-hint">{" · ".join(parts)}</div>'
+
+    x_count = len(sources.get("x_accounts") or [])
+    web_count = len(sources.get("websites") or [])
+    count_label = f"{x_count + web_count} 个来源"
 
     return (
-        '<aside class="panel-left" aria-label="正在盯着的来源">'
+        '<aside class="panel-left" id="watch-panel" aria-label="正在盯着的来源">'
+        '<button type="button" class="panel-toggle" id="watch-toggle" '
+        'aria-expanded="true" aria-controls="watch-body">'
         '<div class="panel-head">'
+        '<div class="panel-title-row">'
         "<h2>正在盯着</h2>"
-        "<p>日常扫描的 X 账号与网站；有变化写入右侧时间线。</p>"
+        f'<span class="panel-count">{_esc_html(count_label)}</span>'
+        '<span class="chevron" aria-hidden="true"></span>'
+        "</div>"
+        '<p class="panel-desc">日常扫描的 X 账号与网站；有变化写入右侧时间线。</p>'
         f"{scan_hint}"
         "</div>"
+        "</button>"
+        '<div class="panel-body" id="watch-body">'
         '<section class="src-section">'
         "<h3>X 账号</h3>"
         f'<div class="src-list">{"".join(x_blocks)}</div>'
@@ -849,74 +1014,91 @@ def render_sources_panel(sources: dict) -> str:
         "<h3>网站 / 文档</h3>"
         f'<div class="src-list">{"".join(web_blocks)}</div>'
         "</section>"
+        "</div>"
         "</aside>"
     )
 
 CSS_TEMPLATE = '''
   :root {
-    --bg: #0b0f14;
-    --bg2: #121821;
-    --card: #161d28;
-    --card-hover: #1c2533;
-    --border: #243044;
-    --text: #e8eef7;
-    --muted: #8b9bb4;
-    --accent: #6ee7b7;
-    --accent2: #60a5fa;
-    --warn: #fbbf24;
-    --pink: #f472b6;
-    --func: #34d399;
-    --hire: #fbbf24;
-    --tut: #60a5fa;
-    --line: #2a3548;
-    --shadow: 0 8px 28px rgba(0,0,0,.35);
-    --radius: 14px;
-    --left-w: 320px;
-    --font: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-            "Noto Sans SC", system-ui, sans-serif;
+    --bg: #000000;
+    --bg-elevated: #0a0a0a;
+    --bg-hover: #111111;
+    --border: #1a1a1a;
+    --border-hover: #333333;
+    --text: #ededed;
+    --text-secondary: #a1a1a1;
+    --text-tertiary: #666666;
+    --accent: #fff;
+    --accent-muted: #888;
+    --func: #50e3c2;
+    --hire: #f5a623;
+    --tut: #0070f3;
+    --line: #222;
+    --radius: 8px;
+    --left-w: 300px;
+    --font: "Inter", "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+            "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+            sans-serif;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
-  body {
-    min-height: 100vh;
-    background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(52,211,153,.12), transparent 50%),
-      radial-gradient(900px 500px at 90% 0%, rgba(96,165,250,.10), transparent 45%),
-      var(--bg);
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  a { color: var(--accent2); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  body { min-height: 100vh; }
+  a { color: var(--text); text-decoration: none; }
+  a:hover { color: #fff; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: .85em; color: var(--text-secondary);
+  }
   .shell {
-    max-width: 1280px; margin: 0 auto; padding: 22px 18px 48px;
+    max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px;
   }
   header.hero {
-    background: linear-gradient(145deg, rgba(22,29,40,.95), rgba(18,24,33,.9));
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 4px);
-    padding: 22px 22px 18px;
-    box-shadow: var(--shadow);
-    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    padding: 0 0 24px;
+    margin-bottom: 24px;
   }
   .brand {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
   }
   .logo {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: linear-gradient(135deg, #34d399, #60a5fa);
-    display: grid; place-items: center; font-weight: 800; color: #062016; font-size: 14px;
+    width: 28px; height: 28px; border-radius: 6px;
+    background: #fff; color: #000;
+    display: grid; place-items: center; font-weight: 700; font-size: 13px;
+    letter-spacing: -0.02em;
   }
-  h1 { margin: 0; font-size: 1.55rem; letter-spacing: .02em; }
-  .subtitle { margin: 8px 0 0; color: var(--muted); line-height: 1.55; font-size: .92rem; }
+  h1 {
+    margin: 0; font-size: 1.25rem; font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.2;
+  }
+  .subtitle {
+    margin: 8px 0 0; color: var(--text-secondary);
+    line-height: 1.55; font-size: .875rem; max-width: 56rem;
+  }
   .meta {
-    margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 12px;
-    color: var(--muted); font-size: .82rem;
+    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;
+    color: var(--text-secondary); font-size: .75rem;
   }
   .pill {
     display: inline-flex; align-items: center; gap: 6px;
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 999px; padding: 4px 10px;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 999px; padding: 4px 10px; color: var(--text-secondary);
   }
-  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .pill.scan-time {
+    border-color: #333; color: var(--text);
+  }
+  .pill.result-new {
+    border-color: rgba(80, 227, 194, 0.45); color: var(--func);
+  }
+  .pill.result-quiet {
+    border-color: var(--border); color: var(--text-secondary);
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
   .dot.func { background: var(--func); }
   .dot.hire { background: var(--hire); }
   .dot.tut { background: var(--tut); }
@@ -924,162 +1106,250 @@ CSS_TEMPLATE = '''
   .layout {
     display: grid;
     grid-template-columns: var(--left-w) minmax(0, 1fr);
-    gap: 18px;
+    gap: 32px;
     align-items: start;
   }
 
   .panel-left {
-    position: sticky; top: 12px;
-    max-height: calc(100vh - 24px);
+    position: sticky; top: 16px;
+    max-height: calc(100vh - 32px);
     overflow: auto;
-    background: rgba(18,24,33,.82);
     border: 1px solid var(--border);
-    border-radius: calc(var(--radius) + 2px);
-    padding: 14px 12px 16px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+    padding: 0;
   }
-  .panel-left::-webkit-scrollbar { width: 6px; }
-  .panel-left::-webkit-scrollbar-thumb { background: #2a3548; border-radius: 999px; }
-  .panel-head h2 {
-    margin: 0 0 4px; font-size: 1.05rem;
+  .panel-left::-webkit-scrollbar { width: 4px; }
+  .panel-left::-webkit-scrollbar-thumb { background: #333; border-radius: 999px; }
+  .panel-toggle {
+    display: block; width: 100%; text-align: left;
+    background: transparent; border: 0; color: inherit;
+    padding: 16px; cursor: pointer;
+    font: inherit;
   }
-  .panel-head p {
-    margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.45;
+  .panel-toggle:hover { background: var(--bg-hover); }
+  .panel-toggle:focus-visible {
+    outline: 2px solid var(--accent, #0070f3);
+    outline-offset: -2px;
+  }
+  .panel-title-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel-title-row h2 {
+    margin: 0; font-size: .9375rem; font-weight: 600;
+    letter-spacing: -0.01em; flex: 0 1 auto;
+  }
+  .panel-count {
+    font-size: .6875rem; color: var(--text-tertiary);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 1px 7px; line-height: 1.4;
+  }
+  .chevron {
+    margin-left: auto; flex: 0 0 auto;
+    width: 16px; height: 16px; position: relative;
+    transition: transform .18s ease;
+  }
+  .chevron::before {
+    content: ""; position: absolute; inset: 4px;
+    border-right: 1.5px solid var(--text-secondary);
+    border-bottom: 1.5px solid var(--text-secondary);
+    transform: rotate(45deg); /* points down when expanded */
+  }
+  .panel-left.is-collapsed .chevron { transform: rotate(-90deg); } /* points right */
+  .panel-desc {
+    margin: 6px 0 0; color: var(--text-secondary); font-size: .75rem; line-height: 1.5;
   }
   .panel-hint {
-    margin-top: 8px; font-size: .72rem; color: var(--muted);
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 6px 8px;
+    margin-top: 10px; font-size: .6875rem; color: var(--text-tertiary);
+    border-top: 1px solid var(--border); padding-top: 10px;
   }
-  .src-section { margin-top: 14px; }
+  .panel-body { padding: 0 16px 16px; }
+  .panel-left.is-collapsed .panel-desc,
+  .panel-left.is-collapsed .panel-hint,
+  .panel-left.is-collapsed .panel-body { display: none; }
+  .panel-left.is-collapsed {
+    max-height: none; overflow: visible;
+  }
+  .panel-left.is-collapsed .panel-toggle { padding-bottom: 14px; }
+  .src-section { margin-top: 18px; }
   .src-section h3 {
-    margin: 0 0 8px; font-size: .78rem; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--muted); font-weight: 700;
+    margin: 0 0 8px; font-size: .6875rem; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--text-tertiary); font-weight: 500;
   }
-  .src-list { display: flex; flex-direction: column; gap: 8px; }
-  a.src-card {
+  .src-list { display: flex; flex-direction: column; gap: 2px; }
+  .src-card {
     display: flex; gap: 10px; align-items: flex-start;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 10px 10px;
-    color: inherit; text-decoration: none;
-    transition: .15s ease;
+    border-radius: 6px; padding: 8px;
+    transition: background .12s ease;
   }
-  a.src-card:hover {
-    background: var(--card-hover); border-color: #314159;
-    text-decoration: none;
-  }
+  .src-card:hover { background: var(--bg-hover); }
   .src-kind {
-    flex: 0 0 auto; width: 28px; height: 28px; border-radius: 8px;
+    flex: 0 0 auto; width: 22px; height: 22px; border-radius: 4px;
     display: grid; place-items: center;
-    font-size: .7rem; font-weight: 800;
+    font-size: .625rem; font-weight: 600;
+    border: 1px solid var(--border); color: var(--text-secondary);
+    margin-top: 1px;
   }
-  .src-kind.x {
-    background: rgba(96,165,250,.18); color: #93c5fd;
+  .src-kind.x { color: var(--text-secondary); }
+  .src-kind.web { color: var(--text-secondary); }
+  .src-body { min-width: 0; flex: 1; }
+  a.src-title, .src-title {
+    display: block;
+    font-size: .8125rem; font-weight: 500; line-height: 1.35;
+    margin-bottom: 2px; color: var(--text);
+    letter-spacing: -0.01em;
   }
-  .src-kind.web {
-    background: rgba(52,211,153,.16); color: #6ee7b7;
-  }
-  .src-body { min-width: 0; }
-  .src-title {
-    font-size: .88rem; font-weight: 700; line-height: 1.3; margin-bottom: 3px;
-  }
+  a.src-title:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
   .src-intro {
-    font-size: .75rem; color: var(--muted); line-height: 1.45;
+    font-size: .6875rem; color: var(--text-tertiary); line-height: 1.45;
   }
-  .src-extra {
-    margin-top: 4px; font-size: .72rem;
+  a.src-extra {
+    display: inline-block; margin-top: 6px;
+    font-size: .6875rem; color: var(--text-secondary);
+    border: none; padding: 0; background: none;
   }
+  a.src-extra:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
 
-  .panel-right {
-    min-width: 0;
-  }
+  .panel-right { min-width: 0; }
   .panel-right-head {
     display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
-    gap: 8px; margin-bottom: 6px;
+    gap: 8px; margin-bottom: 12px;
   }
   .panel-right-head h2 {
-    margin: 0; font-size: 1.05rem;
+    margin: 0; font-size: .9375rem; font-weight: 600; letter-spacing: -0.01em;
   }
   .panel-right-head .hint {
-    color: var(--muted); font-size: .78rem;
+    color: var(--text-tertiary); font-size: .75rem;
   }
 
   .filters {
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
+    display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px;
     position: sticky; top: 0; z-index: 20;
-    padding: 10px 0; background: linear-gradient(180deg, rgba(11,15,20,.96), rgba(11,15,20,.88));
+    padding: 8px 0;
+    background: rgba(0,0,0,.85);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .filters button {
-    border: 1px solid var(--border); background: var(--card); color: var(--text);
-    border-radius: 999px; padding: 8px 14px; cursor: pointer; font-size: .9rem;
-    transition: .15s ease;
+    border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+    border-radius: 999px; padding: 5px 12px; cursor: pointer; font-size: .8125rem;
+    font-family: inherit; transition: .12s ease;
   }
-  .filters button:hover { background: var(--card-hover); }
+  .filters button:hover { border-color: var(--border-hover); color: var(--text); }
   .filters button.active {
-    border-color: transparent;
-    background: linear-gradient(135deg, rgba(52,211,153,.25), rgba(96,165,250,.25));
-    box-shadow: inset 0 0 0 1px rgba(110,231,183,.35);
+    border-color: #fff; background: #fff; color: #000; font-weight: 500;
   }
-  .timeline { position: relative; padding-left: 22px; }
+  .timeline { position: relative; padding-left: 20px; }
   .timeline::before {
-    content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
-    width: 2px; background: var(--line);
+    content: ""; position: absolute; left: 5px; top: 4px; bottom: 4px;
+    width: 1px; background: var(--line);
   }
-  .item {
-    position: relative; margin-bottom: 14px;
-  }
+  .item { position: relative; margin-bottom: 12px; }
   .item::before {
-    content: ""; position: absolute; left: -19px; top: 18px;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent); box-shadow: 0 0 0 3px rgba(52,211,153,.18);
+    content: ""; position: absolute; left: -17px; top: 16px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--text-tertiary); border: 1px solid var(--bg);
   }
-  .item[data-cat="招聘"]::before { background: var(--hire); box-shadow: 0 0 0 3px rgba(251,191,36,.18); }
-  .item[data-cat="教程"]::before { background: var(--tut); box-shadow: 0 0 0 3px rgba(96,165,250,.18); }
+  .item[data-cat="功能"]::before { background: var(--func); }
+  .item[data-cat="招聘"]::before { background: var(--hire); }
+  .item[data-cat="教程"]::before { background: var(--tut); }
   .card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 16px 14px;
-    transition: .15s ease;
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    background: var(--bg-elevated);
+    transition: border-color .12s ease;
   }
-  .card:hover { background: var(--card-hover); border-color: #314159; }
+  .card:hover { border-color: var(--border-hover); }
   .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
   .badge {
-    font-size: .75rem; font-weight: 700; letter-spacing: .04em;
-    border-radius: 6px; padding: 3px 8px;
+    font-size: .6875rem; font-weight: 500; letter-spacing: .02em;
+    border-radius: 4px; padding: 2px 7px;
+    border: 1px solid var(--border);
   }
-  .badge.功能 { background: rgba(52,211,153,.15); color: var(--func); }
-  .badge.招聘 { background: rgba(251,191,36,.15); color: var(--hire); }
-  .badge.教程 { background: rgba(96,165,250,.15); color: var(--tut); }
-  .date { color: var(--muted); font-size: .85rem; }
+  .badge.功能 { color: var(--func); border-color: rgba(80,227,194,.25); }
+  .badge.招聘 { color: var(--hire); border-color: rgba(245,166,35,.25); }
+  .badge.教程 { color: var(--tut); border-color: rgba(0,112,243,.3); }
+  .date { color: var(--text-tertiary); font-size: .75rem; }
   .src {
-    margin-left: auto; font-size: .8rem; color: var(--muted);
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 6px; padding: 2px 8px;
+    margin-left: auto; font-size: .6875rem; color: var(--text-tertiary);
+    border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px;
   }
-  .title { margin: 0 0 6px; font-size: 1.05rem; line-height: 1.4; }
-  .summary { margin: 0; color: #c5d0e0; font-size: .92rem; line-height: 1.6;  white-space: pre-wrap; }
-  .link { display: inline-block; margin-top: 10px; font-size: .88rem; }
+  .src:empty { display: none; }
+  .title {
+    margin: 0 0 6px; font-size: .9375rem; line-height: 1.4;
+    font-weight: 500; letter-spacing: -0.01em;
+  }
+  .summary {
+    margin: 0; color: var(--text-secondary); font-size: .8125rem;
+    line-height: 1.65; white-space: pre-wrap;
+  }
+  .summary .fp-label {
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: .01em;
+    color: #fff;
+    border-radius: 4px;
+    padding: 1px 7px;
+    margin: 6px 0 2px;
+    line-height: 1.5;
+  }
+  .summary .fp-label.fp-already {
+    background: rgba(80, 227, 194, .18);
+    border: 1px solid rgba(80, 227, 194, .4);
+    color: #7dffd6;
+  }
+  .summary .fp-label.fp-pushing {
+    background: rgba(0, 112, 243, .2);
+    border: 1px solid rgba(0, 112, 243, .45);
+    color: #7eb6ff;
+  }
+  .summary .fp-label.fp-building {
+    background: rgba(245, 166, 35, .2);
+    border: 1px solid rgba(245, 166, 35, .45);
+    color: #ffc86b;
+  }
+  .summary .fp-label.fp-other {
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #fff;
+  }
+  .summary .fp-line {
+    display: block;
+    font-weight: 700;
+    color: #f5f5f5;
+    background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.03) 70%, transparent);
+    border-left: 2px solid rgba(255,255,255,.35);
+    padding: 3px 10px;
+    margin: 3px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .summary .fp-line.fp-already { border-left-color: rgba(80, 227, 194, .7); background: linear-gradient(90deg, rgba(80,227,194,.14), transparent); }
+  .summary .fp-line.fp-pushing { border-left-color: rgba(0, 112, 243, .7); background: linear-gradient(90deg, rgba(0,112,243,.14), transparent); }
+  .summary .fp-line.fp-building { border-left-color: rgba(245, 166, 35, .75); background: linear-gradient(90deg, rgba(245,166,35,.14), transparent); }
+  .summary .fp-line.fp-other { border-left-color: rgba(255,255,255,.4); }
+  .link {
+    display: inline-block; margin-top: 10px; font-size: .8125rem;
+    color: var(--text-secondary);
+  }
+  .link:hover { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
   .empty {
-    text-align: center; padding: 48px 16px; color: var(--muted);
+    text-align: center; padding: 48px 16px; color: var(--text-tertiary);
     border: 1px dashed var(--border); border-radius: var(--radius);
-    background: rgba(22,29,40,.5);
+    font-size: .875rem;
   }
   footer {
-    margin-top: 22px; color: var(--muted); font-size: .8rem; text-align: center;
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
+    color: var(--text-tertiary); font-size: .75rem; text-align: center;
   }
   .hidden { display: none !important; }
 
   @media (max-width: 960px) {
-    .layout {
-      grid-template-columns: 1fr;
-    }
-    .panel-left {
-      position: static; max-height: none; overflow: visible;
-    }
+    .layout { grid-template-columns: 1fr; gap: 24px; }
+    .panel-left { position: static; max-height: none; overflow: visible; }
   }
   @media (max-width: 560px) {
-    .shell { padding: 14px 12px 40px; }
-    h1 { font-size: 1.3rem; }
+    .shell { padding: 20px 16px 48px; }
+    h1 { font-size: 1.125rem; }
   }
 '''
 
@@ -1108,6 +1378,46 @@ JS_TEMPLATE = '''
       })[c]);
     }
 
+    function fpKind(label) {
+      if (label.includes('已有')) return 'fp-already';
+      if (label.includes('在推')) return 'fp-pushing';
+      if (label.includes('要做') || label.includes('招聘推断') || label.includes('加分')) return 'fp-building';
+      if (label.includes('功能推断') || label.includes('相邻')) return 'fp-other';
+      return 'fp-other';
+    }
+
+    function formatSummary(raw) {
+      const text = String(raw ?? '');
+      if (!text) return '';
+      const lines = text.split('\\n');
+      let kind = null;
+      const out = [];
+      for (const line of lines) {
+        const trimmed = line.trim();
+        const labelMatch = trimmed.match(/^(【[^】]+】)[ \\t]*(.*)$/);
+        if (labelMatch && /^【/.test(trimmed)) {
+          const lab = labelMatch[1];
+          const rest = (labelMatch[2] || '').trim();
+          kind = fpKind(lab);
+          out.push('<span class="fp-label ' + kind + '">' + escapeHtml(lab) + '</span>');
+          if (rest) {
+            out.push('<span class="fp-line ' + kind + '">' + escapeHtml(rest) + '</span>');
+          }
+          continue;
+        }
+        if (kind && /^[•*-]/.test(trimmed)) {
+          out.push('<span class="fp-line ' + kind + '">' + escapeHtml(trimmed) + '</span>');
+          continue;
+        }
+        if (!trimmed) {
+          out.push('');
+          continue;
+        }
+        out.push(escapeHtml(line));
+      }
+      return out.join('\\n');
+    }
+
     function render(filter) {
       currentFilter = filter;
       const list = filter === '全部' ? items : items.filter(i => i.category === filter);
@@ -1128,10 +1438,10 @@ JS_TEMPLATE = '''
             <div class="row">
               <span class="badge ${escapeHtml(it.category)}">${escapeHtml(it.category)}</span>
               <span class="date">${escapeHtml(it.date)}</span>
-              <span class="src">${escapeHtml(it.source_label || '')}</span>
+              ${it.source_label ? `<span class="src">${escapeHtml(it.source_label)}</span>` : ''}
             </div>
             <h2 class="title">${escapeHtml(it.title)}</h2>
-            <p class="summary">${escapeHtml(it.summary)}</p>
+            <div class="summary">${formatSummary(it.summary)}</div>
             ${hasLink ? `<a class="link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">查看来源 →</a>` : ''}
           </div>`;
         timelineEl.appendChild(div);
@@ -1148,24 +1458,61 @@ JS_TEMPLATE = '''
 
     render('全部');
     maybeRefresh();
+
+    (function initWatchCollapse() {
+      const panel = document.getElementById('watch-panel');
+      const toggle = document.getElementById('watch-toggle');
+      if (!panel || !toggle) return;
+      const KEY = 'gmgn-watch-collapsed';
+      function apply(collapsed) {
+        panel.classList.toggle('is-collapsed', collapsed);
+        toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      }
+      let stored = null;
+      try { stored = localStorage.getItem(KEY); } catch (_) {}
+      if (stored === '1') apply(true);
+      else if (stored === '0') apply(false);
+      else apply(window.matchMedia('(max-width: 960px)').matches);
+      toggle.addEventListener('click', () => {
+        const next = !panel.classList.contains('is-collapsed');
+        apply(next);
+        try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (_) {}
+      });
+    })();
 '''
 
 
-def render_html(items: list[dict], generated_at: str, sources: dict | None = None) -> str:
+def render_html(
+    items: list[dict],
+    generated_at: str,
+    sources: dict | None = None,
+    scan_status: dict | None = None,
+) -> str:
     counts = {"功能": 0, "招聘": 0, "教程": 0}
     for it in items:
         c = it.get("category")
         if c in counts:
             counts[c] += 1
 
-    try:
-        dt = datetime.fromisoformat(generated_at)
-        last_updated_label = dt.strftime("%Y-%m-%d %H:%M") + "（上海时间）"
-    except Exception:
-        last_updated_label = generated_at
+    features = load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {}
+    scan = resolve_scan_status(features, override=scan_status)
+    scan_time_label = (scan.get("last_checked_label") or format_shanghai_label(scan.get("last_checked")) or "").strip()
+    if not scan_time_label:
+        try:
+            dt = datetime.fromisoformat(generated_at)
+            scan_time_label = dt.strftime("%Y-%m-%d %H:%M") + " Asia/Shanghai"
+        except Exception:
+            scan_time_label = generated_at
+    scan_result = (scan.get("result") or ("有新增" if scan.get("has_new") else "无新增")).strip()
+    result_class = "result-new" if scan.get("has_new") else "result-quiet"
 
     if sources is None:
-        sources = build_watch_sources(load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {})
+        sources = build_watch_sources(features)
+    # Inject scan fields so left panel stays in sync with hero
+    sources = dict(sources)
+    sources["last_checked"] = scan.get("last_checked") or sources.get("last_checked") or ""
+    sources["last_checked_label"] = scan_time_label
+    sources["scan_result"] = scan_result
 
     sources_html = render_sources_panel(sources)
 
@@ -1183,6 +1530,9 @@ def render_html(items: list[dict], generated_at: str, sources: dict | None = Non
         '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
         "<title>GMGN 情报站</title>\n"
         '<meta name="description" content="GMGN 新功能、招聘与教程自动收集时间线" />\n'
+        '<link rel="preconnect" href="https://fonts.googleapis.com" />\n'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
+        '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />\n'
         "<style>\n"
         f"{css}\n"
         "</style>\n"
@@ -1196,7 +1546,8 @@ def render_html(items: list[dict], generated_at: str, sources: dict | None = Non
         "      </div>\n"
         '      <p class="subtitle">自动收集的 GMGN 新功能、招聘与教程更新。左侧是正在盯着的账号与网站；右侧是时间线（最新在上）。摘要中的【已有】/【在推】/【要做】标出可推断的功能点。</p>\n'
         '      <div class="meta">\n'
-        f'        <span class="pill">最近生成：{last_updated_label}</span>\n'
+        f'        <span class="pill scan-time">最近扫描：{_esc_html(scan_time_label)}</span>\n'
+        f'        <span class="pill {result_class}">本次：{_esc_html(scan_result)}</span>\n'
         f'        <span class="pill"><span class="dot func"></span>功能 {counts["功能"]}</span>\n'
         f'        <span class="pill"><span class="dot hire"></span>招聘 {counts["招聘"]}</span>\n'
         f'        <span class="pill"><span class="dot tut"></span>教程 {counts["教程"]}</span>\n'
@@ -1233,7 +1584,15 @@ def render_html(items: list[dict], generated_at: str, sources: dict | None = Non
         "</html>\n"
     )
 
-def write_outputs(items: list[dict], generated_at: str, sources: dict | None = None) -> None:
+def write_outputs(
+    items: list[dict],
+    generated_at: str,
+    sources: dict | None = None,
+    scan_status: dict | None = None,
+) -> None:
+    features = load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {}
+    scan = resolve_scan_status(features, override=scan_status)
+
     meta = {
         "generated_at": generated_at,
         "generated_at_label": "Asia/Shanghai",
@@ -1243,18 +1602,32 @@ def write_outputs(items: list[dict], generated_at: str, sources: dict | None = N
             "招聘": sum(1 for i in items if i["category"] == "招聘"),
             "教程": sum(1 for i in items if i["category"] == "教程"),
         },
+        "last_checked": scan.get("last_checked") or "",
+        "last_checked_label": scan.get("last_checked_label") or "",
+        "scan_has_new": bool(scan.get("has_new")),
+        "scan_new_count": int(scan.get("new_count") or 0),
+        "scan_result": scan.get("result") or "",
     }
     timeline_doc = items  # canonical is a plain array as specified
 
     if sources is None:
-        sources = build_watch_sources(load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {})
-    html = render_html(items, generated_at, sources)
+        sources = build_watch_sources(features)
+    html = render_html(items, generated_at, sources, scan)
     timeline_text = json.dumps(timeline_doc, ensure_ascii=False, indent=2) + "\n"
     meta_text = json.dumps(meta, ensure_ascii=False, indent=2) + "\n"
+    scan_text = json.dumps(scan, ensure_ascii=False, indent=2) + "\n"
 
-    destinations = [SITE_DIR]
-    if MIRROR_DIR != SITE_DIR:
-        destinations.append(MIRROR_DIR)
+    destinations: list[Path] = []
+    for d in SITE_DESTS:
+        if d not in destinations:
+            destinations.append(d)
+
+    src_build = Path(__file__).resolve()
+    src_readme = SITE_DIR / "README.md"
+    if not src_readme.exists():
+        alt = STORE_ROOT / "site" / "README.md"
+        if alt.exists():
+            src_readme = alt
 
     for dest in destinations:
         dest.mkdir(parents=True, exist_ok=True)
@@ -1262,23 +1635,51 @@ def write_outputs(items: list[dict], generated_at: str, sources: dict | None = N
         (dest / "timeline.json").write_text(timeline_text, encoding="utf-8")
         (dest / "index.html").write_text(html, encoding="utf-8")
         (dest / "build-meta.json").write_text(meta_text, encoding="utf-8")
-        # Keep build.py & README in mirror too
-        if dest == MIRROR_DIR:
-            src_build = SITE_DIR / "build.py"
-            if src_build.exists():
-                (dest / "build.py").write_text(src_build.read_text(encoding="utf-8"), encoding="utf-8")
-            src_readme = SITE_DIR / "README.md"
-            if src_readme.exists():
-                (dest / "README.md").write_text(src_readme.read_text(encoding="utf-8"), encoding="utf-8")
+        (dest / SCAN_STATUS_NAME).write_text(scan_text, encoding="utf-8")
+        if dest.resolve() != src_build.parent.resolve():
+            (dest / "build.py").write_text(src_build.read_text(encoding="utf-8"), encoding="utf-8")
+        if src_readme.exists() and dest.resolve() != src_readme.parent.resolve():
+            (dest / "README.md").write_text(src_readme.read_text(encoding="utf-8"), encoding="utf-8")
 
-    print(json.dumps({"ok": True, "meta": meta, "wrote": [str(d) for d in destinations]}, ensure_ascii=False))
+    print(json.dumps({"ok": True, "meta": meta, "scan": scan, "wrote": [str(d) for d in destinations]}, ensure_ascii=False))
 
 
 def main() -> None:
+    import argparse
+
+    ap = argparse.ArgumentParser(description="Rebuild GMGN intel site from baselines (+ updates/).")
+    ap.add_argument("--has-new", dest="has_new", action="store_true", default=None, help="Mark this scan as having new items")
+    ap.add_argument("--no-new", dest="has_new", action="store_false", help="Mark this scan as quiet (无新增)")
+    ap.add_argument("--new-count", type=int, default=None, help="Number of new timeline items this scan")
+    ap.add_argument("--last-checked", default=None, help="ISO timestamp of this scan (Asia/Shanghai)")
+    ap.add_argument("--last-checked-label", default=None, help="Display label for scan time")
+    ap.add_argument("--result", default=None, help="Override result text, e.g. 有新增 · 2 条")
+    args = ap.parse_args()
+
     items, generated_at = build_timeline()
     features = load_json(FEATURES_PATH) if FEATURES_PATH.exists() else {}
     sources = build_watch_sources(features)
-    write_outputs(items, generated_at, sources)
+
+    override: dict = {}
+    if args.last_checked:
+        override["last_checked"] = args.last_checked
+    if args.last_checked_label:
+        override["last_checked_label"] = args.last_checked_label
+    if args.has_new is not None:
+        override["has_new"] = bool(args.has_new)
+    if args.new_count is not None:
+        override["new_count"] = int(args.new_count)
+        if "has_new" not in override:
+            override["has_new"] = args.new_count > 0
+    if args.result:
+        override["result"] = args.result
+
+    # Always refresh last_checked from baselines when not explicitly set, so quiet scans still update the site clock.
+    if "last_checked" not in override and features.get("last_checked"):
+        override["last_checked"] = features["last_checked"]
+        override["last_checked_label"] = features.get("last_checked_label") or format_shanghai_label(features["last_checked"])
+
+    write_outputs(items, generated_at, sources, override or None)
 
 
 if __name__ == "__main__":
