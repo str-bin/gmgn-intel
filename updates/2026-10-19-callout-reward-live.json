@@ -1,0 +1,16 @@
+{
+  "id": "feat-2026-10-19-callout-reward-live",
+  "date": "2026-10-19",
+  "datetime": "2026-10-19T19:40:44+08:00",
+  "category": "功能",
+  "title": "Callout Reward 正式上线：喊单并持仓，别人通过你的 Callout 交易即可拿 USDC 奖励",
+  "summary": "@gmgnapp001 正式宣布 Introducing Callout Reward on GMGN；@gmgnai 跟进确认「Callout Reward is live」。玩法：发 Callout + 自己持仓，别人通过你的 Callout 成交后你拿奖励；社区/官方传播口径为奖励以 USDC 发放并自动到账钱包。相对 10-18「创作者奖励已在发放」的软确认，本条是正式产品名与机制落地。\n【已有】\n• Callout Reward 已上线可用\n• 条件：发 Callout 并持有该币（无仓不发奖）\n• 收益：他人经你的 Callout 交易时你获得 USDC 奖励，自动到账钱包\n【在推】\n• 用喊单+持仓绑定激励，拉动 Callout/社交交易活跃与创作者回流\n• 官方持续引导晒奖励截图、欢迎多喊单拿住\n【要做】\n• 公开费率/分成比例、适用链与结算细则仍待完整文档（持续盯 App 内说明与后续公告）",
+  "source_url": "https://x.com/gmgnapp001/status/2112146928582754784",
+  "source_label": "X @gmgnapp001",
+  "related_urls": [
+    "https://x.com/gmgnai/status/2112149524135501913",
+    "https://x.com/gmgnapp001/status/2112167398166106204",
+    "https://x.com/btc_789/status/2112165586117796246"
+  ],
+  "collected_at": "2026-10-20T09:09:27+08:00"
+}

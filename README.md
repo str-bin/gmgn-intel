@@ -63,3 +63,9 @@ cd /workspace/gmgn-intel
 python3 -m http.server 8765
 # 打开 http://127.0.0.1:8765/
 ```
+
+## Direct Upload 注意（2026-10-20）
+
+资产上传与 deployment manifest 都必须用 **bare blake3 hash（32 hex）** 作为 key。
+若上传写成 `hash.ext`、部署却用 bare hash，公网会出现 HTTP 500。
+脚本：`pages-direct-upload.py`（写入 `/tmp/gmgn-pages-manifest.json`），再经 Cloudflare MCP 创建 deployment。
