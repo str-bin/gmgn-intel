@@ -1,0 +1,16 @@
+{
+  "id": "feat-2026-10-22-haze-crosschain-bridge-test",
+  "date": "2026-10-22",
+  "datetime": "2026-10-22T22:11:29+08:00",
+  "category": "功能",
+  "title": "Haze：自研跨链桥小范围放量测试；很快可在 App 用 USDC 买多链任意代币",
+  "summary": "@haze0x（Haze）于 2026-10-22 22:11 Asia/Shanghai 宣布：GMGN 自研跨链桥正在小范围放量测试，强调快速/安全/稳定；并称很快可在 App 上用 USDC 购买多链条任意代币。社区追问「单链充值、各链代备手续费、无感买他链」时，Haze 回复「现在测试的就是这样的功能」。相对此前招聘 JD 里的跨链兑换+Gas 代付【要做】信号，本次是联创公开确认自研桥已进入放量测试阶段（尚未全量开放）。\n【已有】\n• 自研跨链桥已进入小范围放量测试（非全量开放）\n• 多链交易终端与跨链相关基建（招聘此前已写「有真实用户」）\n【在推】\n• App 内用 USDC 购买多链任意代币（官方口径「很快」）\n• 无感跨链买币体验：用户侧少换币/少备各链 Gas，平台侧备费与调度（Haze 确认在测）\n【要做】\n• 自研跨链桥全量开放与稳定性/安全放量\n• 高并发 Gas 代付（额度/预算/防滥用）与结算对账完善（与跨链岗 JD 一致）\n• 公开适用链、费率、失败退款与额度细则",
+  "source_url": "https://x.com/haze0x/status/2113272028891672867",
+  "source_label": "X @haze0x",
+  "related_urls": [
+    "https://x.com/haze0x/status/2113272911041814934",
+    "https://www.chaincatcher.com/en/article/2298298",
+    "https://gmgn.ai/blog/zh-cn/senior-blockchain-engineer-crosschain/"
+  ],
+  "collected_at": "2026-10-23T09:03:42+08:00"
+}
