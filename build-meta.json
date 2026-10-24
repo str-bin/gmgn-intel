@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T09:05:40+08:00",
+  "generated_at": "2026-10-24T15:11:39+08:00",
   "generated_at_label": "Asia/Shanghai",
   "count": 80,
   "by_category": {
@@ -7,8 +7,8 @@
     "招聘": 14,
     "教程": 26
   },
-  "last_checked": "2026-10-24T09:05:22+08:00",
-  "last_checked_label": "2026-10-24 09:05:22 Asia/Shanghai (UTC+8)",
+  "last_checked": "2026-10-24T15:11:31+08:00",
+  "last_checked_label": "2026-10-24 15:11:31 Asia/Shanghai (UTC+8)",
   "scan_has_new": false,
   "scan_new_count": 0,
   "scan_result": "无新增"
