@@ -1,0 +1,14 @@
+{
+  "id": "feat-2026-10-27-callout-dashboard",
+  "date": "2026-10-27",
+  "datetime": "2026-10-27T11:00:18+08:00",
+  "category": "功能",
+  "title": "Callout Dashboard / Callout Radar 上线：聚合 GMGN·FOMO·PUMP 喊单，跟仓加仓可告警",
+  "summary": "@gmgnai 于 2026-10-27 宣布 Callout Dashboard is live，入口 gmgn.ai/callout-radar。实时聚合 GMGN / FOMO / PUMP 来源的最新代币喊单；可跟 Top Traders 最新 Call；喊单人加仓时可告警。界面含 Latest / Top Traders / Conviction（重复买入次数）三列，导航已出现独立 Callout Tab。相对既有单条 Callout 流与 Callout Reward，这是站内喊单情报面板产品化。\n【已有】\n• Callout Dashboard / Callout Radar（gmgn.ai/callout-radar）已上线\n• 实时聚合 GMGN、FOMO、PUMP 喊单源\n• Top Traders 最新 Call 跟踪\n• 喊单人加仓告警\n• Latest / Top Traders / Conviction（Buys×N）视图\n【在推】\n• 把多平台喊单情报收成可交易的雷达，拉动社交跟单\n• 与 Callout Reward / 喊单质量评分形成闭环\n【要做】\n• 公开告警通道（App/TG）、过滤规则与数据源覆盖边界",
+  "source_url": "https://x.com/gmgnai/status/2114915062511173650",
+  "source_label": "X @gmgnai",
+  "related_urls": [
+    "https://gmgn.ai/callout-radar"
+  ],
+  "collected_at": "2026-10-29T15:08:16+08:00"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "feat-2026-10-29-usdc-trading-app",
+  "date": "2026-10-29",
+  "datetime": "2026-10-29T13:14:46+08:00",
+  "category": "功能",
+  "title": "App 侧 USDC 交易已可体验（官方软确认）；衔接此前「USDC 买多链」推进",
+  "summary": "@gmgnapp001 于 2026-10-29 发帖「USDC trading on GMGN app / who's tried it already?」，以「已经有人能试」的口径软确认 App 内 USDC 交易可用。相对 10-22 Haze「很快可在 App 用 USDC 购买多链条任意代币 / 自研跨链桥小范围测试」，进度从「很快/在测」推进到「App 可试用」。官方尚未同步全量开放说明与适用链清单。\n【已有】\n• App 内 USDC 交易可被官方引导试用（软确认已上线可体验）\n• 自研跨链桥此前已进入小范围放量测试（10-22）\n【在推】\n• 用 USDC 作为统一入金/计价，降低多链备币成本\n• 无感跨链买币（平台备费/调度）继续放量\n【要做】\n• 公开适用链、费率、失败退款、Gas 代付额度与全量开放时间\n• 与自研桥全量上线的正式产品公告仍待官方确认",
+  "source_url": "https://x.com/gmgnapp001/status/2115673677773914132",
+  "source_label": "X @gmgnapp001",
+  "related_urls": [
+    "https://x.com/haze0x/status/2113272028891672867",
+    "https://x.com/haze0x/status/2113272911041814934"
+  ],
+  "collected_at": "2026-10-29T15:08:16+08:00"
+}

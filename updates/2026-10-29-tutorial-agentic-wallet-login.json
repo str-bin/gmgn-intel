@@ -1,0 +1,14 @@
+{
+  "id": "tut-2026-10-29-agentic-wallet-login",
+  "date": "2026-10-29",
+  "datetime": "2026-10-29T20:00:00+08:00",
+  "category": "教程",
+  "title": "教程：币安 Agentic 钱包登录与交易",
+  "summary": "官方 docs 新增「Agentic Wallet Login Tutorial / 币安 Agentic 钱包登录教程」。从教程可推断产品已支持：用币安 App 扫码将 Agentic 钱包接到 GMGN、多钱包同时登录交易、内盘在买卖面板直接下单。创建 Agentic 免费；需币安 KYC + MPC、开发者模式与限额配置。\n【已有】\n• 官方中英文登录/交易教程页（docs.gmgn.ai CN + EN）\n• 余额 → Agentic 钱包 → 币安扫码配对流程已文档化\n• 多 Agentic 钱包同时登录交易的操作说明\n• 内盘可用 Agentic 钱包交易；外盘需先转 GMGN 钱包的边界说明\n【在推】\n• 引导币安生态用户无缝接入 GMGN 交易面板\n• 降低多钱包 / Agent 账户操作门槛\n【要做】\n• 补充适用链与发射台清单\n• 与 Agent ID / 开发者限额的联动说明仍可更完整",
+  "source_url": "https://docs.gmgn.ai/index/agentic-wallet-login-tutorial",
+  "source_label": "Docs EN",
+  "related_urls": [
+    "https://docs.gmgn.ai/cn/agentic-qian-bao-deng-lu-jiao-cheng"
+  ],
+  "collected_at": "2026-10-30T16:26:32+08:00"
+}

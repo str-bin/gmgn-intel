@@ -1,0 +1,15 @@
+{
+  "id": "feat-2026-10-29-binance-agentic-wallet",
+  "date": "2026-10-29",
+  "datetime": "2026-10-29T20:00:00+08:00",
+  "category": "功能",
+  "title": "支持连接币安 Binance Agentic 钱包并交易（多钱包；内盘可直接下单）",
+  "summary": "官方文档与社区于约 2026-10-29 确认：GMGN 已支持登录/连接币安 Agentic 钱包并交易。入口为右上角「余额 → Agentic 钱包 → 币安 App 扫码配对」；可同时登录多个 Agentic 钱包。内盘（bonding curve）阶段可在买卖面板直接用 Agentic 钱包交易（可设滑点）；外盘需先转到 GMGN 钱包。前提含币安 KYC + MPC 钱包、创建 Agentic 免费、需开开发者模式并调高限额，异常交易需确认。官方中英文登录教程已上线；正式 X 产品公告仍可能缺席。\n【已有】\n• 余额入口连接币安 Agentic 钱包（币安 App 扫码配对）\n• 支持同时登录多个币安 Agentic 钱包并交易\n• 内盘 bonding curve 阶段可用 Agentic 钱包在买卖面板交易（可设滑点）\n• 官方中英文「Agentic 钱包登录教程」已上线（docs.gmgn.ai）\n【在推】\n• 承接币安 Agent ID / Agentic 生态流量\n• 多账户打新 / 内盘并行操作\n【要做】\n• 外盘仍需先转到 GMGN 钱包\n• 明确支持哪些发射台 / 链\n• 官方 X 正式产品公告仍可能缺席；限额与异常确认流程需用户自行配置",
+  "source_url": "https://docs.gmgn.ai/cn/agentic-qian-bao-deng-lu-jiao-cheng",
+  "source_label": "Docs CN",
+  "related_urls": [
+    "https://docs.gmgn.ai/index/agentic-wallet-login-tutorial",
+    "https://x.com/cyy7025219/status/2115811795088928863"
+  ],
+  "collected_at": "2026-10-30T16:26:32+08:00"
+}

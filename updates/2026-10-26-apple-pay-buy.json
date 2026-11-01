@@ -1,0 +1,14 @@
+{
+  "id": "feat-2026-10-26-apple-pay-buy",
+  "date": "2026-10-26",
+  "datetime": "2026-10-26T11:40:20+08:00",
+  "category": "功能",
+  "title": "App 支持 Apple Pay 直接买 Memecoin：无需充值转账，首单 0 手续费",
+  "summary": "@gmgnai / @gmgnapp001 于 2026-10-26 宣布：GMGN App 现可用 Apple Pay 直接购买 memecoin，无需先充值、无需链上转账；首单 0 手续费。定位降低「朋友第一次买 meme」的门槛（官方文案：不用再发 12 步教程）。注意：这与既有 GMGN Card 的 Apple/Google Pay 入金不同，是 App 内法币通道直达买币。\n【已有】\n• App 内 Buy with Apple Pay 已上线\n• 无需充值 / 无需转账即可买 memecoin\n• 首单 0 手续费\n【在推】\n• 用一键法币买币降低新用户冷启动与分享转化\n• 配合 App Store / Google Play 下载漏斗拉新\n【要做】\n• 公开适用地区、额度、支持的链/币种与风控细则\n• Google Pay / 其他法币通道是否对等上线仍待确认",
+  "source_url": "https://x.com/gmgnai/status/2114562746385944672",
+  "source_label": "X @gmgnai",
+  "related_urls": [
+    "https://x.com/gmgnapp001/status/2114556307441320256"
+  ],
+  "collected_at": "2026-10-29T15:08:16+08:00"
+}

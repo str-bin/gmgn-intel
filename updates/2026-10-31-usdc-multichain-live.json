@@ -1,0 +1,15 @@
+{
+  "id": "feat-2026-10-31-usdc-multichain-live",
+  "date": "2026-10-31",
+  "datetime": "2026-10-31T08:13:02+08:00",
+  "category": "功能",
+  "title": "App 一笔 USDC 买多链代币已正式可用（官方确认 live）",
+  "summary": "@gmgnapp001 于 2026-10-31 08:13 Asia/Shanghai 回复用户抱怨「不想持 SOL/ETH 却被价格波动」时明确说：Try usdc trading, one usdc balance to buy tokens multiple-chains / It's live on GMGN app now。相对 10-29「USDC 交易可试用」+「多链经自研桥仍在放量」的软确认，本次把「一笔 USDC 余额买多链」口径升级为 App 已 live。\n【已有】\n• App 内用单一 USDC 余额购买多链代币（官方确认已上线）\n• 承接自研跨链桥小范围测试 → 面向用户的多链买入体验\n【在推】\n• 用 USDC 统一入金/计价，减少多链备 Gas/本币摩擦\n• 无感跨链调度与 Gas 代付继续放量\n【要做】\n• 仍缺正式产品公告：适用链清单、费率、失败退款、额度与风控细则",
+  "source_url": "https://x.com/gmgnapp001/status/2116322517044605394",
+  "source_label": "X @gmgnapp001",
+  "related_urls": [
+    "https://x.com/gmgnapp001/status/2115673677773914132",
+    "https://x.com/haze0x/status/2113272028891672867"
+  ],
+  "collected_at": "2026-10-31T09:07:07+08:00"
+}
