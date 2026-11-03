@@ -1,0 +1,14 @@
+{
+  "id": "feat-2026-10-29-agent-cli-avalanche",
+  "date": "2026-10-29",
+  "datetime": "2026-10-29T17:15:05+08:00",
+  "category": "功能",
+  "title": "GMGN Agent API / gmgn-cli 新增 Avalanche 链（查数据、交易、喊单、信号全覆盖）",
+  "summary": "GMGN 官方 gmgn-skills 仓库 1.7.1（2026-10-29 17:15 Asia/Shanghai 发布，本次 11-02 扫描补录）把 avalanche 加入合法链列表，README「Supported Chains」现列 10 条链：sol / bsc / base / eth / arbitrum / hyperevm / robinhood / arc / stable / avalanche。同版本 market signal 支持 base/eth/arbitrum/avalanche（服务端 TokenSignalChains），战壕默认发射台与报价类型改由服务端按链下发，说明后端已对新链统一支持。\n【已有】\n• Agent API / CLI 支持 Avalanche：代币查询、行情、持仓、追踪、Swap/限价单、Gas 价格\n• Avalanche 上的 Callout 喊单与 Smart Money / KOL 追踪\n• 市场信号（market signal）覆盖 Avalanche\n• HyperEVM、Stable 链同样出现在 Agent 支持链表里（基线此前未记录）\n【在推】\n• 战壕发射台/报价类型改为服务端下发，新链接入不需要客户端发版\n【要做】\n• Web/App 端与 gmgn.ai/llms.txt 尚未正式公告 Avalanche，待官方 X 发布",
+  "source_url": "https://github.com/GMGNAI/gmgn-skills/commit/9657e453",
+  "source_label": "GitHub GMGNAI/gmgn-skills",
+  "related_urls": [
+    "https://github.com/GMGNAI/gmgn-skills#9-supported-chains"
+  ],
+  "collected_at": "2026-11-02T09:03:41+08:00"
+}

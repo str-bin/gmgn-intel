@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-01T09:08:41+08:00",
+  "generated_at": "2026-11-03T09:03:43+08:00",
   "generated_at_label": "Asia/Shanghai",
-  "count": 86,
+  "count": 87,
   "by_category": {
-    "功能": 45,
+    "功能": 46,
     "招聘": 14,
     "教程": 27
   },
-  "last_checked": "2026-11-01T09:08:40+08:00",
-  "last_checked_label": "2026-11-01 09:08:40 Asia/Shanghai (UTC+8)",
+  "last_checked": "2026-11-03T09:02:23+08:00",
+  "last_checked_label": "2026-11-03 09:02:23 Asia/Shanghai (UTC+8)",
   "scan_has_new": false,
   "scan_new_count": 0,
   "scan_result": "无新增"
