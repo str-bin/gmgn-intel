@@ -1,0 +1,17 @@
+{
+  "id": "feat-2026-11-03-callout-flap-trench",
+  "date": "2026-11-03",
+  "datetime": "2026-11-03T21:00:46+08:00",
+  "category": "功能",
+  "title": "Callout 双奖励扩到 Flap / Trench：发射台付链上奖 + GMGN 叠 Callout Reward",
+  "summary": "@gmgnapp001 发帖并由 @gmgnai 转发确认：Callout mode / Callout Vault 分别在 Trench（Robinhood Chain）与 Flap 上线。机制是「one callout, two rewards」——发射台侧链上奖励 + GMGN 侧 Callout Reward 叠加。\n【已有】\n• Trench Callout Mode live：在 Trench 发盘后，于 GMGN 喊单可拿发射台链上分成，并叠加 GMGN Callout 奖励\n• Flap Callout Vault live：Flap 把交易税转成 USDT 奖励与回购销毁，并奖励 GMGN callout（持仓门槛等由 Flap 侧设定）\n• 官方口径强化「callout for community」——把喊单接到第三方发射台激励\n【在推】\n• Callout 从站内奖励扩展到多发射台双激励网络\n• 用发射台流量回流 GMGN 喊单/持仓\n【要做】\n• 统一门槛/结算/防刷规则仍待产品文档；更多发射台接入节奏未公布",
+  "source_url": "https://x.com/gmgnapp001/status/2117602890860879923",
+  "source_label": "X @gmgnapp001",
+  "related_urls": [
+    "https://x.com/gmgnapp001/status/2117615499467280613",
+    "https://x.com/gmgnai/status/2117608939579977896",
+    "https://x.com/gmgnai/status/2117622700986581468",
+    "https://x.com/gmgnapp001/status/2112146928582754784"
+  ],
+  "collected_at": "2026-11-04T09:07:03+08:00"
+}

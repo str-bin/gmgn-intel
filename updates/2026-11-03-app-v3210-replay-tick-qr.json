@@ -1,0 +1,14 @@
+{
+  "id": "feat-2026-11-03-app-v3210-replay-tick-qr",
+  "date": "2026-11-03",
+  "datetime": "2026-11-03T19:44:07+08:00",
+  "category": "功能",
+  "title": "App V3.2.10 上线：成交回放分享、K 线 Tick 图、扫码关注交易员",
+  "summary": "@gmgnapp001 于 2026-11-03 19:44 Asia/Shanghai 宣布 gmgn app V3.2.10 now live。相对此前「一笔 USDC 买多链」已 live，本版把社交分享与行情精度再推进一步。\n【已有】\n• 交易历史 REPLAY + 分享：把最佳成交做成可回放/转发的内容\n• K 线叠加 Tick chart：更高分辨率成交点，便于短线盯盘\n• 扫码关注交易员：用 QR 快速 follow，缩短关注路径\n• 交易设置切换 GO PRO：一笔 USDC 余额买任意链代币、无需手动桥接（强化既有 live 口径）\n【在推】\n• 用 replay 内容拉动社群传播与跟单漏斗\n• App 交易设置里把跨链买入做成默认体验\n【要做】\n• 仍缺正式文档：Replay 数据范围/隐私、Tick 图适用链、QR follow 风控",
+  "source_url": "https://x.com/gmgnapp001/status/2117583600984178849",
+  "source_label": "X @gmgnapp001",
+  "related_urls": [
+    "https://x.com/gmgnapp001/status/2116322517044605394"
+  ],
+  "collected_at": "2026-11-04T09:07:03+08:00"
+}
