@@ -1,0 +1,14 @@
+{
+  "id": "feat-2026-11-04-elysium-day1",
+  "date": "2026-11-04",
+  "datetime": "2026-11-04T23:02:20+08:00",
+  "category": "功能",
+  "title": "Elysium 链 Day 1：GMGN 宣布首日支持（Hyperliquid L2）",
+  "summary": "@gmgnai 于 2026-11-04 23:02 Asia/Shanghai 发图文：「Elysium is coming. GMGN will be there on Day 1」，官方配图为 GMGN × Elysium 联合视觉。Elysium 为 Kinetiq 打造的 Hyperliquid L2（结算 HyperEVM，Gas 用 HYPE），公开主网窗口约 2026-11-09；口径对标此前 Arc / Robinhood 的首日接入预告。\n【在推】\n• Elysium 链 Day-1 交易/发现支持（主网上线日即可用，尚未到上线日）\n• 新链 meme 季节备战：发射台生态（Pump.fun / FOMO 等亦称 Day-1）与终端同步\n【已有】\n• 基线已有 HyperEVM Agent API/CLI 支持；Elysium 为独立 L2，Web/App/llms.txt 尚未列入\n【要做】\n• 正式链上线后核对：战壕/买卖/跟单/安全检查覆盖范围与 Gas（HYPE）体验",
+  "source_url": "https://x.com/gmgnai/status/2117995870704869879",
+  "source_label": "X @gmgnai",
+  "related_urls": [
+    "https://x.com/gmgnapp001/status/2117996564941767144"
+  ],
+  "collected_at": "2026-11-05T09:08:40+08:00"
+}
